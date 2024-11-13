@@ -1,0 +1,51 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "fc44a13ef1dc6cf153fc39172350bf42821bcb15ce1b92a1692d09bd83edcee2"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.9"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "gurobipy": {
+            "hashes": [
+                "sha256:2910b77d8eca51509f238bbe4d042382a2cb204ba79338086718ae4e8976ff9d",
+                "sha256:2d0b9d86a58ee14ddf227d7765913ff132bc16ba7d4a513db376d447a3b543f1",
+                "sha256:360867cd0dedd7bb3b55b990645cfd870091e7c78659f4c7e4226c2da185f41d",
+                "sha256:5084c4c9b1f82c3ae3e70ac3395bb0cf74b16220b0a016270bc145ca0489eec8",
+                "sha256:5e0b0ea5ce2eaf4bd940821860fe37dcc8fd3fe7215ab0d97cceaedfa5eeb15d",
+                "sha256:68c0ffe4ac8c4d87662307f96f50f40ddc3867d71c6ebabce4bda52f4688ecbd",
+                "sha256:71ea7c653a92377991291a7e81b456fdfd06f8e3fc36b74a54444c2bab5225a8",
+                "sha256:724fc6484913c100eb12ef1c33ff2d54ee9150ee061eb636474ebad1112ec33f",
+                "sha256:90bba495efb25cff5a3826158aff7be29637d2e80accc3a89a98cb8630856106",
+                "sha256:a08fb42a5e7cb02cdb993c1381c8b8c5a3baeedcadd56e7288d8458a57b81442",
+                "sha256:b5c35cb981a61527016855324e054cae473496785db57f0682bd56d584a96eee",
+                "sha256:d4803e659fefc2102e9dc3d84f3d7f54a3918127c362cbebae6103b7e13849c6",
+                "sha256:eb299c37e095627fdf8c5767bec23ff108febd34aa92882c3a64090e4511b143",
+                "sha256:f8287de7535c3b9c97f4aa8716969d70302a972bd09e9d3b6fbd7266ca0eab72",
+                "sha256:fbf8aa6761306dc5d6572c51542cdf47873bc5d858164e8cc398c5a124f0a206",
+                "sha256:fc3892e3d88d0f8a01da75f12f74023d398ef599a9e1add66ed76313733e30fb"
+            ],
+            "index": "pypi",
+            "version": "==12.0.0"
+        },
+        "python-decouple": {
+            "hashes": [
+                "sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f",
+                "sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66"
+            ],
+            "index": "pypi",
+            "version": "==3.8"
+        }
+    },
+    "develop": {}
+}
