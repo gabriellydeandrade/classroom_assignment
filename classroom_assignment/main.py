@@ -17,16 +17,13 @@ WEIGHT_FACTOR_C = 1000
 
 
 class ClassroomAssignment:
-    def __init__(
-        self,
-        classrooms,
-        sections
-    ):
+    def __init__(self, classrooms, sections):
         self.classrooms = classrooms
         self.sections = sections
         self.coefficients = {}
         self.variables = {}
         self.slack_variables = {}
+        self.slack_variables_capacity_diff = {}
 
         self.env = self.init_environment()
         self.model = gp.Model(name="ClassroomAssignment", env=self.env)
@@ -84,11 +81,20 @@ class ClassroomAssignment:
                 vtype=GRB.INTEGER, name=f"PNC_{classroom}"
             )
 
+            self.slack_variables_capacity_diff[classroom] = {}
+
+            for section in self.sections:
+                self.slack_variables_capacity_diff[classroom][section] = (
+                    self.model.addVar(
+                        vtype=GRB.INTEGER, name=f"CapDiff_{classroom}_{section}"
+                    )
+                )
+
     def add_constraints(self):
         sections_days, sections_times = utils.get_possible_schedules(self.sections)
 
         # Soft constraints
-        # RF1: Garante que a sala seja alocada mesmo se exceder a capacidade da sala. Não inviabiliza o modelo. 
+        # RF1: Garante que a sala seja alocada mesmo se exceder a capacidade da sala. Não inviabiliza o modelo.
         for classroom in self.classrooms:
             self.model.addConstr(
                 gp.quicksum(
@@ -96,11 +102,27 @@ class ClassroomAssignment:
                         utils.get_section_schedule(self.sections, section)[0]
                     ][utils.get_section_schedule(self.sections, section)[1]]
                     * self.sections[section]["capacity"]
-
                     for section in self.sections.keys()
                 )
-                <= self.classrooms[classroom]["capacity"] + self.slack_variables[classroom]
+                <= self.classrooms[classroom]["capacity"]
+                + self.slack_variables[classroom]
             )
+
+            # RF2: Garante que a sala seja alocada com a menor capacidade possível
+
+            for section in self.sections:
+                workload = utils.get_section_schedule(self.sections, section)
+                day, time = workload
+
+
+                self.model.addConstr(
+                    self.slack_variables_capacity_diff[classroom][section]
+                    == self.classrooms[classroom]["capacity"]
+                    - self.variables[classroom][section][
+                        utils.get_section_schedule(self.sections, section)[0]
+                    ][utils.get_section_schedule(self.sections, section)[1]]
+                    * self.sections[section]["capacity"]
+                )
 
         # Hard constraints
         # RH1: Um sala poderá ser alocada para no máximo 1 uma turma em um mesmo dia e horário (binário)
@@ -146,6 +168,11 @@ class ClassroomAssignment:
             - gp.quicksum(
                 WEIGHT_FACTOR_C * self.slack_variables[classroom]
                 for classroom in self.classrooms
+            )
+            - gp.quicksum(
+                self.slack_variables_capacity_diff[classroom][section]
+                for classroom in self.classrooms
+                for section in self.sections
             ),
             GRB.MAXIMIZE,
         )
@@ -181,10 +208,7 @@ def main():
 
     COURSES = get_sections_set()
 
-    timetabling = ClassroomAssignment(
-        CLASSROOMS,
-        COURSES
-    )
+    timetabling = ClassroomAssignment(CLASSROOMS, COURSES)
     timetabling.initialize_variables_and_coefficients()
     timetabling.add_capacity_slack_variables()
     timetabling.add_constraints()
