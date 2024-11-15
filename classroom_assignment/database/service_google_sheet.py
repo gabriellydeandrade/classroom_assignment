@@ -53,151 +53,56 @@ def read_google_sheet_to_dataframe(spreadsheet_id, range_name):
         return pd.DataFrame()
 
 
-@cache_to_csv("cache/get_required_courses.csv", refresh_time=settings.APP_CACHE_TTL)
-def get_required_courses() -> pd.DataFrame:
-    page_name = "disciplinas_obrigatorias!A:Q"
-    df = read_google_sheet_to_dataframe(settings.SAMPLE_SPREADSHEET_ID, page_name)
-
-    courses = df.loc[df["Alocar"] == "TRUE"].filter(
-        [
-            "Código único turma",
-            "Código disciplina",
-            "Qtd de créditos",
-            "Dia da semana",
-            "Horário",
-            "Tipo disciplina",
-        ]
-    )
-    courses.rename(
-        columns={
-            "Código único turma": "course_class_id",
-            "Código disciplina": "course_id",
-            "Qtd de créditos": "credits",
-            "Dia da semana": "day",
-            "Horário": "time",
-            "Tipo disciplina": "course_type",
-        },
-        inplace=True,
-    )
-    courses.set_index("course_class_id", inplace=True)
-
-    return courses
-
-
-@cache_to_csv("cache/get_elective_courses.csv", refresh_time=settings.APP_CACHE_TTL)
-def get_elective_courses():
-    page_name = "disciplinas_eletivas!A:K"
-    df = read_google_sheet_to_dataframe(settings.SAMPLE_SPREADSHEET_ID, page_name)
-
-    courses = df.loc[df["Alocar"] == "TRUE"].filter(
-        [
-            "Código único turma",
-            "Código disciplina",
-            "Qtd de créditos",
-            "Perfil",
-            "Tipo disciplina",
-            "Tipo turma",
-        ]
-    )
-    courses.rename(
-        columns={
-            "Código único turma": "course_class_id",
-            "Código disciplina": "course_id",
-            "Qtd de créditos": "credits",
-            "Perfil": "knowledge_area",
-            "Tipo disciplina": "course_type",
-            "Tipo turma": "class_type",
-        },
-        inplace=True,
-    )
-    courses.set_index("course_class_id", inplace=True)
-
-    return courses
-
-
-@cache_to_csv("cache/get_substitute_professor.csv", refresh_time=settings.APP_CACHE_TTL)
-def get_substitute_professor():
-    page_name = "professores!A:K"
-    df = read_google_sheet_to_dataframe(settings.SAMPLE_SPREADSHEET_ID, page_name)
-
-    professors_availables = df.loc[df["Alocar"] == "TRUE"].filter(
-        ["Nome curto", "Disciplinas aptas", "Área de conhecimento", "Categoria"]
-    )
-    professors_availables.rename(
-        columns={
-            "Nome curto": "professor",
-            "Disciplinas aptas": "qualified_courses",
-            "Área de conhecimento": "expertise",
-            "Categoria": "category",
-        },
-        inplace=True,
-    )
-    professors_availables.set_index("professor", inplace=True)
-
-    substitute = professors_availables.loc[(professors_availables["category"] == "PS")]
-
-    return substitute
-
-
-@cache_to_csv("cache/get_permanent_professors.csv", refresh_time=settings.APP_CACHE_TTL)
-def get_permanent_professors():
-    page_name = "professores!A:K"
-    df = read_google_sheet_to_dataframe(settings.SAMPLE_SPREADSHEET_ID, page_name)
-
-    professors_availables = df.loc[df["Alocar"] == "TRUE"].filter(
-        ["Nome curto", "Disciplinas aptas", "Área de conhecimento", "Categoria"]
-    )
-    professors_availables.rename(
-        columns={
-            "Nome curto": "professor",
-            "Disciplinas aptas": "qualified_courses",
-            "Área de conhecimento": "expertise",
-            "Categoria": "category",
-        },
-        inplace=True,
-    )
-    professors_availables.set_index("professor", inplace=True)
-
-    permanent = professors_availables.loc[
-        (~professors_availables["category"].isin(["PS", "EX", "AP"]))
-    ]
-
-    return permanent
-
-
-def get_professors():
-    return get_permanent_professors(), get_substitute_professor()
-
-
-@cache_to_csv("cache/get_manual_allocation.csv", refresh_time=settings.APP_CACHE_TTL)
-def get_manual_allocation():
-    page_name = "alocacao_manual!A:I"
+@cache_to_csv("cache/get_section_allocation.csv", refresh_time=settings.APP_CACHE_TTL)
+def get_secion_allocation():
+    page_name = "alocacao!A:J"
 
     df = read_google_sheet_to_dataframe(settings.SAMPLE_SPREADSHEET_ID, page_name)
 
-    manual_allocation = df.filter(
-        [
-            "Nome curto professor",
-            "Código único turma",
-            "Código disciplina",
-            "Qtd de créditos",
-            "Tipo disciplina",
-            "Dia da semana",
-            "Horário",
-        ]
-    )
-    manual_allocation.rename(
+    df.rename(
         columns={
+            "Instituto": "institute",
             "Nome curto professor": "professor",
             "Código único turma": "course_class_id",
             "Código disciplina": "course_id",
-            "Qtd de créditos": "credits",
-            "Tipo disciplina": "course_type",
+            "Nome disciplina": "course_name",
             "Dia da semana": "day",
             "Horário": "time",
+            "Qtd alunos": "capacity",
+            "Tipo sala": "classroom_type",
         },
         inplace=True,
     )
-    manual_allocation.set_index("course_class_id", inplace=True)
 
-    return manual_allocation
+    df.set_index("course_class_id", inplace=True)
+
+
+    return df
+
+
+@cache_to_csv("cache/get_classrooms_available.csv", refresh_time=settings.APP_CACHE_TTL)
+def get_classrooms_available():
+    page_name = "salas!A:L"
+
+    df = read_google_sheet_to_dataframe(settings.SAMPLE_SPREADSHEET_ID, page_name)
+
+    classrooms = df.loc[df["Disponível"] == "TRUE"].filter(
+        [
+            "Nome",
+            "Responsável pela sala",
+            "Tipo sala",
+            "Capacidade real"
+        ]
+    )
+    classrooms.rename(
+        columns={
+            "Nome": "classroom_name",
+            "Responsável pela sala": "responsable_institute",
+            "Tipo sala": "classroom_type",
+            "Capacidade real": "capacity",
+        },
+        inplace=True,
+    )
+    classrooms.set_index("classroom_name", inplace=True)
+
+    return classrooms

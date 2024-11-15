@@ -1,0 +1,95 @@
+from unittest import TestCase, main
+from unittest.mock import patch
+import sys
+import os
+
+sys.path.insert(
+    0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+)  # FIXME quero corrigir de outra forma
+
+from database.service_google_sheet import (
+    get_classrooms_available,
+)
+from database.transform_data import transform_to_dict
+
+
+import pandas as pd
+
+
+class TestClassroomAvailableFromGoogleSheets(TestCase):
+    @patch("database.service_google_sheet.read_google_sheet_to_dataframe")
+    def test_get_classrooms_available(self, mock_read_google_sheet):
+        mock_data = pd.DataFrame(
+            {
+                "Disponível": ["TRUE", "TRUE"],
+                "Nome": ["Sala 1", "Sala 2"],
+                "Responsável pela sala": ["IC", "IC"],
+                "Tipo sala": ["Laboratório", "Sala"],
+                "Capacidade SIGA": [40, 40],
+                "Capacidade real": [30, 30],
+            },
+        )
+
+        mock_data.index.name = "course_class_id"
+
+        mock_read_google_sheet.return_value = mock_data
+
+        result = get_classrooms_available()
+
+        expected_data = pd.DataFrame(
+            {
+                "responsable_institute": ["IC", "IC"],
+                "classroom_type": ["Laboratório", "Sala"],
+                "capacity": [30, 30],
+            },
+            index=[
+                "Sala 1",
+                "Sala 2",
+            ],
+        )
+
+        expected_data.index.name = "classroom_name"
+
+        pd.testing.assert_frame_equal(result, expected_data)
+
+
+class TestTransformClassroomAvailable(TestCase):
+
+    def test_treat_classroom_available_with_correct_params(self):
+        classrom_available = pd.DataFrame(
+            {
+                "classroom_name": ["Sala 1", "Sala 2"],
+                "responsible_institute": ["IC", "IC"],
+                "classrom_type": ["Laboratório", "Sala"],
+                "capacity": [30, 30],
+            },
+            index=[
+                "Sala 1",
+                "Sala 2",
+            ],
+        )
+
+        classrom_available.index.name = "classroom_name"
+
+        result = transform_to_dict(classrom_available)
+
+        expected_result = {
+            "Sala 1": {
+                "classroom_name": "Sala 1",
+                "responsible_institute": "IC",
+                "classrom_type": "Laboratório",
+                "capacity": 30,
+            },
+            "Sala 2": {
+                "classroom_name": "Sala 2",
+                "responsible_institute": "IC",
+                "classrom_type": "Sala",
+                "capacity": 30,
+            },
+        }
+
+        self.assertDictEqual(result, expected_result)
+
+
+if __name__ == "__main__":
+    main()

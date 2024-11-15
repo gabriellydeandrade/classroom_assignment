@@ -6,6 +6,12 @@ name = "pypi"
 [packages]
 gurobipy = "*"
 python-decouple = "*"
+google-api-python-client = "*"
+google-auth-httplib2 = "*"
+google-auth-oauthlib = "*"
+cache-pandas = "*"
+pandas = "*"
+pandera = "*"
 
 [dev-packages]
 

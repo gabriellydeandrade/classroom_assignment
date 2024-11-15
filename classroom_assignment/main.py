@@ -1,19 +1,17 @@
 import gurobipy as gp
 from gurobipy import GRB
 
-import settings
+import classroom_assignment.settings as settings
 
 from utils import utils
 from database.construct_sets import (
-    get_courses_set,
-    get_manual_allocation_set,
-    get_professors_set,
+    get_classrooms_set,
+    get_sections_set,
 )
 
 
 DEFAULT_COEFFICIENT = 1
 RESPONSIBLE_INSTITUTE_COEFFICIENT = 10
-
 ZERO_COEFFICIENT = 0
 WEIGHT_FACTOR_C = 1000
 
@@ -22,12 +20,10 @@ class ClassroomAssignment:
     def __init__(
         self,
         classrooms,
-        sections,
-        professors,
+        sections
     ):
-        self.classrroms = classrooms
+        self.classrooms = classrooms
         self.sections = sections
-        self.classrooms = professors
         self.coefficients = {}
         self.variables = {}
         self.slack_variables = {}
@@ -44,9 +40,6 @@ class ClassroomAssignment:
 
         return env
 
-    def set_courses(self, courses):
-        self.sections = courses
-
     def initialize_variables_and_coefficients(self):
         for classroom in self.classrooms:
             self.coefficients[classroom] = {}
@@ -56,7 +49,7 @@ class ClassroomAssignment:
                 self.coefficients[classroom][section] = {}
                 self.variables[classroom][section] = {}
 
-                workload = utils.get_course_schedule(self.sections, section)
+                workload = utils.get_section_schedule(self.sections, section)
                 day, time = workload
 
                 self.coefficients[classroom][section][day] = {}
@@ -86,56 +79,44 @@ class ClassroomAssignment:
                 )
 
     def add_credit_slack_variables(self):
-        for professor in self.permanent_professors:
-            self.slack_variables[professor] = self.model.addVar(
-                vtype=GRB.INTEGER, name=f"PNC_{professor}"
+        for classroom in self.classrooms:
+            self.slack_variables[classroom] = self.model.addVar(
+                vtype=GRB.INTEGER, name=f"PNC_{classroom}"
             )
 
     def add_constraints(self):
-        course_days, course_times = utils.get_possible_schedules(self.sections)
-
-        # Manual
-        # RH1: Alocar manualmente os professores
-        for course_class_id in self.manual_allocation.keys():
-            professor = self.manual_allocation[course_class_id]["professor"]
-            day = self.manual_allocation[course_class_id]["day"]
-            time = self.manual_allocation[course_class_id]["time"]
-
-            self.model.addConstr(
-                self.variables[professor][course_class_id][day][time] == 1
-            )
+        sections_days, sections_times = utils.get_possible_schedules(self.sections)
 
         # Soft constraints
-        # RF1: Garante que o professor seja alocado com a quantidade de créditos sujerida pela coordenação se possível. Não inviabiliza o modelo caso não seja atingido.
-        for professor in self.permanent_professors:
-            self.model.addConstr(
-                gp.quicksum(
-                    self.variables[professor][course][
-                        utils.get_course_schedule(self.sections, course)[0]
-                    ][utils.get_course_schedule(self.sections, course)[1]]
-                    * self.sections[course]["credits"]
-                    for course in self.sections.keys()
+        # RF1: Garante que a sala seja alocada mesmo se exceder a capacidade da sala. Não inviabiliza o modelo. 
+        for classroom in self.classrooms:
+            for section in self.sections.keys():
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.variables[classroom][section][
+                            utils.get_section_schedule(self.sections, section)[0]
+                        ][utils.get_section_schedule(self.sections, section)[1]]
+                        * self.sections[section]["capacity"]
+                    )
+                    >= self.sections[section]["capacity"] + self.slack_variables[classroom]
                 )
-                == MIN_CREDITS_PERMANENT - self.slack_variables[professor]
-            )
 
         # Hard constraints
         # RH1: Um sala poderá ser alocada para no máximo 1 uma turma em um mesmo dia e horário (binário)
-        for professor in self.classrooms:
-            if professor == DUMMY_PROFESSOR:
-                continue
-            for i in range(len(course_days)):
-                day = course_days[i]
-                time = course_times[i]
-                day_courses = utils.get_courses_by_day(self.sections, day)
-                time_courses = utils.get_courses_by_time(self.sections, time)
-                common_courses = day_courses.intersection(time_courses)
+        for classroom in self.classrooms:
+            for i in range(len(sections_days)):
+                day = sections_days[i]
+                time = sections_times[i]
+                day_sections = utils.get_section_by_day(self.sections, day)
+                time_sections = utils.get_section_by_time(self.sections, time)
+
+                common_sections = day_sections.intersection(time_sections)
                 self.model.addConstr(
                     gp.quicksum(
-                        self.variables[professor][course][
-                            utils.get_course_schedule(self.sections, course)[0]
-                        ][utils.get_course_schedule(self.sections, course)[1]]
-                        for course in common_courses
+                        self.variables[classroom][section][
+                            utils.get_section_schedule(self.sections, section)[0]
+                        ][utils.get_section_schedule(self.sections, section)[1]]
+                        for section in common_sections
                     )
                     <= 1
                 )
@@ -143,15 +124,15 @@ class ClassroomAssignment:
     def set_objective(self):
         self.model.setObjective(
             gp.quicksum(
-                self.variables[professor][course][day][time]
-                * self.coefficients[professor][course][day][time]
-                for professor in self.classrooms
-                for course in self.sections.keys()
-                for day, time in [utils.get_course_schedule(self.sections, course)]
+                self.variables[classroom][section][day][time]
+                * self.coefficients[classroom][section][day][time]
+                for classroom in self.classrooms
+                for section in self.sections.keys()
+                for day, time in [utils.get_section_schedule(self.sections, section)]
             )
             - gp.quicksum(
-                WEIGHT_FACTOR_C * self.slack_variables[professor]
-                for professor in self.permanent_professors
+                WEIGHT_FACTOR_C * self.slack_variables[classroom]
+                for classroom in self.classrooms
             ),
             GRB.MAXIMIZE,
         )
@@ -162,15 +143,15 @@ class ClassroomAssignment:
 
     def generate_results(self):
 
-        professor_timeschedule = []
+        classroom_assignement = []
         for var in self.model.getVars():
             if var.X > 0:
                 timeschedule = f"{var.VarName}/{var.X}"
-                professor_timeschedule.append(timeschedule)
+                classroom_assignement.append(timeschedule)
 
         model_value = self.model.ObjVal
         print("========= RESULT ==========")
-        for r in professor_timeschedule:
+        for r in classroom_assignement:
             print(r)
         print("=============================")
         print(f"Obj: {model_value}")
@@ -179,30 +160,17 @@ class ClassroomAssignment:
         self.model.dispose()
         self.env.dispose()
 
-        return professor_timeschedule, model_value
+        return classroom_assignement, model_value
 
 
 def main():
-    MANUAL_ALLOCATION = get_manual_allocation_set()
+    CLASSROOMS = get_classrooms_set()
 
-    professors_permanent_set, professors_substitute_set, professor_dummy = (
-        get_professors_set()
-    )
-    professors_set = (
-        professors_permanent_set | professors_substitute_set | professor_dummy
-    )
-    PROFESSORS = professors_set
-    PERMANENT_PROFESSORS = professors_permanent_set
-    SUBSTITUTE_PROFESSORS = professors_substitute_set
-
-    COURSES = get_courses_set(MANUAL_ALLOCATION)
+    COURSES = get_sections_set()
 
     timetabling = ClassroomAssignment(
-        PROFESSORS,
-        PERMANENT_PROFESSORS,
-        SUBSTITUTE_PROFESSORS,
-        COURSES,
-        MANUAL_ALLOCATION,
+        CLASSROOMS,
+        COURSES
     )
     timetabling.initialize_variables_and_coefficients()
     timetabling.add_credit_slack_variables()
