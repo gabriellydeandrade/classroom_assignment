@@ -1,7 +1,7 @@
 import gurobipy as gp
 from gurobipy import GRB
 
-import classroom_assignment.settings as settings
+import settings
 
 from utils import utils
 from database.construct_sets import (

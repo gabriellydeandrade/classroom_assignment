@@ -15,9 +15,12 @@ from database.transform_data import transform_to_dict
 
 import pandas as pd
 
+# get_secion_allocation = patch("database.service_google_sheet.get_secion_allocation", lambda: pd.DataFrame()).start()
 
 class TestSectionAllocationFromGoogleSheets(TestCase):
+    
     @patch("database.service_google_sheet.read_google_sheet_to_dataframe")
+    @patch("database.service_google_sheet.cache_to_csv", lambda x:x)
     def test_get_secion_allocation(self, mock_read_google_sheet):
         mock_data = pd.DataFrame(
             {
@@ -61,7 +64,7 @@ class TestSectionAllocationFromGoogleSheets(TestCase):
 
         expected_data.index.name = "course_class_id"
 
-
+        mock_read_google_sheet.assert_called_once()
         pd.testing.assert_frame_equal(result, expected_data)
 
 

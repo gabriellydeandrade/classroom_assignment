@@ -1,5 +1,5 @@
 from unittest import TestCase, main
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 import sys
 import os
 
@@ -7,18 +7,20 @@ sys.path.insert(
     0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 )  # FIXME quero corrigir de outra forma
 
-from database.service_google_sheet import (
-    get_classrooms_available,
-)
+from database.service_google_sheet import get_classrooms_available
 from database.transform_data import transform_to_dict
-
-
 import pandas as pd
 
 
 class TestClassroomAvailableFromGoogleSheets(TestCase):
+
+    # @patch.object(cache_to_csv, "cache_to_csv")
+    @patch("database.service_google_sheet.cache_to_csv")
     @patch("database.service_google_sheet.read_google_sheet_to_dataframe")
-    def test_get_classrooms_available(self, mock_read_google_sheet):
+    # @patch("cache_pandas.cache_to_csv", lambda *args, **kwargs: lambda func: func)
+    def test_get_classrooms_available(self, mock_read_google_sheet, temp):
+        temp.return_value.return_value = Mock()
+
         mock_data = pd.DataFrame(
             {
                 "Disponível": ["TRUE", "TRUE"],
@@ -50,6 +52,7 @@ class TestClassroomAvailableFromGoogleSheets(TestCase):
 
         expected_data.index.name = "classroom_name"
 
+        mock_read_google_sheet.assert_called_once()
         pd.testing.assert_frame_equal(result, expected_data)
 
 
@@ -89,7 +92,6 @@ class TestTransformClassroomAvailable(TestCase):
         }
 
         self.assertDictEqual(result, expected_result)
-
 
 if __name__ == "__main__":
     main()
