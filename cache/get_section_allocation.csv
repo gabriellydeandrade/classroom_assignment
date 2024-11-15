@@ -1,3 +1,3 @@
-course_class_id,institute,professor,course_id,course_name,day,time,capacity,classroom_type
-OBG-BCC1-1,IC,Prof1,Course1,CourseName1,"SEG,QUA",08:00-10:00,30,Laboratório
-OBG-BCC1-2,IC,Prof2,Course2,CourseName2,TER,10:00-12:00,30,Sala
+course_class_id,responsable_institute,professor,course_id,course_name,day,time,capacity,classroom_type,Restrição quadro negro
+OBG-BCC2-7,IC,Adriana Vivacqua,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,30,Laboratório,FALSE
+OBG-BCC2-5,IC,XPTO,ICP132,Processo de Software,"TER,QUI",13:00-15:00,40,Sala,FALSE

@@ -25,10 +25,10 @@ class TestClassroomAvailableFromGoogleSheets(TestCase):
             {
                 "Disponível": ["TRUE", "TRUE"],
                 "Nome": ["Sala 1", "Sala 2"],
-                "Responsável pela sala": ["IC", "IC"],
+                "Instituto responsável": ["IC", "IC"],
                 "Tipo sala": ["Laboratório", "Sala"],
-                "Capacidade SIGA": [40, 40],
                 "Capacidade real": [30, 30],
+                "Capacidade SIGA": [40, 40],
             },
         )
 
@@ -42,6 +42,7 @@ class TestClassroomAvailableFromGoogleSheets(TestCase):
             {
                 "responsable_institute": ["IC", "IC"],
                 "classroom_type": ["Laboratório", "Sala"],
+                "capacity_siga": [40, 40],
                 "capacity": [30, 30],
             },
             index=[
@@ -88,6 +89,82 @@ class TestTransformClassroomAvailable(TestCase):
                 "responsible_institute": "IC",
                 "classrom_type": "Sala",
                 "capacity": 30,
+            },
+        }
+
+        self.assertDictEqual(result, expected_result)
+
+    def test_treat_classroom_with_capacity_from_siga_when_real_capacity_is_empty(self):
+        classrom_available = pd.DataFrame(
+            {
+                "classroom_name": ["Sala 1", "Sala 2"],
+                "responsible_institute": ["IC", "IC"],
+                "classrom_type": ["Laboratório", "Sala"],
+                "capacity_siga": [40, 40],
+                "capacity": ["", 30],
+            },
+            index=[
+                "Sala 1",
+                "Sala 2",
+            ],
+        )
+
+        classrom_available.index.name = "classroom_name"
+
+        result = transform_to_dict(classrom_available)
+
+        expected_result = {
+            "Sala 1": {
+                "classroom_name": "Sala 1",
+                "responsible_institute": "IC",
+                "classrom_type": "Laboratório",
+                "capacity_siga": 40,
+                "capacity": 40,
+            },
+            "Sala 2": {
+                "classroom_name": "Sala 2",
+                "responsible_institute": "IC",
+                "classrom_type": "Sala",
+                "capacity_siga": 40,
+                "capacity": 30,
+            },
+        }
+
+        self.assertDictEqual(result, expected_result)
+
+    def test_treat_classroom_with_zero_capacity_when_capacity_is_not_set(self):
+        classrom_available = pd.DataFrame(
+            {
+                "classroom_name": ["Sala 1", "Sala 2"],
+                "responsible_institute": ["IC", "IC"],
+                "classrom_type": ["Laboratório", "Sala"],
+                "capacity_siga": ["", ""],
+                "capacity": ["", ""],
+            },
+            index=[
+                "Sala 1",
+                "Sala 2",
+            ],
+        )
+
+        classrom_available.index.name = "classroom_name"
+
+        result = transform_to_dict(classrom_available)
+
+        expected_result = {
+            "Sala 1": {
+                "classroom_name": "Sala 1",
+                "responsible_institute": "IC",
+                "classrom_type": "Laboratório",
+                "capacity_siga": "",
+                "capacity": 0,
+            },
+            "Sala 2": {
+                "classroom_name": "Sala 2",
+                "responsible_institute": "IC",
+                "classrom_type": "Sala",
+                "capacity_siga": "",
+                "capacity": 0,
             },
         }
 

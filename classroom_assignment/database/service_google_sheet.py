@@ -61,7 +61,7 @@ def get_secion_allocation():
 
     df.rename(
         columns={
-            "Instituto": "institute",
+            "Instituto responsável": "responsable_institute",
             "Nome curto professor": "professor",
             "Código único turma": "course_class_id",
             "Código disciplina": "course_id",
@@ -89,16 +89,18 @@ def get_classrooms_available():
     classrooms = df.loc[df["Disponível"] == "TRUE"].filter(
         [
             "Nome",
-            "Responsável pela sala",
+            "Instituto responsável",
             "Tipo sala",
+            "Capacidade SIGA",
             "Capacidade real"
         ]
     )
     classrooms.rename(
         columns={
             "Nome": "classroom_name",
-            "Responsável pela sala": "responsable_institute",
+            "Instituto responsável": "responsable_institute",
             "Tipo sala": "classroom_type",
+            "Capacidade SIGA": "capacity_siga",
             "Capacidade real": "capacity",
         },
         inplace=True,

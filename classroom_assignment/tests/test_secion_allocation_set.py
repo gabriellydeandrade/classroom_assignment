@@ -24,7 +24,7 @@ class TestSectionAllocationFromGoogleSheets(TestCase):
     def test_get_secion_allocation(self, mock_read_google_sheet):
         mock_data = pd.DataFrame(
             {
-                "Instituto": ["IC", "IC"],
+                "Instituto responsável": ["IC", "IC"],
                 "Código único turma": [
                     "OBG-BCC1-1",
                     "OBG-BCC1-2",
@@ -47,7 +47,7 @@ class TestSectionAllocationFromGoogleSheets(TestCase):
 
         expected_data = pd.DataFrame(
             {
-                "institute": ["IC", "IC"],
+                "responsable_institute": ["IC", "IC"],
                 "professor": ["Prof1", "Prof2"],
                 "course_id": ["Course1", "Course2"],
                 "course_name": ["CourseName1", "CourseName2"],

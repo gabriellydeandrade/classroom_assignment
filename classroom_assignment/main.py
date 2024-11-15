@@ -78,7 +78,7 @@ class ClassroomAssignment:
                     vtype=GRB.BINARY, name=f"{classroom}_{section}_{day}_{time}"
                 )
 
-    def add_credit_slack_variables(self):
+    def add_capacity_slack_variables(self):
         for classroom in self.classrooms:
             self.slack_variables[classroom] = self.model.addVar(
                 vtype=GRB.INTEGER, name=f"PNC_{classroom}"
@@ -90,16 +90,17 @@ class ClassroomAssignment:
         # Soft constraints
         # RF1: Garante que a sala seja alocada mesmo se exceder a capacidade da sala. Não inviabiliza o modelo. 
         for classroom in self.classrooms:
-            for section in self.sections.keys():
-                self.model.addConstr(
-                    gp.quicksum(
-                        self.variables[classroom][section][
-                            utils.get_section_schedule(self.sections, section)[0]
-                        ][utils.get_section_schedule(self.sections, section)[1]]
-                        * self.sections[section]["capacity"]
-                    )
-                    >= self.sections[section]["capacity"] + self.slack_variables[classroom]
+            self.model.addConstr(
+                gp.quicksum(
+                    self.variables[classroom][section][
+                        utils.get_section_schedule(self.sections, section)[0]
+                    ][utils.get_section_schedule(self.sections, section)[1]]
+                    * self.sections[section]["capacity"]
+
+                    for section in self.sections.keys()
                 )
+                <= self.classrooms[classroom]["capacity"] + self.slack_variables[classroom]
+            )
 
         # Hard constraints
         # RH1: Um sala poderá ser alocada para no máximo 1 uma turma em um mesmo dia e horário (binário)
@@ -120,6 +121,18 @@ class ClassroomAssignment:
                     )
                     <= 1
                 )
+
+        # RH2: Uma seção deverá ter somente uma sala de aula
+        for section in self.sections.keys():
+            workload = utils.get_section_schedule(self.sections, section)
+            day, time = workload
+            self.model.addConstr(
+                gp.quicksum(
+                    self.variables[classroom][section][day][time]
+                    for classroom in self.classrooms
+                )
+                == 1
+            )
 
     def set_objective(self):
         self.model.setObjective(
@@ -173,7 +186,7 @@ def main():
         COURSES
     )
     timetabling.initialize_variables_and_coefficients()
-    timetabling.add_credit_slack_variables()
+    timetabling.add_capacity_slack_variables()
     timetabling.add_constraints()
     timetabling.set_objective()
     timetabling.optimize()
