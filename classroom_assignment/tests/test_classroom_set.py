@@ -1,26 +1,38 @@
 from unittest import TestCase, main
-from unittest.mock import patch, Mock
+from unittest.mock import patch, Mock, MagicMock
 import sys
 import os
+import pandas as pd
+from functools import wraps
 
 sys.path.insert(
     0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 )  # FIXME quero corrigir de outra forma
 
-from database.service_google_sheet import get_classrooms_available
 from database.transform_data import transform_to_dict
-import pandas as pd
+
+
+def mock_decorator(*args, **kwargs):
+    """Decorate by doing nothing."""
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
+
+patch('cache_pandas.cache_to_csv', mock_decorator).start()
+
+from database.service_google_sheet import get_classrooms_available
 
 
 class TestClassroomAvailableFromGoogleSheets(TestCase):
 
     # @patch.object(cache_to_csv, "cache_to_csv")
-    @patch("database.service_google_sheet.cache_to_csv")
+    # @patch("database.service_google_sheet.cache_to_csv")
     @patch("database.service_google_sheet.read_google_sheet_to_dataframe")
     # @patch("cache_pandas.cache_to_csv", lambda *args, **kwargs: lambda func: func)
-    def test_get_classrooms_available(self, mock_read_google_sheet, temp):
-        temp.return_value.return_value = Mock()
-
+    def test_get_classrooms_available(self, mock_read_google_sheet):
         mock_data = pd.DataFrame(
             {
                 "Disponível": ["TRUE", "TRUE"],

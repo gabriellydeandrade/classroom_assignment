@@ -2,10 +2,24 @@ from unittest import TestCase, main
 from unittest.mock import patch
 import sys
 import os
+import pandas as pd
+
+from functools import wraps
 
 sys.path.insert(
     0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 )  # FIXME quero corrigir de outra forma
+
+def mock_decorator(*args, **kwargs):
+    """Decorate by doing nothing."""
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
+
+patch('cache_pandas.cache_to_csv', mock_decorator).start()
 
 from database.service_google_sheet import (
     get_secion_allocation,
@@ -13,14 +27,9 @@ from database.service_google_sheet import (
 from database.transform_data import transform_to_dict
 
 
-import pandas as pd
-
-# get_secion_allocation = patch("database.service_google_sheet.get_secion_allocation", lambda: pd.DataFrame()).start()
-
 class TestSectionAllocationFromGoogleSheets(TestCase):
     
     @patch("database.service_google_sheet.read_google_sheet_to_dataframe")
-    @patch("database.service_google_sheet.cache_to_csv", lambda x:x)
     def test_get_secion_allocation(self, mock_read_google_sheet):
         mock_data = pd.DataFrame(
             {
