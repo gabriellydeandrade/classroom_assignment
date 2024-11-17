@@ -125,7 +125,7 @@ class ClassroomAssignment:
                 )
 
         # Hard constraints
-        # RH1: Um sala poderá ser alocada para no máximo 1 uma turma em um mesmo dia e horário (binário)
+        # RN1: Um sala poderá ser alocada para no máximo 1 uma turma em um mesmo dia e horário (binário)
         for classroom in self.classrooms:
             for i in range(len(sections_days)):
                 day = sections_days[i]
@@ -144,7 +144,7 @@ class ClassroomAssignment:
                     <= 1
                 )
 
-        # RH2: Uma seção deverá ter somente uma sala de aula
+        # RN2: Uma seção deverá ter somente uma sala de aula
         for section in self.sections.keys():
             workload = utils.get_section_schedule(self.sections, section)
             day, time = workload
