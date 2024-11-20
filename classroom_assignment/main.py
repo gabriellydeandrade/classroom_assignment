@@ -181,24 +181,31 @@ class ClassroomAssignment:
         self.model.update()
         self.model.optimize()
 
+    def clean_model(self):
+        self.model.dispose()
+        self.env.dispose()
+
     def generate_results(self):
 
         classroom_assignement = []
+        cap_diff = []
         for var in self.model.getVars():
             if var.X > 0:
                 timeschedule = f"{var.VarName}/{var.X}"
-                classroom_assignement.append(timeschedule)
+                if "CapDiff" in var.VarName:
+                    cap_diff.append(timeschedule)
+                else:
+                    classroom_assignement.append(timeschedule)
 
         model_value = self.model.ObjVal
+        
+        utils.treat_and_save_results(classroom_assignement, self.sections)
+
         print("========= RESULT ==========")
         for r in classroom_assignement:
             print(r)
         print("=============================")
         print(f"Obj: {model_value}")
-
-        # Clean up model and environment
-        self.model.dispose()
-        self.env.dispose()
 
         return classroom_assignement, model_value
 
@@ -215,6 +222,8 @@ def main():
     timetabling.set_objective()
     timetabling.optimize()
     timetabling.generate_results()
+    timetabling.clean_model()
+
 
 
 if __name__ == "__main__":

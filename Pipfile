@@ -12,6 +12,7 @@ google-auth-oauthlib = "*"
 cache-pandas = "*"
 pandas = "*"
 pandera = "*"
+streamlit = "*"
 
 [dev-packages]
 
