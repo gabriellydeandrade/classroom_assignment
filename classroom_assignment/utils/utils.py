@@ -99,25 +99,31 @@ def save_results_to_csv(data: list, filename: str) -> None:
 
 def treat_and_save_results(timeschedule: list, courses: dict):
     timeschedule_treated = []
+    cap_diff = []
 
     for schedule in timeschedule:
-        schedule, value = schedule.split("/")
-        allocation = schedule.split("_")
+        
+        if "CapDiff" in schedule:
+            cap_diff.append(schedule)
+        else:
 
-        classroom_name = allocation[0]
-        course_class_id = allocation[1]
+            schedule, value = schedule.split("/")
+            allocation = schedule.split("_")
+            classroom_name = allocation[0]
+            course_class_id = int(allocation[1])
 
-        professor = courses[course_class_id]["professor"]
-        course_id = courses[course_class_id]["course_id"]
-        course_name = courses[course_class_id]["course_name"]
+            professor = courses[course_class_id]["professor"]
+            course_id = courses[course_class_id]["course_id"]
+            course_name = courses[course_class_id]["course_name"]
 
-        day = allocation[2]
-        time = allocation[3]
+            day = allocation[2]
+            time = allocation[3]
 
-        result = [classroom_name, professor, course_id, course_name, day, time]
+            result = [classroom_name, professor, course_id, course_name, day, time]
 
-        timeschedule_treated.append(result)
+            timeschedule_treated.append(result)
 
     save_results_to_csv(timeschedule_treated, "classroom_assignment/results/assignment.csv")
+    save_results_to_csv(cap_diff, "classroom_assignment/results/cap_diff.csv")
     
-    return timeschedule_treated
+    return timeschedule_treated, cap_diff

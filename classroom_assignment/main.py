@@ -188,22 +188,17 @@ class ClassroomAssignment:
     def generate_results(self):
 
         classroom_assignement = []
-        cap_diff = []
         for var in self.model.getVars():
             if var.X > 0:
                 timeschedule = f"{var.VarName}/{var.X}"
-                if "CapDiff" in var.VarName:
-                    cap_diff.append(timeschedule)
-                else:
-                    classroom_assignement.append(timeschedule)
+                classroom_assignement.append(timeschedule)
 
         model_value = self.model.ObjVal
         
         utils.treat_and_save_results(classroom_assignement, self.sections)
 
         print("========= RESULT ==========")
-        for r in classroom_assignement:
-            print(r)
+        print("Result was saved in results/*")
         print("=============================")
         print(f"Obj: {model_value}")
 
@@ -212,7 +207,6 @@ class ClassroomAssignment:
 
 def main():
     CLASSROOMS = get_classrooms_set()
-
     COURSES = get_sections_set()
 
     timetabling = ClassroomAssignment(CLASSROOMS, COURSES)

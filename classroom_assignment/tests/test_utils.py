@@ -175,80 +175,80 @@ class TestGetPossibleSchedules(TestCase):
         self.assertEqual(result[0], expected_days)
         self.assertEqual(result[1], expected_times)
 
-# class TestTreatAndSaveResults(TestCase):
 
-#     @patch("utils.utils.save_results_to_csv")
-#     def test_treat_and_save_results(self, mock_save_results_to_csv):
+class TestTreatAndSaveResults(TestCase):
 
-#         # E2011 (LAB 1)_OBG-BCC2-7_SEG,QUA_10:00-12:00/1.0
-#         # F2007_OBG-BCC2-5_TER,QUI_13:00-15:00/1.0
-#         # CapDiff_A201_OBG-BCC2-7/70.0
-#         # CapDiff_A201_OBG-BCC2-5/70.0
-#         # CapDiff_A202_OBG-BCC2-7/70.0
+    @patch("utils.utils.save_results_to_csv")
+    def test_treat_and_save_results(self, mock_save_results_to_csv):
 
-#         timeschedule_mock = [
-#            "E2011 (LAB 1)_OBG-BCC2-7_SEG,QUA_10:00-12:00/1.0",
-#            "F2007_OBG-BCC2-5_TER,QUI_13:00-15:00/1.0"
-#         ]
+        # E2011 (LAB 1)_OBG-BCC2-7_SEG,QUA_10:00-12:00/1.0
+        # F2007_OBG-BCC2-5_TER,QUI_13:00-15:00/1.0
+        # CapDiff_A201_OBG-BCC2-7/70.0
+        # CapDiff_A201_OBG-BCC2-5/70.0
+        # CapDiff_A202_OBG-BCC2-7/70.0
 
-#         sections_mock = {
-#             "OBG-BCC1-1": {
-#                 "course_id": "ICP131",
-#                 "course_name": "Programação de Computadores I",
-#                 "credits": 4,
-#                 "course_type": "OBG",
-#                 "class_type": "Gradução",
-#                 "capacity": 40,
-#                 "responsable_institute": "IC",
-#                 "classroom_type": "Sala",
-#                 "term": 1
-#             },
-#             "OBG-BCC1-2": {
-#                 "course_id": "ICP132",
-#                 "course_name": "Processo de Software",
-#                 "credits": 4,
-#                 "course_type": "OBG",
-#                 "class_type": "Gradução",
-#                 "capacity": 30,
-#                 "responsable_institute": "IC",
-#                 "classroom_type": "Sala",
-#                 "term": 1
-#             },
-#         }
+        timeschedule_mock = [
+            "E2011 (LAB 1)_OBG-BCC1-1_SEG,QUA_08:00-10:00/1.0",
+            "F2007_OBG-BCC1-2_TER,QUI_10:00-12:00/1.0",
+            "CapDiff_A201_OBG-BCC2-7/70.0",
+            "CapDiff_A201_OBG-BCC2-5/70.0",
+            "CapDiff_A202_OBG-BCC2-7/70.0",
+        ]
 
-#         result = treat_and_save_results(timeschedule_mock, sections_mock)
+        sections_mock = {
+            "OBG-BCC1-1": {
+                "institute": "IC",
+                "professor": "Prof1",
+                "course_id": "Course1",
+                "course_name": "CourseName1",
+                "day": "SEG,QUA",
+                "time": "08:00-10:00",
+                "capacity": 30,
+                "classroom_type": "Laboratório",
+            },
+            "OBG-BCC1-2": {
+                "institute": "IC",
+                "professor": "Prof2",
+                "course_id": "Course2",
+                "course_name": "CourseName2",
+                "day": "TER,QUI",
+                "time": "10:00-12:00",
+                "capacity": 30,
+                "classroom_type": "Sala",
+            },
+        }
 
-#         timeschedule = [
-#             [
-#                 "IC",
-#                 "Adriana Vivacqua",
-#                 "ICP131",
-#                 "Programação de Computadores I",
-#                 "SEG,QUA",
-#                 "13:00-15:00,08:00-10:00",
-#                 40,
-#                 "Sala",
-#                 "OBG",
-#                 1
-#             ],
-#             [
-#                 "IC",
-#                 "Daniel Sadoc",
-#                 "ICP132",
-#                 "Processo de Software",
-#                 "TER,QUI",
-#                 "15:00-17:00",
-#                 30,
-#                 "Sala",
-#                 "OBG",
-#                 1
-#             ],
-#         ]
+        result = treat_and_save_results(timeschedule_mock, sections_mock)
 
-#         expected_result = timeschedule
+        timeschedule = [
+            [
+                "E2011 (LAB 1)",
+                "Prof1",
+                "Course1",
+                "CourseName1",
+                "SEG,QUA",
+                "08:00-10:00",
+            ],
+            [
+                "F2007",
+                "Prof2",
+                "Course2",
+                "CourseName2",
+                "TER,QUI",
+                "10:00-12:00",
+            ],
+        ]
 
-#         mock_save_results_to_csv.assert_called()
-#         self.assertEqual(result, expected_result)
+        cap_diff = [
+            "CapDiff_A201_OBG-BCC2-7/70.0",
+            "CapDiff_A201_OBG-BCC2-5/70.0",
+            "CapDiff_A202_OBG-BCC2-7/70.0",
+        ]
+
+        expected_result = timeschedule, cap_diff
+
+        mock_save_results_to_csv.assert_called()
+        self.assertEqual(result, expected_result)
 
 
 if __name__ == "__main__":

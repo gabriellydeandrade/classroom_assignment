@@ -10,126 +10,53 @@ from main import ClassroomAssignment
 
 class TestInitializeVariablesAndCoefficients(unittest.TestCase):
 
-    @patch("utils.utils.get_course_schedule")
+    @patch("utils.utils.get_section_schedule")
     def setUp(self, mock_get_schedule) -> None:
-        professor_permanent = {
-            "Prof1": {
-                "qualified_courses": ["ICP131"],
-                "expertise": ["ED", "ES", "H"],
-                "category": "PP",
-            },
+        patch("utils.utils.save_results_to_csv").start()
+
+        classrooms = {
+            "Room1": {"capacity": 30, "classroom_type": "Sala"},
+            "Room2": {"capacity": 20, "classroom_type": "Laboratório"},
         }
-        professor_substitute = {
-            "Prof2": {
-                "qualified_courses": [],
-                "expertise": ["ED", "CD"],
-                "category": "PS",
-            },
+        sections = {
+            "Section1": {"capacity": 25, "day": "SEG,QUA", "time": "10:00-12:00"},
+            "Section2": {"capacity": 15, "day": "TER,QUI", "time": "08:00-10:00"},
         }
-        professor_dummy = {
-            "DUMMY": {
-                "qualified_courses": ["*"],
-                "expertise": ["*"],
-                "category": "DUMMY",
-            },
-        }
-        self.PROFESSORS = professor_permanent | professor_substitute | professor_dummy
-        self.COURSES = {
-            "OBG-BCC1-1": {
-                "course_id": "ICP131",
-                "credits": 4,
-                "day": "SEG,QUA",
-                "time": "13:00-15:00,08:00-10:00",
-                "course_type": "OBG",
-            },
-            "OBG-BCC1-2": {
-                "course_id": "ICP123",
-                "credits": 4,
-                "day": "TER,QUI",
-                "time": "15:00-17:00",
-                "course_type": "OBG",
-            },
-        }
-        mock_get_schedule.side_effect = lambda courses, course: (
-            ("SEG", "13:00-15:00") if course == "OBG-BCC1-1" else ("TER", "15:00-17:00")
+        mock_get_schedule.side_effect = lambda sections, section: (
+            ("SEG,QUA", "10:00-12:00") if section == "Section1" else ("TER,QUI", "08:00-10:00")
         )
 
-        self.timetabling = ClassroomAssignment(
-            self.PROFESSORS,
-            professor_permanent,
-            professor_substitute,
-            self.COURSES,
-            {},
-        )
+        self.timetabling = ClassroomAssignment(classrooms, sections)
         self.timetabling.initialize_variables_and_coefficients()
         return super().setUp()
 
-    def test_set_coefficient_if_professor_is_qualified_for_class(self):
+    @unittest.skip("Not implemented yet")
+    def test_set_coefficient_if_section_is_scheduled(self):
+        pass
 
-        expected_coefficient = 100
-
-        self.assertIn("Prof1", self.timetabling.coefficients)
-        self.assertIn("OBG-BCC1-1", self.timetabling.coefficients["Prof1"])
-
-        for day, value in self.timetabling.coefficients["Prof1"]["OBG-BCC1-1"].items():
-            time = list(value.keys())[0]
-            self.assertEqual(
-                self.timetabling.coefficients["Prof1"]["OBG-BCC1-1"][day][time],
-                expected_coefficient,
-            )
-
-        self.assertIn("OBG-BCC1-1", self.timetabling.variables["Prof1"])
-
-    def test_set_coefficient_to_zero_if_professor_is_not_qualified_for_class(self):
-
-        self.assertIn("Prof1", self.timetabling.coefficients)
-        self.assertIn("OBG-BCC1-2", self.timetabling.coefficients["Prof1"])
-
-        for day, value in self.timetabling.coefficients["Prof1"]["OBG-BCC1-2"].items():
-            time = list(value.keys())[0]
-            self.assertEqual(
-                self.timetabling.coefficients["Prof1"]["OBG-BCC1-2"][day][time], 0
-            )
-
-        self.assertIn("OBG-BCC1-2", self.timetabling.variables["Prof1"])
-
-    def test_set_coefficient_specific_if_professor_is_dummy(self):
-
-        self.assertIn("DUMMY", self.timetabling.coefficients)
-        self.assertIn("OBG-BCC1-1", self.timetabling.coefficients["DUMMY"])
-        self.assertIn("OBG-BCC1-2", self.timetabling.coefficients["DUMMY"])
-
-        for day, value in self.timetabling.coefficients["DUMMY"]["OBG-BCC1-1"].items():
-            time = list(value.keys())[0]
-            self.assertEqual(
-                self.timetabling.coefficients["DUMMY"]["OBG-BCC1-1"][day][time], 0.0001
-            )
-
-        for day, value in self.timetabling.coefficients["DUMMY"]["OBG-BCC1-2"].items():
-            time = list(value.keys())[0]
-            self.assertEqual(
-                self.timetabling.coefficients["DUMMY"]["OBG-BCC1-2"][day][time], 0.0001
-            )
-
-        self.assertIn("OBG-BCC1-1", self.timetabling.variables["DUMMY"])
-        self.assertIn("OBG-BCC1-2", self.timetabling.variables["DUMMY"])
+    @unittest.skip("Not implemented yet")
+    def test_set_coefficient_to_zero_if_section_is_not_scheduled(self):
+        pass
 
 
-class TestAddCreditSlackVariables(unittest.TestCase):
+class TestAddCapacitySlackVariables(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.timetabling = ClassroomAssignment(
-            ["Prof1", "Prof2"], ["Prof1"], ["Prof2"], {}, {}
-        )
-        self.timetabling.add_credit_slack_variables()
+        self.classrooms = {
+            "Room1": {"capacity": 30, "classroom_type": "Sala"},
+            "Room2": {"capacity": 20, "classroom_type": "Laboratório"},
+        }
+        self.sections = {
+            "Section1": {"capacity": 25, "day": "SEG,QUA", "time": "10:00-12:00", "classroom_type": "Sala"},
+            "Section2": {"capacity": 15, "day": "TER,QUI", "time": "08:00-10:00", "classroom_type": "Laboratório"},
+        }
+        self.timetabling = ClassroomAssignment(self.classrooms, self.sections)
+        self.timetabling.add_capacity_slack_variables()
         return super().setUp()
 
-    def test_add_credit_slack_variables(self):
-        self.assertIn("Prof1", self.timetabling.slack_variables)
-
-    def test_add_credit_slack_variables_only_for_permanent_professors(self):
-        self.assertIn("Prof1", self.timetabling.slack_variables)
-        self.assertNotIn("Prof2", self.timetabling.slack_variables)
+    def test_add_capacity_slack_variables_for_all_classrooms(self):
+        for classroom in self.classrooms.keys():
+            self.assertIn(classroom, self.timetabling.slack_variables)
 
 
 if __name__ == "__main__":
