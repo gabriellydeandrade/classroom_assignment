@@ -27,7 +27,7 @@ def get_possible_schedules(sections: dict) -> Tuple[list, list]:
     return days, times
 
 
-def get_section_schedule(courses_set: dict, course_class_id: str) -> Tuple[str, str]:
+def get_section_schedule(courses_set: dict, course_class_id: str) -> Tuple[list, list]:
     """
     Retrieve the schedule for a specific course class.
 
@@ -42,7 +42,13 @@ def get_section_schedule(courses_set: dict, course_class_id: str) -> Tuple[str, 
     day = courses_set[course_class_id]["day"]
     time = courses_set[course_class_id]["time"]
 
-    return (day, time)
+    days = day.split(",")
+    times = time.split(",")
+
+    if len(times) < len(days):
+        times = [times[0]] * len(days)
+
+    return (days, times)
 
 
 def get_section_by_time(courses: dict, time: str) -> set:
@@ -62,7 +68,7 @@ def get_section_by_time(courses: dict, time: str) -> set:
     for course_id, details in courses.items():
         if type(details["time"]) == str:
             for course_time in details["time"].split(","):
-                if course_time in time:
+                if course_time and course_time in time:
                     result.append(course_id)
 
     return set(result)
@@ -84,7 +90,7 @@ def get_section_by_day(courses: dict, day: str) -> set:
     for course_id, details in courses.items():
         if type(details["day"]) == str:
             for course_day in details["day"].split(","):
-                if course_day in day:
+                if course_day and course_day in day:
                     result.append(course_id)
 
     return set(result)
