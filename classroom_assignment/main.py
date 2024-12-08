@@ -52,8 +52,9 @@ class ClassroomAssignment:
                 self.coefficients[classroom][section][day] = {}
 
                 if (
-                    self.sections[section]["classroom_type"]
-                    == self.classrooms[classroom]["classroom_type"]
+                    self.classrooms[classroom]["classroom_type"] and 
+                    self.classrooms[classroom]["classroom_type"]
+                    in self.sections[section]["classroom_type"]
                     and self.sections[section]["responsable_institute"]
                     == self.classrooms[classroom]["responsable_institute"]
                 ):
@@ -61,8 +62,9 @@ class ClassroomAssignment:
                         time
                     ] = RESPONSIBLE_INSTITUTE_COEFFICIENT
                 elif (
-                    self.sections[section]["classroom_type"]
-                    == self.classrooms[classroom]["classroom_type"]
+                    self.classrooms[classroom]["classroom_type"] and 
+                    self.classrooms[classroom]["classroom_type"]
+                    in self.sections[section]["classroom_type"]
                 ):
                     self.coefficients[classroom][section][day][
                         time
@@ -114,7 +116,6 @@ class ClassroomAssignment:
                 workload = utils.get_section_schedule(self.sections, section)
                 day, time = workload
 
-
                 self.model.addConstr(
                     self.slack_variables_capacity_diff[classroom][section]
                     == self.classrooms[classroom]["capacity"]
@@ -144,10 +145,11 @@ class ClassroomAssignment:
                     <= 1
                 )
 
-        # RN2: Uma seção deverá ter somente uma sala de aula
         for section in self.sections.keys():
             workload = utils.get_section_schedule(self.sections, section)
             day, time = workload
+
+            # RN2: Uma seção deverá ter somente uma sala de aula
             self.model.addConstr(
                 gp.quicksum(
                     self.variables[classroom][section][day][time]
@@ -155,6 +157,11 @@ class ClassroomAssignment:
                 )
                 == 1
             )
+
+            # RN3: Caso a disciplina seja do primeiro período, uma sala específica deverá ser ocupada (F3014)
+            if self.sections[section]["term"] == 1 and self.sections[section]["class_type"] == "Calouro":
+                classroom = "F3014"
+                self.model.addConstr(self.variables[classroom][section][day][time] == 1)
 
     def set_objective(self):
         self.model.setObjective(
@@ -194,7 +201,7 @@ class ClassroomAssignment:
                 classroom_assignement.append(timeschedule)
 
         model_value = self.model.ObjVal
-        
+
         utils.treat_and_save_results(classroom_assignement, self.sections)
 
         print("========= RESULT ==========")
@@ -217,7 +224,6 @@ def main():
     timetabling.optimize()
     timetabling.generate_results()
     timetabling.clean_model()
-
 
 
 if __name__ == "__main__":

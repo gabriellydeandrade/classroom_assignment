@@ -7,8 +7,10 @@ df = pd.read_csv(
     names=[
         "classroom_name",
         "professor",
+        "graduation_course",
         "course_id",
         "course_name",
+        "term",
         "day",
         "time"
     ],
@@ -30,9 +32,11 @@ with st.container(border=True) as general:
         df,
         column_config={
             "classroom_name": "Sala",
+            "graduation_course": "Curso",
             "professor": "Docente",
             "course_id": "Código disciplina",
             "course_name": "Nome disciplina",
+            "term": "Período",
             "day": st.column_config.ListColumn(
                 "Dia da Semana",
                 help="Dia da semana que a disciplina é ministrada",

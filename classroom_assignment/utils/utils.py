@@ -62,7 +62,7 @@ def get_section_by_time(courses: dict, time: str) -> set:
     for course_id, details in courses.items():
         if type(details["time"]) == str:
             for course_time in details["time"].split(","):
-                if course_time == time:
+                if course_time in time:
                     result.append(course_id)
 
     return set(result)
@@ -84,7 +84,7 @@ def get_section_by_day(courses: dict, day: str) -> set:
     for course_id, details in courses.items():
         if type(details["day"]) == str:
             for course_day in details["day"].split(","):
-                if course_day == day:
+                if course_day in day:
                     result.append(course_id)
 
     return set(result)
@@ -111,13 +111,15 @@ def treat_and_save_results(timeschedule: list, courses: dict):
             course_class_id = int(allocation[1])
 
             professor = courses[course_class_id]["professor"]
+            graduation_course = courses[course_class_id]["graduation_course"]
             course_id = courses[course_class_id]["course_id"]
             course_name = courses[course_class_id]["course_name"]
+            term = courses[course_class_id]["term"]
 
             day = allocation[2]
             time = allocation[3]
 
-            result = [classroom_name, professor, course_id, course_name, day, time]
+            result = [classroom_name, professor, graduation_course, course_id, course_name, term, day, time]
 
             timeschedule_treated.append(result)
 

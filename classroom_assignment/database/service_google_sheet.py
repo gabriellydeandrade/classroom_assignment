@@ -55,13 +55,14 @@ def read_google_sheet_to_dataframe(spreadsheet_id, range_name):
 
 @cache_to_csv("cache/get_section_allocation.csv", refresh_time=settings.APP_CACHE_TTL)
 def get_secion_allocation():
-    page_name = "alocacao!A:J"
+    page_name = "alocacao!A:M"
 
     df = read_google_sheet_to_dataframe(settings.SAMPLE_SPREADSHEET_ID, page_name)
 
     df.rename(
         columns={
             "Instituto responsável": "responsable_institute",
+            "Curso": "graduation_course",
             "Nome curto professor": "professor",
             "Código disciplina": "course_id",
             "Nome disciplina": "course_name",
@@ -69,9 +70,14 @@ def get_secion_allocation():
             "Horário": "time",
             "Qtd alunos": "capacity",
             "Tipo sala": "classroom_type",
+            "Período": "term",
+            "Tipo turma": "class_type",
+            "Restrição quadro negro": "board_type"
         },
         inplace=True,
     )
+
+    df["term"] = df["term"].astype(int)
 
     return df
 
