@@ -152,14 +152,14 @@ class TestGetPossibleSchedules(TestCase):
     def test_get_courses_with_same_schedule(self):
 
         mock_courses = {
-            "OBG-BCC1-1": {
+            "0": {
                 "course_id": "ICP131",
                 "credits": 4,
                 "day": "SEG,QUA",
                 "time": "13:00-15:00",
                 "course_type": "OBG",
             },
-            "OBG-BCC1-2": {
+            "1": {
                 "course_id": "ICP123",
                 "credits": 4,
                 "day": "SEG,QUI",
@@ -169,34 +169,32 @@ class TestGetPossibleSchedules(TestCase):
         }
 
         result = get_possible_schedules(mock_courses)
-        expected_days = list(set(["SEG,QUA", "SEG,QUI"]))
-        expected_times = list(set(["13:00-15:00"]))
+        expected_days = ["SEG,QUA", "SEG,QUI"]
+        expected_times = ["13:00-15:00", "13:00-15:00"]
+        expected_schedule = []
+        schedule = []
 
-        self.assertEqual(result[0], expected_days)
-        self.assertEqual(result[1], expected_times)
-
+        for i in range(len(expected_days)):
+            expected_schedule.append((expected_days[i], expected_times[i]))
+            schedule.append((result[0][i], result[1][i]))
+        
+        self.assertEqual(set(expected_schedule), set(schedule))
 
 class TestTreatAndSaveResults(TestCase):
 
     @patch("utils.utils.save_results_to_csv")
     def test_treat_and_save_results(self, mock_save_results_to_csv):
 
-        # E2011 (LAB 1)_OBG-BCC2-7_SEG,QUA_10:00-12:00/1.0
-        # F2007_OBG-BCC2-5_TER,QUI_13:00-15:00/1.0
-        # CapDiff_A201_OBG-BCC2-7/70.0
-        # CapDiff_A201_OBG-BCC2-5/70.0
-        # CapDiff_A202_OBG-BCC2-7/70.0
-
         timeschedule_mock = [
-            "E2011 (LAB 1)_OBG-BCC1-1_SEG,QUA_08:00-10:00/1.0",
-            "F2007_OBG-BCC1-2_TER,QUI_10:00-12:00/1.0",
-            "CapDiff_A201_OBG-BCC2-7/70.0",
-            "CapDiff_A201_OBG-BCC2-5/70.0",
-            "CapDiff_A202_OBG-BCC2-7/70.0",
+            "E2011 (LAB 1)_0_SEG,QUA_08:00-10:00#1.0",
+            "F2007_1_TER,QUI_10:00-12:00#1.0",
+            "CapDiff_A201_OBG-BCC2-7#70.0",
+            "CapDiff_A201_OBG-BCC2-5#70.0",
+            "CapDiff_A202_OBG-BCC2-7#70.0",
         ]
 
         sections_mock = {
-            "OBG-BCC1-1": {
+            0: {
                 "institute": "IC",
                 "professor": "Prof1",
                 "course_id": "Course1",
@@ -206,7 +204,7 @@ class TestTreatAndSaveResults(TestCase):
                 "capacity": 30,
                 "classroom_type": "Laboratório",
             },
-            "OBG-BCC1-2": {
+            1: {
                 "institute": "IC",
                 "professor": "Prof2",
                 "course_id": "Course2",
@@ -240,9 +238,9 @@ class TestTreatAndSaveResults(TestCase):
         ]
 
         cap_diff = [
-            "CapDiff_A201_OBG-BCC2-7/70.0",
-            "CapDiff_A201_OBG-BCC2-5/70.0",
-            "CapDiff_A202_OBG-BCC2-7/70.0",
+            "CapDiff_A201_OBG-BCC2-7#70.0",
+            "CapDiff_A201_OBG-BCC2-5#70.0",
+            "CapDiff_A202_OBG-BCC2-7#70.0",
         ]
 
         expected_result = timeschedule, cap_diff

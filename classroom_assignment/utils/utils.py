@@ -13,18 +13,16 @@ def get_possible_schedules(sections: dict) -> Tuple[list, list]:
             - days (list): A list of unique days on which the sections are scheduled.
             - time (list): A list of unique times at which the sections are scheduled.
     """
-    days = []
-    times = []
+
+    unique_schedules = set()
 
     for _, course_details in sections.items():
         day = course_details["day"]
         time = course_details["time"]
+        unique_schedules.add((day, time))
 
-        days.append(day)
-        times.append(time)
-
-    days = list(set(days))
-    times = list(set(times))
+    days = list(day for day, _ in unique_schedules)
+    times = list(time for _, time in unique_schedules)
 
     return days, times
 
@@ -107,7 +105,7 @@ def treat_and_save_results(timeschedule: list, courses: dict):
             cap_diff.append(schedule)
         else:
 
-            schedule, value = schedule.split("/")
+            schedule, value = schedule.split("#")
             allocation = schedule.split("_")
             classroom_name = allocation[0]
             course_class_id = int(allocation[1])

@@ -1,3 +1,48 @@
 ,responsable_institute,professor,course_id,course_name,day,time,Vagas,classroom_type,Restrição quadro negro
-0,IC,Adriana Vivacqua,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,30,Laboratório,FALSE
-1,IC,XPTO,ICP132,Processo de Software,"TER,QUI",13:00-15:00,40,Sala,FALSE
+0,IC,Ronald Chiesse,ICP239,Programação Orientada a Objeto,"TER,QUI",10:00-12:00,60,"T,P",FALSE
+1,IC,Eldânae Teixeira,ICP237,Introdução a Modelagem de Sistemas,"TER,QUI",15:00-17:00,60,"T,P",FALSE
+2,IC,Vivian Santos,ICP489,Banco de Dados I,"QUA,SEX",08:00-10:00,60,"T,P",FALSE
+3,IC,Vinícius Gusmão,ICP350,Modelagem e Avaliação de Desempenho,"SEG,QUA",10:00-12:00,60,T,FALSE
+4,IC,Vinícius Gusmão,ICP350,Modelagem e Avaliação de Desempenho,"SEG,QUA",08:00-10:00,60,T,FALSE
+5,IC,Valéria Bastos,ICP353,Computadores e Programação,"TER,QUI",08:00-10:00,60,T,FALSE
+6,IC,Valéria Bastos,ICP246,Arquitetura de Computadores e Sistemas Operacionais,"TER,QUI",10:00-12:00,60,T,FALSE
+7,IC,Silvana Rossetto,ICP361,Programação Concorrente,"TER,QUI",08:00-10:00,60,"T,P",FALSE
+8,IC,Severino Collier,ICP136,Introdução ao Pensamento Dedutivo,"SEG,QUA",08:00-10:00,60,T,FALSE
+9,IC,Mitre Dourado,ICP368,Algoritmos e Grafos,"TER,QUI",10:00-12:00,60,T,FALSE
+10,IC,Maria Luiza Campos,ICP357,Data Warehousing no Sup. à Tomada de Decisão,"SEG,QUA",13:00-15:00,60,T,FALSE
+11,IC,Maria Helena Jardim,ICP365,Otimização,"TER,QUI",10:00-12:00,60,T,FALSE
+12,IC,Juliana Valério,ICP115,Álgebra Linear Algorítmica,"SEG,QUA,SEX","13:00-15:00,13:00-15:00,8:00-10:00",60,"T,T,P",FALSE
+13,IC,Juliana França,ICP102,Trabalhando com Grandes Volumes de Dados,PREENCHER MANUALMENTE,PREENCHER MANUALMENTE,60,T,FALSE
+14,IC,Jonice de Oliveira,ICP249,Tecnologia e Sociedade,"TER,QUI",13:00-15:00,60,T,FALSE
+15,IC,Jonice de Oliveira,ICP132,Processo de Software,"TER,QUI",13:00-15:00,60,"T,P",FALSE
+16,IC,João Paixão,ICP248,Computação Científica e Análise de dados,"QUA,SEX",10:00-12:00,60,"T,P",FALSE
+17,IC,João Paixão,ICP238,Introdução a Computação Numérica,SEG,08:00-10:00,60,P,FALSE
+18,IC,João Carlos Pereira,ICP370,Lógica e Computabilidade,"QUA,SEX",08:00-10:00,60,T,FALSE
+19,IC,João Carlos Pereira,ICP363,Introdução ao Aprendizado de Máquina,"TER,QUI",13:00-15:00,60,T,FALSE
+20,IC,Hugo Nobrega,ICP144,Matemática Discreta,"TER,QUI",08:00-10:00,60,T,FALSE
+21,IC,Hugo Musso,ICP123,Linguagens Formais,"SEG,QUA",13:00-15:00,60,T,FALSE
+22,IC,Giseli Lopes,ICP141,Programação de Computadores II,"QUA,SEX",08:00-10:00,60,"T,P",FALSE
+23,IC,Gabriel Pereira,ICP143,Projeto Prático,TER,13:00-15:00,60,T,FALSE
+24,IC,Daniel Sadoc,ICP103,Análise de Risco,PREENCHER MANUALMENTE,PREENCHER MANUALMENTE,60,P,FALSE
+25,IC,Daniel Sadoc,ICP473,Segurança da Informação,"QUA,SEX",08:00-10:00,60,T,FALSE
+26,IC,Daniel Bastos,ICP134,Números Inteiros e Criptografia,"TER,QUI",08:00-10:00,60,T,FALSE
+27,IC,Claudson Bornstein,ICP116,Estrutura de Dados,"TER,QUI",13:00-15:00,60,T,FALSE
+28,IC,Carolina Marcelino,ICP362,Redes de Computadores I,"QUA,SEX",10:00-12:00,60,T,FALSE
+29,IC,Carla Delgado,ICP472,Metodologia da Pesquisa,"QUA,SEX",10:00-12:00,60,T,FALSE
+30,IC,Carla Delgado,ICP135,Projeto de Carreira,"SEG,QUA",13:00-15:00,60,T,FALSE
+31,IC,Anamaria Moreira,ICP133,Fundamentos de Sistemas de Computação,"TER,QUI",10:00-12:00,60,T,FALSE
+32,IC,Amaury Cruz,ICP351,Modelagem Matemática e Computacional,"SEG,QUA",08:00-10:00,60,T,FALSE
+33,IC,Aloisio Pina,ICP532,Mineração de Dados,"SEG,QUA",10:00-12:00,60,T,FALSE
+34,IC,Adriana Vivacqua,ICP145,Habilidades sociais para o trabalho,QUI,10:00-12:00,60,T,FALSE
+35,IC,Adriana Vivacqua,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,60,"T,P",FALSE
+36,IC,Severino Collier,ICP136,Introdução ao Pensamento Dedutivo,"SEG,QUA",10:00-12:00,30,T,FALSE
+37,IC,Maria Luiza Campos,ICP135,Projeto de Carreira,"SEG,QUA",13:00-15:00,30,T,FALSE
+38,IC,Juliana França,ICP132,Processo de Software,"SEG,QUA",10:00-12:00,30,"T,P",FALSE
+39,IC,João Paixão,ICP238,Introdução a Computação Numérica,SEG,13:00-15:00,30,P,FALSE
+40,IC,Hugo Nobrega,ICP144,Matemática Discreta,"TER,QUI",15:00-17:00,30,T,FALSE
+41,IC,Giseli Lopes,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,30,"T,P",FALSE
+42,IC,Gabriel Pereira,ICP143,Projeto Prático,QUI,13:00-15:00,30,T,FALSE
+43,IC,Daniel Bastos,ICP134,Números Inteiros e Criptografia,"TER,QUI",08:00-10:00,30,T,FALSE
+44,IC,Carolina Marcelino,ICP011,Tóp. Esp. em Ciência de Dados I,PREENCHER MANUALMENTE,PREENCHER MANUALMENTE,30,,
+45,IC,Anamaria Moreira,ICP133,Fundamentos de Sistemas de Computação,"TER,QUI",08:00-10:00,30,T,
+46,IC,Adriana Vivacqua,ICP145,Habilidades sociais para o trabalho,QUI,13:00-15:00,30,T,

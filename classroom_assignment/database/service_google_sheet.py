@@ -63,7 +63,6 @@ def get_secion_allocation():
         columns={
             "Instituto responsável": "responsable_institute",
             "Nome curto professor": "professor",
-            # "Código único turma": "course_class_id",
             "Código disciplina": "course_id",
             "Nome disciplina": "course_name",
             "Dia da semana": "day",
@@ -73,9 +72,6 @@ def get_secion_allocation():
         },
         inplace=True,
     )
-
-    # df.set_index("course_class_id", inplace=True)
-
 
     return df
 

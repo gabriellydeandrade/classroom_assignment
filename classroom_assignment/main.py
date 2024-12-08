@@ -190,7 +190,7 @@ class ClassroomAssignment:
         classroom_assignement = []
         for var in self.model.getVars():
             if var.X > 0:
-                timeschedule = f"{var.VarName}/{var.X}"
+                timeschedule = f"{var.VarName}#{var.X}"
                 classroom_assignement.append(timeschedule)
 
         model_value = self.model.ObjVal
