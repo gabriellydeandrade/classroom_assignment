@@ -26,6 +26,38 @@ def get_possible_schedules(sections: dict) -> Tuple[list, list]:
 
     return days, times
 
+def get_possible_schedules_v2(sections: dict) -> Tuple[list, list]:
+    """
+    Extracts and returns the unique days and times from a dictionary of sections.
+    Args:
+        sections (dict): A dictionary where the keys are course identifiers and the values are dictionaries
+                        containing course details, specifically 'day' and 'time'.
+    Returns:
+        tuple: A tuple containing two lists:
+            - days (list): A list of unique days on which the sections are scheduled.
+            - time (list): A list of unique times at which the sections are scheduled.
+    """
+
+    unique_schedules = set()
+
+    for _, course_details in sections.items():
+        day_original = course_details["day"]
+        time_original = course_details["time"]
+
+        days = day_original.split(",")
+        times = time_original.split(",")
+
+        if len(times) < len(days):
+            times = [times[0]] * len(days)
+
+        for day, time in zip(days, times):
+            unique_schedules.add((day, time))
+
+    days = list(day for day, _ in unique_schedules)
+    times = list(time for _, time in unique_schedules)
+
+    return days, times
+
 
 def get_section_schedule(courses_set: dict, course_class_id: str) -> Tuple[list, list]:
     """
@@ -108,7 +140,7 @@ def treat_and_save_results(timeschedule: list, courses: dict):
     for schedule in timeschedule:
         
         if "CapDiff" in schedule:
-            cap_diff.append(schedule)
+            cap_diff.append([schedule])
         else:
 
             schedule, value = schedule.split("#")

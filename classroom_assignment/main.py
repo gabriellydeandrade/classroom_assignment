@@ -96,7 +96,7 @@ class ClassroomAssignment:
                 )
 
     def add_constraints(self):
-        sections_days, sections_times = utils.get_possible_schedules(self.sections)
+        sections_days, sections_times = utils.get_possible_schedules_v2(self.sections)
 
         # Soft constraints
         # RF1: Garante que a sala seja alocada mesmo se exceder a capacidade da sala. Não inviabiliza o modelo.
@@ -114,6 +114,7 @@ class ClassroomAssignment:
                 )
                 <= self.classrooms[classroom]["capacity"]
                 + self.slack_variables[classroom]
+                # TODO: revisar regra
             )
 
             # RF2: Garante que a sala seja alocada com a menor capacidade possível
@@ -143,10 +144,6 @@ class ClassroomAssignment:
                     gp.quicksum(
                         self.variables[classroom][section][day][time]
                         for section in common_sections
-                        for day, time in zip(
-                            utils.get_section_schedule(self.sections, section)[0],
-                            utils.get_section_schedule(self.sections, section)[1],
-                        )
                     )
                     <= 1
                 )
@@ -154,7 +151,7 @@ class ClassroomAssignment:
         for section in self.sections.keys():
             days, times = utils.get_section_schedule(self.sections, section)
             for day, time in zip(days, times):
-                # RN2: Uma seção deverá ter somente uma sala de aula
+                # RN2: Uma seção deverá ter somente uma sala de aula para um mesmo dia e horário (oK)
                 self.model.addConstr(
                     gp.quicksum(
                         self.variables[classroom][section][day][time]
@@ -163,108 +160,47 @@ class ClassroomAssignment:
                     == 1
                 )
 
-                # RN3: Caso a disciplina seja do primeiro período, uma sala específica deverá ser ocupada para as aulas teóricas (F3014)
-                # if (
-                #     self.sections[section]["term"] == 1
-                #     and self.sections[section]["class_type"] == "Calouro"
-                # ):
-                #     classroom = "F3014"
-                #     # TODO considerar que eu posso ter um OU. Ou aloca em um horário/tempo ou em outro
-                #     self.model.addConstr(
-                #         self.variables[classroom][section][day][time] == 1
-                #     )
-
-        # RN4: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
-
         for section in self.sections:
             days, times = utils.get_section_schedule(self.sections, section)
             classroom_types = self.sections[section]["classroom_type"].split(",")
 
-            if len(classroom_types) > 1:
+            if len(classroom_types) == 1:
+                classroom_types = [classroom_types[0]] * len(days)
 
-                # Garante que seja alocada a quantidade de sala de um tipo determinado solicitada na alocação
-                for i in range(len(classroom_types)):
-                    if (
-                        self.classrooms[classroom]["classroom_type"]
-                        == classroom_types[i]
-                    ):
-                        self.model.addConstr(
-                            gp.quicksum(
-                                self.variables[classroom][section][days[j]][times[j]]
-                                for classroom in self.classrooms
-                                for j in range(len(days))
-                                if self.classrooms[classroom]["classroom_type"]
-                                == classroom_types[i]
-                            )
-                            == sum(
-                                [1 for x in classroom_types if x == classroom_types[i]]
-                            )
-                        )
-
-                # TODO: avaliar necessidade e remover se for o caso
-                # Garante que não seja alocada mais de uma sala de um tipo determinado solicitada na alocação
-                # for classroom in self.classrooms:
-                #     if self.classrooms[classroom]["classroom_type"] in classroom_types:
-                #         self.model.addConstr(
-                #             gp.quicksum(
-                #                 self.variables[classroom][section][days[i]][times[i]]
-                #                 for i in range(len(days))
-                #             )
-                #             <= 1
-                #         )
-
-                if (
-                    self.sections[section]["term"] == 1
-                    and self.sections[section]["class_type"] == "Calouro"
-                ):
-                    classroom_new_students = "F3014"
+            # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
+            if self.classrooms[classroom]["classroom_type"] in classroom_types:
+                for day, time in zip(days, times):
                     self.model.addConstr(
-                        gp.quicksum(
-                            self.variables[classroom_new_students][section][days[i]][
-                                times[i]
-                            ]
-                            for i in range(len(days))
-                        )
-                        == sum(
-                            [
-                                1
-                                for x in classroom_types
-                                if x
-                                == self.classrooms[classroom_new_students][
-                                    "classroom_type"
-                                ]
-                            ]
-                        )
+                        self.variables[classroom][section][day][time] <= 1
                     )
             else:
-                if (
-                    self.sections[section]["term"] == 1
-                    and self.sections[section]["class_type"] == "Calouro"
-                ):
-                    # FIXME: não está funcionando e está inviabilizando o modelo
-                    classroom_new_students = "F3014"
+                for day, time in zip(days, times):
                     self.model.addConstr(
-                        gp.quicksum(
-                            self.variables[classroom_new_students][section][
-                                days[i]
-                            ][times[i]]
-                            for i in range(len(days))
-                        )
-                        == len(days)
+                        self.variables[classroom][section][day][time] == 0
                     )
-                else:
-                    for day, time in zip(days, times):
-                        if (
-                            self.classrooms[classroom]["classroom_type"]
-                            in classroom_types
-                        ):
-                            self.model.addConstr(
-                                self.variables[classroom][section][day][time] <= 1
-                            )
-                        else:
-                            self.model.addConstr(
-                                self.variables[classroom][section][day][time] == 0
-                            )
+
+            # RN4: Caso a disciplina seja do primeiro período, uma sala específica deverá ser ocupada para as aulas teóricas (F3014)
+            if (
+                self.sections[section]["term"] == 1
+                and self.sections[section]["class_type"] == "Calouro"
+            ):
+                classroom_new_students = "F3014"
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.variables[classroom_new_students][section][days[i]][
+                            times[i]
+                        ]
+                        for i in range(len(days))
+                    )
+                    == sum(
+                        [
+                            1
+                            for x in classroom_types
+                            if x
+                            == self.classrooms[classroom_new_students]["classroom_type"]
+                        ]
+                    )
+                )
 
     def set_objective(self):
         self.model.setObjective(
