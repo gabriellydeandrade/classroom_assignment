@@ -22,7 +22,7 @@ class ClassroomAssignment:
         self.sections = sections
         self.coefficients = {}
         self.variables = {}
-        self.slack_variables = {}
+        self.slack_variables_capacity_exceeded = {}
         self.slack_variables_capacity_diff = {}
 
         self.env = self.init_environment()
@@ -82,7 +82,7 @@ class ClassroomAssignment:
 
     def add_capacity_slack_variables(self):
         for classroom in self.classrooms:
-            self.slack_variables[classroom] = self.model.addVar(
+            self.slack_variables_capacity_exceeded[classroom] = self.model.addVar(
                 vtype=GRB.INTEGER, name=f"PNC_{classroom}"
             )
 
@@ -113,7 +113,7 @@ class ClassroomAssignment:
                     )
                 )
                 <= self.classrooms[classroom]["capacity"]
-                + self.slack_variables[classroom]
+                + self.slack_variables_capacity_exceeded[classroom]
                 # TODO: revisar regra
             )
 
@@ -125,8 +125,10 @@ class ClassroomAssignment:
                     self.model.addConstr(
                         self.slack_variables_capacity_diff[classroom][section]
                         == self.classrooms[classroom]["capacity"]
-                        - self.variables[classroom][section][day][time]
-                        * self.sections[section]["capacity"]
+                        - (
+                            self.variables[classroom][section][day][time]
+                            * self.sections[section]["capacity"]
+                        )
                     )
 
         # Hard constraints
@@ -159,7 +161,7 @@ class ClassroomAssignment:
                     )
                     == 1
                 )
-
+        
         for section in self.sections:
             days, times = utils.get_section_schedule(self.sections, section)
             classroom_types = self.sections[section]["classroom_type"].split(",")
@@ -168,39 +170,105 @@ class ClassroomAssignment:
                 classroom_types = [classroom_types[0]] * len(days)
 
             # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
-            if self.classrooms[classroom]["classroom_type"] in classroom_types:
-                for day, time in zip(days, times):
+            for classroom in self.classrooms:
+                if self.classrooms[classroom]["classroom_type"] in classroom_types:
                     self.model.addConstr(
-                        self.variables[classroom][section][day][time] <= 1
+                        gp.quicksum(
+                            self.variables[classroom][section][days[i]][times[i]]
+                            for i in range(len(days)) #FIXME essa lógica não está dando certo
+                        )
+                        == classroom_types.count(self.classrooms[classroom]["classroom_type"])
                     )
-            else:
-                for day, time in zip(days, times):
-                    self.model.addConstr(
-                        self.variables[classroom][section][day][time] == 0
-                    )
+                else:
+                    for day, time in zip(days, times):
+                        self.model.addConstr(
+                            self.variables[classroom][section][day][time] == 0
+                        )
+
+        # for section in self.sections:
+        #     days, times = utils.get_section_schedule(self.sections, section)
+        #     classroom_types = self.sections[section]["classroom_type"].split(",")
+
+        #     if len(classroom_types) == 1:
+        #         classroom_types = [classroom_types[0]] * len(days)
+
+        #     # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
+        #     if self.classrooms[classroom]["classroom_type"] in classroom_types:
+
+        #         self.model.addConstr(
+        #             gp.quicksum(
+        #                 self.variables[classroom][section][days[i]][times[i]]
+        #                 for i in range(len(days))
+        #             )
+        #             == sum(
+        #                 [
+        #                     1
+        #                     for x in classroom_types
+        #                     if x == self.classrooms[classroom]["classroom_type"]
+        #                 ]
+        #             )
+        #         )
+        #         # for day, time in zip(days, times):
+        #         #     self.model.addConstr(
+        #         #         self.variables[classroom][section][day][time] <= 1
+        #         #     )
+        #     else:
+        #         for day, time in zip(days, times):
+        #             self.model.addConstr(
+        #                 self.variables[classroom][section][day][time] == 0
+        #             )
 
             # RN4: Caso a disciplina seja do primeiro período, uma sala específica deverá ser ocupada para as aulas teóricas (F3014)
-            if (
-                self.sections[section]["term"] == 1
-                and self.sections[section]["class_type"] == "Calouro"
-            ):
-                classroom_new_students = "F3014"
-                self.model.addConstr(
-                    gp.quicksum(
-                        self.variables[classroom_new_students][section][days[i]][
-                            times[i]
-                        ]
-                        for i in range(len(days))
-                    )
-                    == sum(
-                        [
-                            1
-                            for x in classroom_types
-                            if x
-                            == self.classrooms[classroom_new_students]["classroom_type"]
-                        ]
-                    )
-                )
+            # for section in self.sections:
+            # days, times = utils.get_section_schedule(self.sections, section)
+            # classroom_types = self.sections[section]["classroom_type"].split(",")
+
+            # if (
+            #     self.sections[section]["term"] == 1
+            #     and self.sections[section]["class_type"] == "Calouro"
+            # ):
+            #     classroom_new_students = "F3014"
+
+            #     self.model.addConstr(
+            #         gp.quicksum(
+            #             self.variables[classroom_new_students][section][days[i]][
+            #                 times[i]
+            #             ]
+            #             for i in range(len(days))
+            #         )
+            #         == len(classroom_types)
+            # sum(
+            #     [
+            #         1
+            #         for x in classroom_types
+            #         if x
+            #         == self.classrooms[classroom_new_students]["classroom_type"]
+            #     ]
+            # )
+            # )
+
+            # # # RN4: Caso a disciplina seja do primeiro período, uma sala específica deverá ser ocupada para as aulas teóricas (F3014)
+            # if (
+            #     self.sections[section]["term"] == 1
+            #     and self.sections[section]["class_type"] == "Calouro"
+            # ):
+            #     classroom_new_students = "F3014"
+            #     self.model.addConstr(
+            #         gp.quicksum(
+            #             self.variables[classroom_new_students][section][days[i]][
+            #                 times[i]
+            #             ]
+            #             for i in range(len(days))
+            #         )
+            #         == sum(
+            #             [
+            #                 1
+            #                 for x in classroom_types
+            #                 if x
+            #                 == self.classrooms[classroom_new_students]["classroom_type"]
+            #             ]
+            #         )
+            #     )
 
     def set_objective(self):
         self.model.setObjective(
@@ -215,7 +283,7 @@ class ClassroomAssignment:
                 )
             )
             - gp.quicksum(
-                WEIGHT_FACTOR_C * self.slack_variables[classroom]
+                WEIGHT_FACTOR_C * self.slack_variables_capacity_exceeded[classroom]
                 for classroom in self.classrooms
             )
             - gp.quicksum(

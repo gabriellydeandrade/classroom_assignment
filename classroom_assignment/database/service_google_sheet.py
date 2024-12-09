@@ -68,7 +68,7 @@ def get_secion_allocation():
             "Nome disciplina": "course_name",
             "Dia da semana": "day",
             "Horário": "time",
-            "Qtd alunos": "capacity",
+            "Vagas": "capacity",
             "Tipo sala": "classroom_type",
             "Período": "term",
             "Tipo turma": "class_type",

@@ -1,4 +1,4 @@
-,responsable_institute,graduation_course,professor,course_id,course_name,day,time,Vagas,classroom_type,term,class_type,board_type
+,responsable_institute,graduation_course,professor,course_id,course_name,day,time,capacity,classroom_type,term,class_type,board_type
 0,IC,BCC1,Adriana Vivacqua,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,60,"T,P",1,Calouro,FALSE
 1,IC,CMT1,Aloisio Pina,ICP532,Mineração de Dados,"SEG,QUA",10:00-12:00,60,T,10,Regular,FALSE
 2,IC,BCC1,Amaury Cruz,ICP351,Modelagem Matemática e Computacional,"SEG,QUA",08:00-10:00,60,T,5,Regular,FALSE

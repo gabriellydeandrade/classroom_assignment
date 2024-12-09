@@ -136,11 +136,14 @@ def save_results_to_csv(data: list, filename: str) -> None:
 def treat_and_save_results(timeschedule: list, courses: dict):
     timeschedule_treated = []
     cap_diff = []
+    pnc = []
 
     for schedule in timeschedule:
         
         if "CapDiff" in schedule:
             cap_diff.append([schedule])
+        elif "PNC" in schedule:
+            pnc.append([schedule])
         else:
 
             schedule, value = schedule.split("#")
@@ -163,5 +166,6 @@ def treat_and_save_results(timeschedule: list, courses: dict):
 
     save_results_to_csv(timeschedule_treated, "classroom_assignment/results/assignment.csv")
     save_results_to_csv(cap_diff, "classroom_assignment/results/cap_diff.csv")
+    save_results_to_csv(pnc, "classroom_assignment/results/pnc.csv")
     
     return timeschedule_treated, cap_diff

@@ -56,7 +56,7 @@ class TestAddCapacitySlackVariables(unittest.TestCase):
 
     def test_add_capacity_slack_variables_for_all_classrooms(self):
         for classroom in self.classrooms.keys():
-            self.assertIn(classroom, self.timetabling.slack_variables)
+            self.assertIn(classroom, self.timetabling.slack_variables_capacity_exceeded)
 
 
 if __name__ == "__main__":
