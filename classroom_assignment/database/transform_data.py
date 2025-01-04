@@ -2,9 +2,11 @@ from typing import Dict
 import pandas as pd
 from re import search
 from numbers import Number
+import numpy as np
 
 
 def transform_to_dict(data: pd.DataFrame) -> Dict:
+    data = data.replace({np.nan: None})
     data_transformed = data.to_dict("index")
 
     for dt in data_transformed:
@@ -32,5 +34,8 @@ def transform_to_dict(data: pd.DataFrame) -> Dict:
         if line["classroom_type"] and search(r"[PT](,[PT])*", line["classroom_type"]):
             line["classroom_type"] = line["classroom_type"].replace("T", "Sala")
             line["classroom_type"] = line["classroom_type"].replace("P", "Laboratório")
+
+        if line["classroom_type"] == None:
+            line["classroom_type"] = "NAO INFORMADO"
 
     return data_transformed

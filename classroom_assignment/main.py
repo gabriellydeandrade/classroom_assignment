@@ -9,12 +9,10 @@ from database.construct_sets import (
     get_sections_set,
 )
 
-
 DEFAULT_COEFFICIENT = 10
 RESPONSIBLE_INSTITUTE_COEFFICIENT = 100
 ZERO_COEFFICIENT = 0
 WEIGHT_FACTOR_C = 1000
-# PENAULTY_FACTOR_DIFF = 100
 
 
 class ClassroomAssignment:
@@ -96,39 +94,16 @@ class ClassroomAssignment:
                     )
                 )
 
-                # self.slack_variables_capacity_exceeded[classroom][section] = (
-                #     self.model.addVar(
-                #         vtype=GRB.INTEGER,
-                #         name=f"PNC_{classroom}_{section}",
-                #         lb=0.0,
-                #         ub=float("inf"),
-                #     )
-                # )
-
     def add_constraints(self):
         sections_days, sections_times = utils.get_possible_schedules_v2(self.sections)
 
         # Soft constraints
-        # RF1: Garante que a sala seja alocada mesmo se exceder a capacidade da sala. Não inviabiliza o modelo.
         for classroom in self.classrooms:
             for section in self.sections:
                 days, times = utils.get_section_schedule(self.sections, section)
 
                 for day, time in zip(days, times):
-                    # if (
-                    #     self.classrooms[classroom]["capacity"]
-                    #     < self.sections[section]["capacity"]
-                    # ):
-                    # self.model.addConstr(
-                    #     self.slack_variables_capacity_exceeded[classroom][section]
-                    #     == (
-                    #         self.variables[classroom][section][day][time]
-                    #         * self.sections[section]["capacity"]
-                    #     )
-                    #     - self.classrooms[classroom]["capacity"]
-                    # )
                     # RF2: Garante que a sala seja alocada com a menor capacidade possível
-                    # else:
                     self.model.addConstr(
                         self.slack_variables_capacity_diff[classroom][section]
                         == self.classrooms[classroom]["capacity"]
@@ -137,23 +112,10 @@ class ClassroomAssignment:
                             * self.sections[section]["capacity"]
                         )
                     )
-                    # self.model.addConstr(
-                    #         self.variables[classroom][section][day][time]
-                    #         * self.sections[section]["capacity"]
-                    #         # for section in self.sections.keys()
-                    #         # for day, time in zip(
-                    #         #     utils.get_section_schedule(self.sections, section)[0],
-                    #         #     utils.get_section_schedule(self.sections, section)[1],
-                    #         # )
-                    #     <= self.classrooms[classroom]["capacity"]
-                    #     + self.slack_variables_capacity_exceeded[classroom][section]
-                    #     # TODO: revisar regra
-                    # )
 
         # Hard constraints
+        # RN1: Um sala poderá ser alocada para no máximo 1 uma turma em um mesmo dia e horário (binário)
         for classroom in self.classrooms:
-
-            # RN1: Um sala poderá ser alocada para no máximo 1 uma turma em um mesmo dia e horário (binário)
             for i in range(len(sections_days)):
                 day = sections_days[i]
                 time = sections_times[i]
@@ -161,43 +123,70 @@ class ClassroomAssignment:
                 time_sections = utils.get_section_by_time(self.sections, time)
 
                 common_sections = day_sections.intersection(time_sections)
+
                 self.model.addConstr(
                     gp.quicksum(
                         self.variables[classroom][section][day][time]
                         for section in common_sections
                     )
-                    <= 1
+                    <= 1,
+                    name=f"RN1:Section_{section}_{classroom}_{day}_{time}",
                 )
 
         for section in self.sections.keys():
             days, times = utils.get_section_schedule(self.sections, section)
             for day, time in zip(days, times):
-                # RN2: Uma seção deverá ter somente uma sala de aula para um mesmo dia e horário (oK)
+                # RN2: Uma seção deverá ter somente uma sala de aula para um mesmo dia e horário
                 self.model.addConstr(
                     gp.quicksum(
                         self.variables[classroom][section][day][time]
                         for classroom in self.classrooms
                     )
-                    == 1
+                    == 1,
+                    name=f"RN2:Section_{section}_{classroom}_{day}_{time}",
                 )
 
-        # for section in self.sections.keys():
+        # # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
+        # for section in self.sections:
         #     days, times = utils.get_section_schedule(self.sections, section)
         #     classroom_types = self.sections[section]["classroom_type"].split(",")
 
         #     if len(classroom_types) == 1:
         #         classroom_types = [classroom_types[0]] * len(days)
 
-        #     # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
-        #     for class_type in classroom_types:
+        #     for day, time in zip(days, times):
+        #         for class_type in classroom_types:
+        #             classroom_match_type = [x for x in self.classrooms if self.classrooms[x]["classroom_type"] == class_type]
+
+        #             self.model.addConstr(
+        #                 gp.quicksum(
+        #                     self.variables[classroom][section][day][time]
+        #                     for classroom in classroom_match_type
+        #                 )
+        #                 == 1,
+        #                 name=f"RN3:Section_{section}_{class_type}_{day}_{time}"
+        #             )
+
+        for section in self.sections.keys():
+            days, times = utils.get_section_schedule(self.sections, section)
+            classroom_types = self.sections[section]["classroom_type"].split(",")
+
+            if len(classroom_types) == 1:
+                classroom_types = [classroom_types[0]] * len(days)
+
+        # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
+        # se foi solicitado uma sala teórica e outra prática, deverá ser alocado uma sala teórica e outra prática
+        # for class_type in classroom_types:
+        #     for day, time in zip(days, times):
         #         self.model.addConstr(
         #             gp.quicksum(
         #                 self.variables[classroom][section][day][time]
         #                 for classroom in self.classrooms
-        #                 if self.classrooms[classroom]["classroom_type"] == class_type
-        #                 for day, time in zip(days, times)
+        #                 if self.classrooms[classroom]["classroom_type"]
+        #                 == class_type
         #             )
-        #             == classroom_types.count(class_type)
+        #             == classroom_types.count(class_type),
+        #             name=f"RN3:Section_{section}_{class_type}_{day}_{time}"
         #         )
 
         # for classroom in self.classrooms:
@@ -251,20 +240,9 @@ class ClassroomAssignment:
                     utils.get_section_schedule(self.sections, section)[1],
                 )
             )
-            # - gp.quicksum(
-            #     self.variables[classroom][section][day][time]
-            #     * WEIGHT_FACTOR_C
-            #     * self.slack_variables_capacity_exceeded[classroom][section]
-            #     for classroom in self.classrooms
-            #     for section in self.sections.keys()
-            #     for day, time in zip(
-            #         utils.get_section_schedule(self.sections, section)[0],
-            #         utils.get_section_schedule(self.sections, section)[1],
-            #     )
-            # )
             - gp.quicksum(
-                self.variables[classroom][section][day][time] 
-                 * self.slack_variables_capacity_diff[classroom][section]
+                self.variables[classroom][section][day][time]
+                * self.slack_variables_capacity_diff[classroom][section]
                 for classroom in self.classrooms
                 for section in self.sections.keys()
                 for day, time in zip(
@@ -287,9 +265,14 @@ class ClassroomAssignment:
 
         classroom_assignement = []
         for var in self.model.getVars():
-            if var.X > 0:
-                timeschedule = f"{var.VarName}#{var.X}"
-                classroom_assignement.append(timeschedule)
+            try:
+                if var.X > 0:
+                    timeschedule = f"{var.VarName}#{var.X}"
+                    classroom_assignement.append(timeschedule)
+            except:
+                self.model.computeIIS()
+                self.model.write("model.ilp")
+                raise Exception("Model is infeasible")
 
         model_value = self.model.ObjVal
 

@@ -44,17 +44,21 @@ def get_possible_schedules_v2(sections: dict) -> Tuple[list, list]:
         day_original = course_details["day"]
         time_original = course_details["time"]
 
-        days = day_original.split(",")
-        times = time_original.split(",")
+        days = day_original.split(",") if day_original else []
+        times = time_original.split(",") if time_original else []
 
+        # Repete o horário para os dias no caso de agendamento de mesma hora. Ex.: SEG,QUA 10h às 12h
         if len(times) < len(days):
             times = [times[0]] * len(days)
 
         for day, time in zip(days, times):
             unique_schedules.add((day, time))
 
-    days = list(day for day, _ in unique_schedules)
-    times = list(time for _, time in unique_schedules)
+    days = []
+    times = []
+    for day, time in unique_schedules:
+        days.append(day)
+        times.append(time)
 
     return days, times
 
@@ -74,8 +78,8 @@ def get_section_schedule(courses_set: dict, course_class_id: str) -> Tuple[list,
     day = courses_set[course_class_id]["day"]
     time = courses_set[course_class_id]["time"]
 
-    days = day.split(",")
-    times = time.split(",")
+    days = day.split(",") if day else []
+    times = time.split(",") if time else []
 
     if len(times) < len(days):
         times = [times[0]] * len(days)

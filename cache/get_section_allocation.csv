@@ -1,2 +1,13 @@
 ,responsable_institute,graduation_course,professor,course_id,course_name,day,time,capacity,classroom_type,term,class_type,board_type
 0,IC,BCC1,Adriana Vivacqua,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,60,"T,P",1,Calouro,FALSE
+1,IC,BCC1,João Paixão,ICP136,Introdução ao Pensamento Dedutivo,"SEG,QUA",08:00-10:00,60,T,1,Calouro,FALSE
+2,IC,BCC1,Maria Luiza Campos,ICP135,Projeto de Carreira,"SEG,QUA",13:00-15:00,60,T,1,Calouro,FALSE
+3,IC,BCC1,Severino Collier,ICP134,Números Inteiros e Criptografia,"TER,QUI",08:00-10:00,60,T,1,Calouro,FALSE
+4,IC,BCC1,Eldânae Teixeira,ICP132,Processo de Software,"TER,QUI",13:00-15:00,60,"T,P",1,Calouro,FALSE
+5,IC,BCC1,Evandro Macedo,ICP133,Fundamentos de Sistemas de Computação,"TER,QUI",10:00-12:00,60,T,1,Calouro,FALSE
+6,IC,BCC2,Giseli Lopes,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,30,"T,P",1,Veterano,FALSE
+7,IC,BCC2-CMT1,Jonice de Oliveira,ICP132,Processo de Software,"SEG,QUA",10:00-12:00,30,"T,P",1,Veterano,FALSE
+8,IC,BCC2-CMT1,Juliana Valério,ICP136,Introdução ao Pensamento Dedutivo,"SEG,QUA",10:00-12:00,30,T,1,Veterano,FALSE
+9,IC,BCC2,Eldânae Teixeira,ICP135,Projeto de Carreira,"SEG,QUA",13:00-15:00,30,T,1,Veterano,FALSE
+10,IC,BCC2-CMT1,Anamaria Moreira,ICP133,Fundamentos de Sistemas de Computação,"TER,QUI",08:00-10:00,30,T,1,Veterano,FALSE
+11,IC,BCC2-CMT1,Daniel Bastos,ICP134,Números Inteiros e Criptografia,"TER,QUI",08:00-10:00,30,T,1,Veterano,FALSE

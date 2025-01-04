@@ -1,0 +1,16 @@
+\ Model ClassroomAssignment_copy
+\ LP format - for model browsing. Use MPS format to capture full model detail.
+\ Signature: 0x84dfe0a0cd98929e
+Maximize
+ 
+Subject To
+ RN1_Section_11_F3010_SEG_10_00-12_00: F3010_0_SEG_10_00-12_00
+   + F3010_6_SEG_10_00-12_00 + F3010_7_SEG_10_00-12_00
+   + F3010_8_SEG_10_00-12_00 <= 1
+ RN2_Section_6_F3010_SEG_10_00-12_00: F3010_6_SEG_10_00-12_00 = 1
+ RN2_Section_8_F3010_SEG_10_00-12_00: F3010_8_SEG_10_00-12_00 = 1
+Bounds
+Binaries
+ F3010_0_SEG_10_00-12_00 F3010_6_SEG_10_00-12_00 F3010_7_SEG_10_00-12_00
+ F3010_8_SEG_10_00-12_00
+End
