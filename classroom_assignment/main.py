@@ -11,7 +11,6 @@ from database.construct_sets import (
 
 DEFAULT_COEFFICIENT = 10
 RESPONSIBLE_INSTITUTE_COEFFICIENT = 100
-ZERO_COEFFICIENT = 0
 WEIGHT_FACTOR_C = 1000
 
 
@@ -21,7 +20,6 @@ class ClassroomAssignment:
         self.sections = sections
         self.coefficients = {}
         self.variables = {}
-        # self.slack_variables_capacity_exceeded = {}
         self.slack_variables_capacity_diff = {}
 
         self.env = self.init_environment()
@@ -52,27 +50,16 @@ class ClassroomAssignment:
                     self.coefficients[classroom][section][day] = {}
 
                     if (
-                        self.classrooms[classroom]["classroom_type"]
-                        and self.classrooms[classroom]["classroom_type"]
-                        in self.sections[section]["classroom_type"]
-                        and self.sections[section]["responsable_institute"]
+                        self.sections[section]["responsable_institute"]
                         == self.classrooms[classroom]["responsable_institute"]
                     ):
                         self.coefficients[classroom][section][day][
                             time
                         ] = RESPONSIBLE_INSTITUTE_COEFFICIENT
-                    elif (
-                        self.classrooms[classroom]["classroom_type"]
-                        and self.classrooms[classroom]["classroom_type"]
-                        in self.sections[section]["classroom_type"]
-                    ):
-                        self.coefficients[classroom][section][day][
-                            time
-                        ] = DEFAULT_COEFFICIENT
                     else:
                         self.coefficients[classroom][section][day][
                             time
-                        ] = ZERO_COEFFICIENT
+                        ] = DEFAULT_COEFFICIENT
 
                     self.variables[classroom][section][day] = {}
                     self.variables[classroom][section][day][time] = self.model.addVar(
@@ -167,12 +154,12 @@ class ClassroomAssignment:
         #                 name=f"RN3:Section_{section}_{class_type}_{day}_{time}"
         #             )
 
-        for section in self.sections.keys():
-            days, times = utils.get_section_schedule(self.sections, section)
-            classroom_types = self.sections[section]["classroom_type"].split(",")
+        # for section in self.sections.keys():
+        #     days, times = utils.get_section_schedule(self.sections, section)
+        #     classroom_types = self.sections[section]["classroom_type"].split(",")
 
-            if len(classroom_types) == 1:
-                classroom_types = [classroom_types[0]] * len(days)
+        #     if len(classroom_types) == 1:
+        #         classroom_types = [classroom_types[0]] * len(days)
 
         # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
         # se foi solicitado uma sala teórica e outra prática, deverá ser alocado uma sala teórica e outra prática
@@ -207,26 +194,26 @@ class ClassroomAssignment:
         #             self.variables[classroom][section][day][time] == 0
         #         )
 
-        # RN4: Caso a disciplina seja do primeiro período, uma sala específica deverá ser ocupada para as aulas teóricas (F3014)
-        # for section in self.sections:
-        #     days, times = utils.get_section_schedule(self.sections, section)
-        #     classroom_types = self.sections[section]["classroom_type"].split(",")
+        # RN4: Caso a disciplina seja do primeiro período e for turma de calouro,
+        # uma sala específica deverá ser ocupada para as aulas teóricas (F3014)
+        for section in self.sections:
+            if (
+                self.sections[section]["term"] == 1
+                and self.sections[section]["class_type"] == "Calouro"
+            ):
 
-        #     if (
-        #         self.sections[section]["term"] == 1
-        #         and self.sections[section]["class_type"] == "Calouro"
-        #     ):
-        #         classroom_new_students = "F3014"
-        #         self.model.addConstr(
-        #             gp.quicksum(
-        #                 self.variables[classroom_new_students][section][day][time]
-        #                 for day, time in zip(days, times)
-        #             )
-        #             == 1 #FIXME acho que achei o erro, o problema está em considerar o dia e horário separado, no caso deveria ser 1 para um dia e horário especifico (considerando o dia de sala de aula)
-        #             # == classroom_types.count(
-        #             #     self.classrooms[classroom_new_students]["classroom_type"]
-        #             # )
-        #         )
+                days, times = utils.get_section_schedule(self.sections, section)
+                classroom_types = self.sections[section]["classroom_type"].split(",")
+                qtty_theory_classroom = classroom_types.count("Teórica")
+
+                classroom_new_students = "F3014"
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.variables[classroom_new_students][section][day][time]
+                        for day, time in zip(days, times)
+                    )
+                    == qtty_theory_classroom
+                )
 
     def set_objective(self):
         self.model.setObjective(

@@ -1,24 +1,24 @@
+E1012 (LAB 3);Adriana Vivacqua;BCC1;ICP131;Programação de Computadores I;1;SEG;10:00-12:00
 E1012 (LAB 3);Eldânae Teixeira;BCC1;ICP132;Processo de Software;1;TER;13:00-15:00
-E2001 (SDCC);Adriana Vivacqua;BCC1;ICP131;Programação de Computadores I;1;QUA;10:00-12:00
-E2001 (SDCC);Juliana Valério;BCC2-CMT1;ICP136;Introdução ao Pensamento Dedutivo;1;SEG;10:00-12:00
-E2001 (SDCC);Daniel Bastos;BCC2-CMT1;ICP134;Números Inteiros e Criptografia;1;QUI;08:00-10:00
-E2002 (SDLC);Evandro Macedo;BCC1;ICP133;Fundamentos de Sistemas de Computação;1;QUI;10:00-12:00
-E2002 (SDLC);Jonice de Oliveira;BCC2-CMT1;ICP132;Processo de Software;1;QUA;10:00-12:00
-E2002 (SDLC);Daniel Bastos;BCC2-CMT1;ICP134;Números Inteiros e Criptografia;1;TER;08:00-10:00
-E2011 (LAB 1);Adriana Vivacqua;BCC1;ICP131;Programação de Computadores I;1;SEG;10:00-12:00
-E2011 (LAB 1);Giseli Lopes;BCC2;ICP131;Programação de Computadores I;1;QUA;10:00-12:00
-F2005;Maria Luiza Campos;BCC1;ICP135;Projeto de Carreira;1;SEG;13:00-15:00
-F2005;Severino Collier;BCC1;ICP134;Números Inteiros e Criptografia;1;TER;08:00-10:00
+E1012 (LAB 3);Jonice de Oliveira;BCC2-CMT1;ICP132;Processo de Software;1;QUA;10:00-12:00
+E1012 (LAB 3);Anamaria Moreira;BCC2-CMT1;ICP133;Fundamentos de Sistemas de Computação;1;QUI;08:00-10:00
+E2001 (SDCC);Eldânae Teixeira;BCC2;ICP135;Projeto de Carreira;1;SEG;13:00-15:00
+E2001 (SDCC);Anamaria Moreira;BCC2-CMT1;ICP133;Fundamentos de Sistemas de Computação;1;TER;08:00-10:00
+E2002 (SDLC);Maria Luiza Campos;BCC1;ICP135;Projeto de Carreira;1;QUA;13:00-15:00
+E2002 (SDLC);Juliana Valério;BCC2-CMT1;ICP136;Introdução ao Pensamento Dedutivo;1;SEG;10:00-12:00
+E2011 (LAB 1);Severino Collier;BCC1;ICP134;Números Inteiros e Criptografia;1;QUI;08:00-10:00
+F1014 (LSD);Juliana Valério;BCC2-CMT1;ICP136;Introdução ao Pensamento Dedutivo;1;QUA;10:00-12:00
 F2005;Evandro Macedo;BCC1;ICP133;Fundamentos de Sistemas de Computação;1;TER;10:00-12:00
-F2005;Jonice de Oliveira;BCC2-CMT1;ICP132;Processo de Software;1;SEG;10:00-12:00
 F2006/008;João Paixão;BCC1;ICP136;Introdução ao Pensamento Dedutivo;1;SEG;08:00-10:00
-F2006/008;Maria Luiza Campos;BCC1;ICP135;Projeto de Carreira;1;QUA;13:00-15:00
-F2006/008;Juliana Valério;BCC2-CMT1;ICP136;Introdução ao Pensamento Dedutivo;1;QUA;10:00-12:00
-F2006/008;Anamaria Moreira;BCC2-CMT1;ICP133;Fundamentos de Sistemas de Computação;1;TER;08:00-10:00
-F2007;Severino Collier;BCC1;ICP134;Números Inteiros e Criptografia;1;QUI;08:00-10:00
-F2010/012;João Paixão;BCC1;ICP136;Introdução ao Pensamento Dedutivo;1;QUA;08:00-10:00
-F2010/012;Eldânae Teixeira;BCC1;ICP132;Processo de Software;1;QUI;13:00-15:00
-F2010/012;Eldânae Teixeira;BCC2;ICP135;Projeto de Carreira;1;SEG;13:00-15:00
-F2010/012;Eldânae Teixeira;BCC2;ICP135;Projeto de Carreira;1;QUA;13:00-15:00
-F2010/012;Anamaria Moreira;BCC2-CMT1;ICP133;Fundamentos de Sistemas de Computação;1;QUI;08:00-10:00
+F2006/008;Jonice de Oliveira;BCC2-CMT1;ICP132;Processo de Software;1;SEG;10:00-12:00
+F2006/008;Daniel Bastos;BCC2-CMT1;ICP134;Números Inteiros e Criptografia;1;TER;08:00-10:00
+F2007;Giseli Lopes;BCC2;ICP131;Programação de Computadores I;1;QUA;10:00-12:00
+F3014;Adriana Vivacqua;BCC1;ICP131;Programação de Computadores I;1;QUA;10:00-12:00
+F3014;João Paixão;BCC1;ICP136;Introdução ao Pensamento Dedutivo;1;QUA;08:00-10:00
+F3014;Maria Luiza Campos;BCC1;ICP135;Projeto de Carreira;1;SEG;13:00-15:00
+F3014;Severino Collier;BCC1;ICP134;Números Inteiros e Criptografia;1;TER;08:00-10:00
+F3014;Eldânae Teixeira;BCC1;ICP132;Processo de Software;1;QUI;13:00-15:00
+F3014;Evandro Macedo;BCC1;ICP133;Fundamentos de Sistemas de Computação;1;QUI;10:00-12:00
 F3014;Giseli Lopes;BCC2;ICP131;Programação de Computadores I;1;SEG;10:00-12:00
+F3014;Eldânae Teixeira;BCC2;ICP135;Projeto de Carreira;1;QUA;13:00-15:00
+F3014;Daniel Bastos;BCC2-CMT1;ICP134;Números Inteiros e Criptografia;1;QUI;08:00-10:00

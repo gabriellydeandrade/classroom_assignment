@@ -32,7 +32,7 @@ def transform_to_dict(data: pd.DataFrame) -> Dict:
             line["classroom_type"] = None
 
         if line["classroom_type"] and search(r"[PT](,[PT])*", line["classroom_type"]):
-            line["classroom_type"] = line["classroom_type"].replace("T", "Sala")
+            line["classroom_type"] = line["classroom_type"].replace("T", "Teórica")
             line["classroom_type"] = line["classroom_type"].replace("P", "Laboratório")
 
         if line["classroom_type"] == None:
