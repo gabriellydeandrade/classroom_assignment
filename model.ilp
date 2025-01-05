@@ -1,16 +1,17 @@
 \ Model ClassroomAssignment_copy
 \ LP format - for model browsing. Use MPS format to capture full model detail.
-\ Signature: 0x84dfe0a0cd98929e
+\ Signature: 0xbb72814f649c5b7f
 Maximize
  
 Subject To
- RN1_Section_11_F3010_SEG_10_00-12_00: F3010_0_SEG_10_00-12_00
-   + F3010_6_SEG_10_00-12_00 + F3010_7_SEG_10_00-12_00
-   + F3010_8_SEG_10_00-12_00 <= 1
- RN2_Section_6_F3010_SEG_10_00-12_00: F3010_6_SEG_10_00-12_00 = 1
- RN2_Section_8_F3010_SEG_10_00-12_00: F3010_8_SEG_10_00-12_00 = 1
+ R1832: 60 F3014_4_TER_13_00-15_00 + CapDiff_F3014_4 = 90
+ R1833: 60 F3014_4_QUI_13_00-15_00 + CapDiff_F3014_4 = 90
+ RN4_F3014_NewStudents_4: F3014_4_TER_13_00-15_00 + F3014_4_QUI_13_00-15_00
+   = 1
 Bounds
+ CapDiff_F3014_4 free
 Binaries
- F3010_0_SEG_10_00-12_00 F3010_6_SEG_10_00-12_00 F3010_7_SEG_10_00-12_00
- F3010_8_SEG_10_00-12_00
+ F3014_4_TER_13_00-15_00 F3014_4_QUI_13_00-15_00
+Generals
+ CapDiff_F3014_4
 End

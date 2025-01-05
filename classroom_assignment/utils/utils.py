@@ -2,6 +2,27 @@ import csv
 from typing import Tuple
 
 
+def get_courses_by_exact_day_and_time(courses: dict, day: str, time: str) -> set:
+
+    result = []
+
+    for course_id, details in courses.items():
+        days = details["day"].split(",")
+        times = details["time"].split(",")
+
+        # Repete o horário para os dias no caso de agendamento de mesma hora. Ex.: SEG,QUA 10h às 12h
+        if len(times) < len(days):
+            times = [times[0]] * len(days)
+
+        for i, course_day in enumerate(days):
+            if course_day == day:
+                for j, course_time in enumerate(times):
+                    if i == j and course_time == time:
+                        result.append(course_id)
+
+    return set(result)
+
+
 def get_possible_schedules(sections: dict) -> Tuple[list, list]:
     """
     Extracts and returns the unique days and times from a dictionary of sections.
@@ -25,6 +46,7 @@ def get_possible_schedules(sections: dict) -> Tuple[list, list]:
     times = list(time for _, time in unique_schedules)
 
     return days, times
+
 
 def get_possible_schedules_v2(sections: dict) -> Tuple[list, list]:
     """
@@ -87,55 +109,14 @@ def get_section_schedule(courses_set: dict, course_class_id: str) -> Tuple[list,
     return (days, times)
 
 
-def get_section_by_time(courses: dict, time: str) -> set:
-    """
-    Returns a set of courses that have classes at the specified time.
-
-    Args:
-        courses (dict): Dictionary containing course details.
-        time (str): The time to filter courses by.
-
-    Returns:
-        set: A set of courses that have classes at the specified time.
-    """
-
-    result = []
-
-    for course_id, details in courses.items():
-        if type(details["time"]) == str:
-            for course_time in details["time"].split(","):
-                if course_time and course_time in time:
-                    result.append(course_id)
-
-    return set(result)
-
-
-def get_section_by_day(courses: dict, day: str) -> set:
-    """
-    Returns a set of courses that have classes on the specified day.
-
-    Args:
-        courses (dict): Dictionary containing course details.
-        day (str): The day to filter courses by.
-
-    Returns:
-        set: A set of courses that have classes on the specified day.
-    """
-    result = []
-
-    for course_id, details in courses.items():
-        if type(details["day"]) == str:
-            for course_day in details["day"].split(","):
-                if course_day and course_day in day:
-                    result.append(course_id)
-
-    return set(result)
-
 def save_results_to_csv(data: list, filename: str) -> None:
     with open(filename, "w") as file:
-        spamwriter = csv.writer(file, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        spamwriter = csv.writer(
+            file, delimiter=";", quotechar="|", quoting=csv.QUOTE_MINIMAL
+        )
         for line in data:
             spamwriter.writerow(line)
+
 
 def treat_and_save_results(timeschedule: list, courses: dict):
     timeschedule_treated = []
@@ -143,7 +124,7 @@ def treat_and_save_results(timeschedule: list, courses: dict):
     pnc = []
 
     for schedule in timeschedule:
-        
+
         if "CapDiff" in schedule:
             cap_diff.append([schedule])
         elif "PNC" in schedule:
@@ -164,12 +145,23 @@ def treat_and_save_results(timeschedule: list, courses: dict):
             day = allocation[2]
             time = allocation[3]
 
-            result = [classroom_name, professor, graduation_course, course_id, course_name, term, day, time]
+            result = [
+                classroom_name,
+                professor,
+                graduation_course,
+                course_id,
+                course_name,
+                term,
+                day,
+                time,
+            ]
 
             timeschedule_treated.append(result)
 
-    save_results_to_csv(timeschedule_treated, "classroom_assignment/results/assignment.csv")
+    save_results_to_csv(
+        timeschedule_treated, "classroom_assignment/results/assignment.csv"
+    )
     save_results_to_csv(cap_diff, "classroom_assignment/results/cap_diff.csv")
     save_results_to_csv(pnc, "classroom_assignment/results/pnc.csv")
-    
+
     return timeschedule_treated, cap_diff

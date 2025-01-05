@@ -2,6 +2,7 @@ import gurobipy as gp
 from gurobipy import GRB
 
 import settings
+from math import isclose
 
 from utils import utils
 from database.construct_sets import (
@@ -47,7 +48,8 @@ class ClassroomAssignment:
 
                 for day, time in zip(days, times):
 
-                    self.coefficients[classroom][section][day] = {}
+                    if day not in self.coefficients[classroom][section]:
+                        self.coefficients[classroom][section][day] = {}
 
                     if (
                         self.sections[section]["responsable_institute"]
@@ -61,7 +63,9 @@ class ClassroomAssignment:
                             time
                         ] = DEFAULT_COEFFICIENT
 
-                    self.variables[classroom][section][day] = {}
+                    if day not in self.variables[classroom][section]:
+                        self.variables[classroom][section][day] = {}
+
                     self.variables[classroom][section][day][time] = self.model.addVar(
                         vtype=GRB.BINARY, name=f"{classroom}_{section}_{day}_{time}"
                     )
@@ -69,7 +73,6 @@ class ClassroomAssignment:
     def add_capacity_slack_variables(self):
         for classroom in self.classrooms:
             self.slack_variables_capacity_diff[classroom] = {}
-            # self.slack_variables_capacity_exceeded[classroom] = {}
 
             for section in self.sections:
                 self.slack_variables_capacity_diff[classroom][section] = (
@@ -89,16 +92,28 @@ class ClassroomAssignment:
             for section in self.sections:
                 days, times = utils.get_section_schedule(self.sections, section)
 
+                TOLERANCE = 1e-6  # Defina uma tolerância pequena
+
                 for day, time in zip(days, times):
+                    slack_var = self.model.addVar(
+                        vtype=GRB.CONTINUOUS, name=f"tolerance_slack"
+                    )
+
                     # RF2: Garante que a sala seja alocada com a menor capacidade possível
                     self.model.addConstr(
                         self.slack_variables_capacity_diff[classroom][section]
-                        == self.classrooms[classroom]["capacity"]
+                        <= self.classrooms[classroom][
+                            "capacity"
+                        ]  # TODO: testando a questão da tolerancia do erro
                         - (
                             self.variables[classroom][section][day][time]
                             * self.sections[section]["capacity"]
                         )
+                        + slack_var
                     )
+
+                    # Adicione uma restrição para garantir que a variável de folga esteja dentro da tolerância
+                    self.model.addConstr(slack_var <= TOLERANCE)
 
         # Hard constraints
         # RN1: Um sala poderá ser alocada para no máximo 1 uma turma em um mesmo dia e horário (binário)
@@ -106,15 +121,15 @@ class ClassroomAssignment:
             for i in range(len(sections_days)):
                 day = sections_days[i]
                 time = sections_times[i]
-                day_sections = utils.get_section_by_day(self.sections, day)
-                time_sections = utils.get_section_by_time(self.sections, time)
 
-                common_sections = day_sections.intersection(time_sections)
+                exact_time_sections = utils.get_courses_by_exact_day_and_time(
+                    self.sections, day, time
+                )
 
                 self.model.addConstr(
                     gp.quicksum(
                         self.variables[classroom][section][day][time]
-                        for section in common_sections
+                        for section in exact_time_sections
                     )
                     <= 1,
                     name=f"RN1:Section_{section}_{classroom}_{day}_{time}",
@@ -206,13 +221,17 @@ class ClassroomAssignment:
                 classroom_types = self.sections[section]["classroom_type"].split(",")
                 qtty_theory_classroom = classroom_types.count("Teórica")
 
+                if qtty_theory_classroom == len(classroom_types):
+                    qtty_theory_classroom = len(times)
+
                 classroom_new_students = "F3014"
                 self.model.addConstr(
                     gp.quicksum(
                         self.variables[classroom_new_students][section][day][time]
                         for day, time in zip(days, times)
                     )
-                    == qtty_theory_classroom
+                    == qtty_theory_classroom,
+                    name=f"RN4:F3014_NewStudents_{section}",
                 )
 
     def set_objective(self):
@@ -253,13 +272,13 @@ class ClassroomAssignment:
         classroom_assignement = []
         for var in self.model.getVars():
             try:
-                if var.X > 0:
+                if var.X > 0 and "tolerance_slack" not in var.VarName:
                     timeschedule = f"{var.VarName}#{var.X}"
                     classroom_assignement.append(timeschedule)
             except:
                 self.model.computeIIS()
                 self.model.write("model.ilp")
-                raise Exception("Model is infeasible")
+                raise Exception(f"Model return status {self.model.Status}")
 
         model_value = self.model.ObjVal
 
