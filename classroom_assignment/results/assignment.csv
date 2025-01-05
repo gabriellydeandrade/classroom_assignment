@@ -1,83 +1,83 @@
-E1012 (LAB 3);Carla Delgado;BCC1;ICP472;Metodologia da Pesquisa;7;QUA;10:00-12:00
-E1012 (LAB 3);Carolina Marcelino;BCC1;ICP011;Tóp. Esp. em Ciência de Dados I;7;PREENCHER MANUALMENTE;PREENCHER MANUALMENTE
-E1012 (LAB 3);Hugo Nobrega;BCC2;ICP144;Matemática Discreta;2;QUI;15:00-17:00
-E1012 (LAB 3);João Carlos Pereira;BCC1;ICP370;Lógica e Computabilidade;6;QUA;08:00-10:00
-E1012 (LAB 3);Jonice de Oliveira;BCC1;ICP249;Tecnologia e Sociedade;4;TER;13:00-15:00
-E1012 (LAB 3);Rafael Mello;BCC1;ICP237;Introdução a Modelagem de Sistemas;3;TER;15:00-17:00
-E1012 (LAB 3);Severino Collier;BCC2-CMT1;ICP136;Introdução ao Pensamento Dedutivo;1;SEG;10:00-12:00
-E2001 (SDCC);Adriana Vivacqua;BCC1-CMT1;ICP142;Organização de Dados;2;TER;10:00-12:00
-E2001 (SDCC);Anamaria Moreira;BCC2-CMT1;ICP133;Fundamentos de Sistemas de Computação;1;TER;08:00-10:00
-E2001 (SDCC);Anamaria Moreira;BCC2-CMT1;ICP133;Fundamentos de Sistemas de Computação;1;QUI;08:00-10:00
-E2001 (SDCC);Carla Delgado;BCC2;ICP135;Projeto de Carreira;1;SEG;13:00-15:00
-E2001 (SDCC);Carolina Marcelino;BCC1;ICP362;Redes de Computadores I;6;SEX;10:00-12:00
-E2001 (SDCC);Daniel Sadoc;BCC1;ICP473;Segurança da Informação;7;QUA;08:00-10:00
-E2001 (SDCC);Gabriel Pereira;BCC1;ICP246;Arquitetura de Computadores e Sistemas Operacionais;4;QUI;10:00-12:00
-E2001 (SDCC);João Carlos Pereira;BCC1;ICP363;Introdução ao Aprendizado de Máquina;6;QUI;13:00-15:00
-E2001 (SDCC);João Paixão;BCC1;ICP248;Computação Científica e Análise de dados;4;QUA;10:00-12:00
-E2001 (SDCC);Marcello Goulart;BCC1;ICP238;Introdução a Computação Numérica;3;SEG;08:00-10:00
-E2002 (SDLC);João Carlos Pereira;BCC1;ICP363;Introdução ao Aprendizado de Máquina;6;TER;13:00-15:00
-E2002 (SDLC);João Carlos Pereira;BCC1;ICP370;Lógica e Computabilidade;6;SEX;08:00-10:00
-E2002 (SDLC);Vivian Santos;BCC1-CMT1-ASD1;ICP489;Banco de Dados I;5;QUA;08:00-10:00
-E2011 (LAB 1);Daniel Sadoc;BCC1;ICP473;Segurança da Informação;7;SEX;08:00-10:00
-E2011 (LAB 1);Gabriel Pereira;BCC2-CMT1;ICP143;Projeto Prático;2;QUI;13:00-15:00
-E2011 (LAB 1);Giseli Lopes;BCC2;ICP131;Programação de Computadores I;1;SEG;10:00-12:00
-E2011 (LAB 1);Giseli Lopes;BCC2;ICP131;Programação de Computadores I;1;QUA;10:00-12:00
-E2011 (LAB 1);Hugo Musso;BCC1;ICP123;Linguagens Formais;5;QUA;13:00-15:00
-E2011 (LAB 1);Hugo Nobrega;BCC1;ICP144;Matemática Discreta;2;TER;08:00-10:00
-E2011 (LAB 1);Hugo Nobrega;BCC1;ICP144;Matemática Discreta;2;QUI;08:00-10:00
-E2011 (LAB 1);João Paixão;BCC1;ICP248;Computação Científica e Análise de dados;4;SEX;10:00-12:00
-E2011 (LAB 1);Juliana Valério;BCC1;ICP115;Álgebra Linear Algorítmica;3;SEG;13:00-15:00
-E2011 (LAB 1);Luziane Mendonça;BCC1;ICP365;Otimização;6;TER;10:00-12:00
-E2011 (LAB 1);Maria Luiza Campos;BCC1;ICP145;Habilidades sociais para o trabalho;2;QUI;10:00-12:00
-F1013 (LEP1);Maria Luiza Campos;CMT1;ICP357;Data Warehousing no Sup. à Tomada de Decisão;10;SEG;13:00-15:00
+F2037/039;Carolina Marcelino;BCC1;ICP011;Tóp. Esp. em Ciência de Dados I;7;PREENCHER MANUALMENTE;PREENCHER MANUALMENTE
+F3001;Luziane Mendonça;BCC1;ICP365;Otimização;6;TER;10:00-12:00
+F3005;Vivian Santos;BCC1-CMT1-ASD1;ICP489;Banco de Dados I;5;SEX;08:00-10:00
+F3008;João Carlos Pereira;BCC1;ICP363;Introdução ao Aprendizado de Máquina;6;QUI;13:00-15:00
+F3009;Juliana Valério;BCC1;ICP115;Álgebra Linear Algorítmica;3;SEX;08:00-10:00
+F3009;Luziane Mendonça;BCC1;ICP365;Otimização;6;QUI;10:00-12:00
+F3010;Mitre Dourado;BCC1;ICP368;Algoritmos e Grafos;5;TER;10:00-12:00
+F3012;Gabriel Pereira;BCC1;ICP246;Arquitetura de Computadores e Sistemas Operacionais;4;QUI;10:00-12:00
+F3016;Vinícius Gusmão;BCC1;ICP350;Modelagem e Avaliação de Desempenho;5;QUA;08:00-10:00
+E2001 (SDCC);Carla Delgado;BCC2;ICP135;Projeto de Carreira;1;QUA;13:00-15:00
+E2001 (SDCC);Daniel Bastos;BCC2-CMT1;ICP134;Números Inteiros e Criptografia;1;TER;08:00-10:00
+E2001 (SDCC);Daniel Bastos;BCC2-CMT1;ICP134;Números Inteiros e Criptografia;1;QUI;08:00-10:00
+E2001 (SDCC);Hugo Nobrega;BCC2;ICP144;Matemática Discreta;2;QUI;15:00-17:00
+E2001 (SDCC);Juliana França;BCC2-CMT1;ICP132;Processo de Software;1;QUA;10:00-12:00
+E2001 (SDCC);Severino Collier;BCC2-CMT1;ICP136;Introdução ao Pensamento Dedutivo;1;SEG;10:00-12:00
+E2011 (LAB 1);Marcello Goulart;BCC2;ICP238;Introdução a Computação Numérica;3;SEG;13:00-15:00
+F1013 (LEP1);Giseli Lopes;BCC2;ICP131;Programação de Computadores I;1;SEG;10:00-12:00
+F1013 (LEP1);Giseli Lopes;BCC1;ICP141;Programação de Computadores II;2;QUA;08:00-10:00
+F1013 (LEP1);Juliana Valério;BCC1;ICP115;Álgebra Linear Algorítmica;3;SEG;13:00-15:00
+F1013 (LEP1);Silvana Rossetto;BCC1;ICP361;Programação Concorrente;6;TER;08:00-10:00
 F1013 (LEP1);Valéria Bastos;BCC1;ICP131;Programação de Computadores I;1;QUA;10:00-12:00
-F1013 (LEP1);Valéria Bastos;BCC1;ICP353;Computadores e Programação;5;TER;08:00-10:00
-F1013 (LEP1);Valéria Bastos;BCC1;ICP353;Computadores e Programação;5;QUI;08:00-10:00
-F1013 (LEP1);Ronald Chiesse;BCC1;ICP239;Programação Orientada a Objeto;3;TER;10:00-12:00
 F1013 (LEP1);Ronald Chiesse;BCC1;ICP239;Programação Orientada a Objeto;3;QUI;10:00-12:00
-F1014 (LSD);Amaury Cruz;BCC1;ICP351;Modelagem Matemática e Computacional;5;QUA;08:00-10:00
-F1014 (LSD);Claudson Bornstein;BCC1-CMT1-ASD1;ICP116;Estrutura de Dados;3;QUI;13:00-15:00
-F1014 (LSD);Vinícius Gusmão;BCC1;ICP350;Modelagem e Avaliação de Desempenho;5;SEG;08:00-10:00
+F1014 (LSD);João Paixão;BCC1;ICP248;Computação Científica e Análise de dados;4;QUA;10:00-12:00
+F1014 (LSD);Juliana França;BCC2-CMT1;ICP132;Processo de Software;1;SEG;10:00-12:00
+F1014 (LSD);Marcello Goulart;BCC1;ICP238;Introdução a Computação Numérica;3;SEG;08:00-10:00
+F1014 (LSD);Rafael Mello;BCC1;ICP237;Introdução a Modelagem de Sistemas;3;QUI;15:00-17:00
+F1014 (LSD);Vivian Santos;BCC1-CMT1-ASD1;ICP489;Banco de Dados I;5;QUA;08:00-10:00
 F1014 (LSD);Eldânae Teixeira;BCC1;ICP132;Processo de Software;1;TER;13:00-15:00
-F2005;Maria Luiza Campos;CMT1;ICP357;Data Warehousing no Sup. à Tomada de Decisão;10;QUA;13:00-15:00
-F2005;Severino Collier;BCC2-CMT1;ICP136;Introdução ao Pensamento Dedutivo;1;QUA;10:00-12:00
-F2006/008;Carla Delgado;BCC2;ICP135;Projeto de Carreira;1;QUA;13:00-15:00
-F2006/008;Daniel Bastos;BCC2-CMT1;ICP134;Números Inteiros e Criptografia;1;TER;08:00-10:00
-F2006/008;Daniel Bastos;BCC2-CMT1;ICP134;Números Inteiros e Criptografia;1;QUI;08:00-10:00
-F2006/008;Gabriel Pereira;BCC1;ICP143;Projeto Prático;2;TER;13:00-15:00
-F2006/008;Gabriel Pereira;BCC1;ICP246;Arquitetura de Computadores e Sistemas Operacionais;4;TER;10:00-12:00
-F2006/008;Giseli Lopes;BCC1;ICP141;Programação de Computadores II;2;SEX;08:00-10:00
-F2006/008;Hugo Musso;BCC1;ICP123;Linguagens Formais;5;SEG;13:00-15:00
+F2005;Adriana Vivacqua;BCC2;ICP145;Habilidades sociais para o trabalho;2;QUI;13:00-15:00
+F2005;Anamaria Moreira;BCC2-CMT1;ICP133;Fundamentos de Sistemas de Computação;1;QUI;08:00-10:00
+F2005;Giseli Lopes;BCC2;ICP131;Programação de Computadores I;1;QUA;10:00-12:00
+F2006/008;Adriana Vivacqua;BCC1-CMT1;ICP142;Organização de Dados;2;TER;10:00-12:00
+F2006/008;Amaury Cruz;BCC1;ICP351;Modelagem Matemática e Computacional;5;SEG;08:00-10:00
+F2006/008;Carla Delgado;BCC1;ICP472;Metodologia da Pesquisa;7;SEX;10:00-12:00
+F2006/008;Carolina Marcelino;BCC1;ICP362;Redes de Computadores I;6;QUA;10:00-12:00
+F2006/008;Claudson Bornstein;BCC1-CMT1-ASD1;ICP116;Estrutura de Dados;3;TER;13:00-15:00
+F2006/008;Hugo Musso;BCC1;ICP123;Linguagens Formais;5;QUA;13:00-15:00
+F2006/008;Hugo Nobrega;BCC1;ICP144;Matemática Discreta;2;TER;08:00-10:00
+F2006/008;João Carlos Pereira;BCC1;ICP370;Lógica e Computabilidade;6;QUA;08:00-10:00
+F2006/008;João Carlos Pereira;BCC1;ICP370;Lógica e Computabilidade;6;SEX;08:00-10:00
 F2006/008;Jonice de Oliveira;BCC1;ICP249;Tecnologia e Sociedade;4;QUI;13:00-15:00
-F2006/008;Luziane Mendonça;BCC1;ICP365;Otimização;6;QUI;10:00-12:00
+F2006/008;Maria Luiza Campos;CMT1;ICP357;Data Warehousing no Sup. à Tomada de Decisão;10;SEG;13:00-15:00
+F2006/008;Mitre Dourado;BCC1;ICP368;Algoritmos e Grafos;5;QUI;10:00-12:00
+F2006/008;Rafael Mello;BCC1;ICP237;Introdução a Modelagem de Sistemas;3;TER;15:00-17:00
+F2006/008;Silvana Rossetto;BCC1;ICP361;Programação Concorrente;6;QUI;08:00-10:00
 F2006/008;Vinícius Gusmão;BCC2;ICP350;Modelagem e Avaliação de Desempenho;5;SEG;10:00-12:00
-F2007;Giseli Lopes;BCC1;ICP141;Programação de Computadores II;2;QUA;08:00-10:00
-F2007;Juliana França;BCC2-CMT1;ICP132;Processo de Software;1;SEG;10:00-12:00
-F2007;Juliana França;BCC2-CMT1;ICP132;Processo de Software;1;QUA;10:00-12:00
-F2007;Juliana Valério;BCC1;ICP115;Álgebra Linear Algorítmica;3;QUA;13:00-15:00
-F2007;Marcello Goulart;BCC2;ICP238;Introdução a Computação Numérica;3;SEG;13:00-15:00
-F2007;Mitre Dourado;BCC1;ICP368;Algoritmos e Grafos;5;TER;10:00-12:00
-F2007;Mitre Dourado;BCC1;ICP368;Algoritmos e Grafos;5;QUI;10:00-12:00
-F2007;Silvana Rossetto;BCC1;ICP361;Programação Concorrente;6;TER;08:00-10:00
-F2007;Silvana Rossetto;BCC1;ICP361;Programação Concorrente;6;QUI;08:00-10:00
-F2010/012;Adriana Vivacqua;BCC2;ICP145;Habilidades sociais para o trabalho;2;QUI;13:00-15:00
-F2010/012;Amaury Cruz;BCC1;ICP351;Modelagem Matemática e Computacional;5;SEG;08:00-10:00
-F2010/012;Hugo Nobrega;BCC2;ICP144;Matemática Discreta;2;TER;15:00-17:00
-F2010/012;Juliana Valério;BCC1;ICP115;Álgebra Linear Algorítmica;3;SEX;08:00-10:00
-F2010/012;Vinícius Gusmão;BCC1;ICP350;Modelagem e Avaliação de Desempenho;5;QUA;08:00-10:00
-F2010/012;Vinícius Gusmão;BCC2;ICP350;Modelagem e Avaliação de Desempenho;5;QUA;10:00-12:00
-F3014;Carla Delgado;BCC1;ICP472;Metodologia da Pesquisa;7;SEX;10:00-12:00
-F3014;Carolina Marcelino;BCC1;ICP362;Redes de Computadores I;6;QUA;10:00-12:00
-F3014;Claudson Bornstein;BCC1-CMT1-ASD1;ICP116;Estrutura de Dados;3;TER;13:00-15:00
+F2007;Anamaria Moreira;BCC2-CMT1;ICP133;Fundamentos de Sistemas de Computação;1;TER;08:00-10:00
+F2007;Carla Delgado;BCC2;ICP135;Projeto de Carreira;1;SEG;13:00-15:00
+F2007;Gabriel Pereira;BCC2-CMT1;ICP143;Projeto Prático;2;QUI;13:00-15:00
+F2007;Hugo Nobrega;BCC2;ICP144;Matemática Discreta;2;TER;15:00-17:00
+F2007;Severino Collier;BCC2-CMT1;ICP136;Introdução ao Pensamento Dedutivo;1;QUA;10:00-12:00
+F2010/012;Amaury Cruz;BCC1;ICP351;Modelagem Matemática e Computacional;5;QUA;08:00-10:00
+F2010/012;Carla Delgado;BCC1;ICP472;Metodologia da Pesquisa;7;QUA;10:00-12:00
+F2010/012;Carolina Marcelino;BCC1;ICP362;Redes de Computadores I;6;SEX;10:00-12:00
+F2010/012;Claudson Bornstein;BCC1-CMT1-ASD1;ICP116;Estrutura de Dados;3;QUI;13:00-15:00
+F2010/012;Daniel Sadoc;BCC1;ICP473;Segurança da Informação;7;SEX;08:00-10:00
+F2010/012;Gabriel Pereira;BCC1;ICP246;Arquitetura de Computadores e Sistemas Operacionais;4;TER;10:00-12:00
+F2010/012;Hugo Musso;BCC1;ICP123;Linguagens Formais;5;SEG;13:00-15:00
+F2010/012;Hugo Nobrega;BCC1;ICP144;Matemática Discreta;2;QUI;08:00-10:00
+F2010/012;João Carlos Pereira;BCC1;ICP363;Introdução ao Aprendizado de Máquina;6;TER;13:00-15:00
+F2010/012;Maria Luiza Campos;BCC1;ICP145;Habilidades sociais para o trabalho;2;QUI;10:00-12:00
+F2010/012;Maria Luiza Campos;CMT1;ICP357;Data Warehousing no Sup. à Tomada de Decisão;10;QUA;13:00-15:00
+F2010/012;Valéria Bastos;BCC1;ICP353;Computadores e Programação;5;TER;08:00-10:00
+F2010/012;Vinícius Gusmão;BCC1;ICP350;Modelagem e Avaliação de Desempenho;5;SEG;08:00-10:00
+F3014;Gabriel Pereira;BCC1;ICP143;Projeto Prático;2;TER;13:00-15:00
+F3014;Giseli Lopes;BCC1;ICP141;Programação de Computadores II;2;SEX;08:00-10:00
 F3014;João Paixão;BCC1;ICP136;Introdução ao Pensamento Dedutivo;1;SEG;08:00-10:00
 F3014;João Paixão;BCC1;ICP136;Introdução ao Pensamento Dedutivo;1;QUA;08:00-10:00
-F3014;Rafael Mello;BCC1;ICP237;Introdução a Modelagem de Sistemas;3;QUI;15:00-17:00
+F3014;João Paixão;BCC1;ICP248;Computação Científica e Análise de dados;4;SEX;10:00-12:00
 F3014;Severino Collier;BCC1;ICP134;Números Inteiros e Criptografia;1;TER;08:00-10:00
 F3014;Severino Collier;BCC1;ICP134;Números Inteiros e Criptografia;1;QUI;08:00-10:00
 F3014;Silvana Rossetto;BCC1;ICP133;Fundamentos de Sistemas de Computação;1;TER;10:00-12:00
 F3014;Silvana Rossetto;BCC1;ICP133;Fundamentos de Sistemas de Computação;1;QUI;10:00-12:00
 F3014;Valéria Bastos;BCC1;ICP131;Programação de Computadores I;1;SEG;10:00-12:00
-F3014;Vivian Santos;BCC1-CMT1-ASD1;ICP489;Banco de Dados I;5;SEX;08:00-10:00
+F3014;Vinícius Gusmão;BCC2;ICP350;Modelagem e Avaliação de Desempenho;5;QUA;10:00-12:00
 F3014;Eldânae Teixeira;BCC1;ICP132;Processo de Software;1;QUI;13:00-15:00
 F3014;Eldânae Teixeira;BCC1;ICP135;Projeto de Carreira;1;SEG;13:00-15:00
 F3014;Eldânae Teixeira;BCC1;ICP135;Projeto de Carreira;1;QUA;13:00-15:00
+D217;Jonice de Oliveira;BCC1;ICP249;Tecnologia e Sociedade;4;TER;13:00-15:00
+A203;Ronald Chiesse;BCC1;ICP239;Programação Orientada a Objeto;3;TER;10:00-12:00
+A205;Juliana Valério;BCC1;ICP115;Álgebra Linear Algorítmica;3;QUA;13:00-15:00
+A205;Valéria Bastos;BCC1;ICP353;Computadores e Programação;5;QUI;08:00-10:00
+A206;Daniel Sadoc;BCC1;ICP473;Segurança da Informação;7;QUA;08:00-10:00

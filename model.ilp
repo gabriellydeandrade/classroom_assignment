@@ -1,17 +1,216 @@
 \ Model ClassroomAssignment_copy
 \ LP format - for model browsing. Use MPS format to capture full model detail.
-\ Signature: 0xbb72814f649c5b7f
+\ Signature: 0xcf7e919c2714d523
 Maximize
  
 Subject To
- R1832: 60 F3014_4_TER_13_00-15_00 + CapDiff_F3014_4 = 90
- R1833: 60 F3014_4_QUI_13_00-15_00 + CapDiff_F3014_4 = 90
- RN4_F3014_NewStudents_4: F3014_4_TER_13_00-15_00 + F3014_4_QUI_13_00-15_00
-   = 1
+ R24: 30 F1012_(LEP2)_25_SEG_10_00-12_00 + CapDiff_F1012_(LEP2)_25
+   - tolerance_slack = 0
+ R25: tolerance_slack <= 1e-06
+ R26: 30 F1012_(LEP2)_25_QUA_10_00-12_00 + CapDiff_F1012_(LEP2)_25
+   - tolerance_slack = 0
+ R27: tolerance_slack <= 1e-06
+ R52: 60 F1012_(LEP2)_39_SEG_10_00-12_00 + CapDiff_F1012_(LEP2)_39
+   - tolerance_slack = 0
+ R53: tolerance_slack <= 1e-06
+ R54: 60 F1012_(LEP2)_39_QUA_10_00-12_00 + CapDiff_F1012_(LEP2)_39
+   - tolerance_slack = 0
+ R55: tolerance_slack <= 1e-06
+ R3696: 30 I228_(LEPAC)_25_SEG_10_00-12_00 + CapDiff_I228_(LEPAC)_25
+   - tolerance_slack = 0
+ R3697: tolerance_slack <= 1e-06
+ R3698: 30 I228_(LEPAC)_25_QUA_10_00-12_00 + CapDiff_I228_(LEPAC)_25
+   - tolerance_slack = 0
+ R3699: tolerance_slack <= 1e-06
+ R3724: 60 I228_(LEPAC)_39_SEG_10_00-12_00 + CapDiff_I228_(LEPAC)_39
+   - tolerance_slack = 0
+ R3725: tolerance_slack <= 1e-06
+ R3726: 60 I228_(LEPAC)_39_QUA_10_00-12_00 + CapDiff_I228_(LEPAC)_39
+   - tolerance_slack = 0
+ R3727: tolerance_slack <= 1e-06
+ R4512: 30 E1012_(LAB_3)_25_SEG_10_00-12_00 + CapDiff_E1012_(LAB_3)_25
+   - tolerance_slack = 0
+ R4513: tolerance_slack <= 1e-06
+ R4514: 30 E1012_(LAB_3)_25_QUA_10_00-12_00 + CapDiff_E1012_(LAB_3)_25
+   - tolerance_slack = 0
+ R4515: tolerance_slack <= 1e-06
+ R4540: 60 E1012_(LAB_3)_39_SEG_10_00-12_00 + CapDiff_E1012_(LAB_3)_39
+   - tolerance_slack = 0
+ R4541: tolerance_slack <= 1e-06
+ R4542: 60 E1012_(LAB_3)_39_QUA_10_00-12_00 + CapDiff_E1012_(LAB_3)_39
+   - tolerance_slack = 0
+ R4543: tolerance_slack <= 1e-06
+ R4716: 30 E2011_(LAB_1)_25_SEG_10_00-12_00 + CapDiff_E2011_(LAB_1)_25
+   - tolerance_slack = 0
+ R4717: tolerance_slack <= 1e-06
+ R4718: 30 E2011_(LAB_1)_25_QUA_10_00-12_00 + CapDiff_E2011_(LAB_1)_25
+   - tolerance_slack = 0
+ R4719: tolerance_slack <= 1e-06
+ R4744: 60 E2011_(LAB_1)_39_SEG_10_00-12_00 + CapDiff_E2011_(LAB_1)_39
+   - tolerance_slack = 0
+ R4745: tolerance_slack <= 1e-06
+ R4746: 60 E2011_(LAB_1)_39_QUA_10_00-12_00 + CapDiff_E2011_(LAB_1)_39
+   - tolerance_slack = 0
+ R4747: tolerance_slack <= 1e-06
+ R4784: 30 F1013_(LEP1)_25_SEG_10_00-12_00 + CapDiff_F1013_(LEP1)_25
+   - tolerance_slack = 0
+ R4785: tolerance_slack <= 1e-06
+ R4786: 30 F1013_(LEP1)_25_QUA_10_00-12_00 + CapDiff_F1013_(LEP1)_25
+   - tolerance_slack = 0
+ R4787: tolerance_slack <= 1e-06
+ R4812: 60 F1013_(LEP1)_39_SEG_10_00-12_00 + CapDiff_F1013_(LEP1)_39
+   - tolerance_slack = 0
+ R4813: tolerance_slack <= 1e-06
+ R4814: 60 F1013_(LEP1)_39_QUA_10_00-12_00 + CapDiff_F1013_(LEP1)_39
+   - tolerance_slack = 0
+ R4815: tolerance_slack <= 1e-06
+ R4852: 30 F1014_(LSD)_25_SEG_10_00-12_00 + CapDiff_F1014_(LSD)_25
+   - tolerance_slack = 0
+ R4853: tolerance_slack <= 1e-06
+ R4854: 30 F1014_(LSD)_25_QUA_10_00-12_00 + CapDiff_F1014_(LSD)_25
+   - tolerance_slack = 0
+ R4855: tolerance_slack <= 1e-06
+ R4880: 60 F1014_(LSD)_39_SEG_10_00-12_00 + CapDiff_F1014_(LSD)_39
+   - tolerance_slack = 0
+ R4881: tolerance_slack <= 1e-06
+ R4882: 60 F1014_(LSD)_39_QUA_10_00-12_00 + CapDiff_F1014_(LSD)_39
+   - tolerance_slack = 0
+ R4883: tolerance_slack <= 1e-06
+ R6484: 30 ABC126_(LIG-2)_25_SEG_10_00-12_00 + CapDiff_ABC126_(LIG-2)_25
+   - tolerance_slack = 0
+ R6485: tolerance_slack <= 1e-06
+ R6486: 30 ABC126_(LIG-2)_25_QUA_10_00-12_00 + CapDiff_ABC126_(LIG-2)_25
+   - tolerance_slack = 0
+ R6487: tolerance_slack <= 1e-06
+ R6512: 60 ABC126_(LIG-2)_39_SEG_10_00-12_00 + CapDiff_ABC126_(LIG-2)_39
+   - tolerance_slack = 0
+ R6513: tolerance_slack <= 1e-06
+ R6514: 60 ABC126_(LIG-2)_39_QUA_10_00-12_00 + CapDiff_ABC126_(LIG-2)_39
+   - tolerance_slack = 0
+ R6515: tolerance_slack <= 1e-06
+ R6552: 30 ABC128_(LIG-1)_25_SEG_10_00-12_00 + CapDiff_ABC128_(LIG-1)_25
+   - tolerance_slack = 0
+ R6553: tolerance_slack <= 1e-06
+ R6554: 30 ABC128_(LIG-1)_25_QUA_10_00-12_00 + CapDiff_ABC128_(LIG-1)_25
+   - tolerance_slack = 0
+ R6555: tolerance_slack <= 1e-06
+ R6580: 60 ABC128_(LIG-1)_39_SEG_10_00-12_00 + CapDiff_ABC128_(LIG-1)_39
+   - tolerance_slack = 0
+ R6581: tolerance_slack <= 1e-06
+ R6582: 60 ABC128_(LIG-1)_39_QUA_10_00-12_00 + CapDiff_ABC128_(LIG-1)_39
+   - tolerance_slack = 0
+ R6583: tolerance_slack <= 1e-06
+ R7368: 30 NEAD_25_SEG_10_00-12_00 + CapDiff_NEAD_25 - tolerance_slack = 0
+ R7369: tolerance_slack <= 1e-06
+ R7370: 30 NEAD_25_QUA_10_00-12_00 + CapDiff_NEAD_25 - tolerance_slack = 0
+ R7371: tolerance_slack <= 1e-06
+ R7396: 60 NEAD_39_SEG_10_00-12_00 + CapDiff_NEAD_39 - tolerance_slack = 0
+ R7397: tolerance_slack <= 1e-06
+ R7398: 60 NEAD_39_QUA_10_00-12_00 + CapDiff_NEAD_39 - tolerance_slack = 0
+ R7399: tolerance_slack <= 1e-06
+ R7640: 30 A204_25_SEG_10_00-12_00 + CapDiff_A204_25 - tolerance_slack
+   = 70
+ R7641: tolerance_slack <= 1e-06
+ R7642: 30 A204_25_QUA_10_00-12_00 + CapDiff_A204_25 - tolerance_slack
+   = 70
+ R7668: 60 A204_39_SEG_10_00-12_00 + CapDiff_A204_39 - tolerance_slack
+   = 70
+ R7669: tolerance_slack <= 1e-06
+ R7670: 60 A204_39_QUA_10_00-12_00 + CapDiff_A204_39 - tolerance_slack
+   = 70
+ RN1_Section_46_A204_QUA_10_00-12_00: A204_15_QUA_10_00-12_00
+   + A204_23_QUA_10_00-12_00 + A204_25_QUA_10_00-12_00
+   + A204_39_QUA_10_00-12_00 <= 1
+ RN3_Section_Practical_25: F1012_(LEP2)_25_SEG_10_00-12_00
+   + F1012_(LEP2)_25_QUA_10_00-12_00 + I228_(LEPAC)_25_SEG_10_00-12_00
+   + I228_(LEPAC)_25_QUA_10_00-12_00 + E1012_(LAB_3)_25_SEG_10_00-12_00
+   + E1012_(LAB_3)_25_QUA_10_00-12_00 + E2011_(LAB_1)_25_SEG_10_00-12_00
+   + E2011_(LAB_1)_25_QUA_10_00-12_00 + F1013_(LEP1)_25_SEG_10_00-12_00
+   + F1013_(LEP1)_25_QUA_10_00-12_00 + F1014_(LSD)_25_SEG_10_00-12_00
+   + F1014_(LSD)_25_QUA_10_00-12_00 + ABC126_(LIG-2)_25_SEG_10_00-12_00
+   + ABC126_(LIG-2)_25_QUA_10_00-12_00 + ABC128_(LIG-1)_25_SEG_10_00-12_00
+   + ABC128_(LIG-1)_25_QUA_10_00-12_00 + NEAD_25_SEG_10_00-12_00
+   + NEAD_25_QUA_10_00-12_00 + A204_25_SEG_10_00-12_00
+   + A204_25_QUA_10_00-12_00 = 1
+ RN3_Section_Practical_39: F1012_(LEP2)_39_SEG_10_00-12_00
+   + F1012_(LEP2)_39_QUA_10_00-12_00 + I228_(LEPAC)_39_SEG_10_00-12_00
+   + I228_(LEPAC)_39_QUA_10_00-12_00 + E1012_(LAB_3)_39_SEG_10_00-12_00
+   + E1012_(LAB_3)_39_QUA_10_00-12_00 + E2011_(LAB_1)_39_SEG_10_00-12_00
+   + E2011_(LAB_1)_39_QUA_10_00-12_00 + F1013_(LEP1)_39_SEG_10_00-12_00
+   + F1013_(LEP1)_39_QUA_10_00-12_00 + F1014_(LSD)_39_SEG_10_00-12_00
+   + F1014_(LSD)_39_QUA_10_00-12_00 + ABC126_(LIG-2)_39_SEG_10_00-12_00
+   + ABC126_(LIG-2)_39_QUA_10_00-12_00 + ABC128_(LIG-1)_39_SEG_10_00-12_00
+   + ABC128_(LIG-1)_39_QUA_10_00-12_00 + NEAD_39_SEG_10_00-12_00
+   + NEAD_39_QUA_10_00-12_00 + A204_39_SEG_10_00-12_00
+   + A204_39_QUA_10_00-12_00 = 1
 Bounds
- CapDiff_F3014_4 free
+ CapDiff_A204_25 free
+ CapDiff_A204_39 free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
+ tolerance_slack free
 Binaries
- F3014_4_TER_13_00-15_00 F3014_4_QUI_13_00-15_00
+ F1012_(LEP2)_25_SEG_10_00-12_00 F1012_(LEP2)_25_QUA_10_00-12_00
+ F1012_(LEP2)_39_SEG_10_00-12_00 F1012_(LEP2)_39_QUA_10_00-12_00
+ I228_(LEPAC)_25_SEG_10_00-12_00 I228_(LEPAC)_25_QUA_10_00-12_00
+ I228_(LEPAC)_39_SEG_10_00-12_00 I228_(LEPAC)_39_QUA_10_00-12_00
+ E1012_(LAB_3)_25_SEG_10_00-12_00 E1012_(LAB_3)_25_QUA_10_00-12_00
+ E1012_(LAB_3)_39_SEG_10_00-12_00 E1012_(LAB_3)_39_QUA_10_00-12_00
+ E2011_(LAB_1)_25_SEG_10_00-12_00 E2011_(LAB_1)_25_QUA_10_00-12_00
+ E2011_(LAB_1)_39_SEG_10_00-12_00 E2011_(LAB_1)_39_QUA_10_00-12_00
+ F1013_(LEP1)_25_SEG_10_00-12_00 F1013_(LEP1)_25_QUA_10_00-12_00
+ F1013_(LEP1)_39_SEG_10_00-12_00 F1013_(LEP1)_39_QUA_10_00-12_00
+ F1014_(LSD)_25_SEG_10_00-12_00 F1014_(LSD)_25_QUA_10_00-12_00
+ F1014_(LSD)_39_SEG_10_00-12_00 F1014_(LSD)_39_QUA_10_00-12_00
+ ABC126_(LIG-2)_25_SEG_10_00-12_00 ABC126_(LIG-2)_25_QUA_10_00-12_00
+ ABC126_(LIG-2)_39_SEG_10_00-12_00 ABC126_(LIG-2)_39_QUA_10_00-12_00
+ ABC128_(LIG-1)_25_SEG_10_00-12_00 ABC128_(LIG-1)_25_QUA_10_00-12_00
+ ABC128_(LIG-1)_39_SEG_10_00-12_00 ABC128_(LIG-1)_39_QUA_10_00-12_00
+ NEAD_25_SEG_10_00-12_00 NEAD_25_QUA_10_00-12_00 NEAD_39_SEG_10_00-12_00
+ NEAD_39_QUA_10_00-12_00 A204_15_QUA_10_00-12_00 A204_23_QUA_10_00-12_00
+ A204_25_SEG_10_00-12_00 A204_25_QUA_10_00-12_00 A204_39_SEG_10_00-12_00
+ A204_39_QUA_10_00-12_00
 Generals
- CapDiff_F3014_4
+ CapDiff_F1012_(LEP2)_25 CapDiff_F1012_(LEP2)_39 CapDiff_I228_(LEPAC)_25
+ CapDiff_I228_(LEPAC)_39 CapDiff_E1012_(LAB_3)_25 CapDiff_E1012_(LAB_3)_39
+ CapDiff_E2011_(LAB_1)_25 CapDiff_E2011_(LAB_1)_39 CapDiff_F1013_(LEP1)_25
+ CapDiff_F1013_(LEP1)_39 CapDiff_F1014_(LSD)_25 CapDiff_F1014_(LSD)_39
+ CapDiff_ABC126_(LIG-2)_25 CapDiff_ABC126_(LIG-2)_39
+ CapDiff_ABC128_(LIG-1)_25 CapDiff_ABC128_(LIG-1)_39 CapDiff_NEAD_25
+ CapDiff_NEAD_39 CapDiff_A204_25 CapDiff_A204_39
 End

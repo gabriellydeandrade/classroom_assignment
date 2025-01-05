@@ -2,7 +2,6 @@ import gurobipy as gp
 from gurobipy import GRB
 
 import settings
-from math import isclose
 
 from utils import utils
 from database.construct_sets import (
@@ -149,65 +148,37 @@ class ClassroomAssignment:
                 )
 
         # # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
-        # for section in self.sections:
-        #     days, times = utils.get_section_schedule(self.sections, section)
-        #     classroom_types = self.sections[section]["classroom_type"].split(",")
+        for section in self.sections:
+            days, times = utils.get_section_schedule(self.sections, section)
+            classroom_types = self.sections[section]["classroom_type"].split(",")
 
-        #     if len(classroom_types) == 1:
-        #         classroom_types = [classroom_types[0]] * len(days)
+            if len(classroom_types) == 1:
+                classroom_types = [classroom_types[0]] * len(days)
 
-        #     for day, time in zip(days, times):
-        #         for class_type in classroom_types:
-        #             classroom_match_type = [x for x in self.classrooms if self.classrooms[x]["classroom_type"] == class_type]
+            qtty_theory_classroom = classroom_types.count("Teórica")
+            qtty_practical_classroom = classroom_types.count("Prática")
 
-        #             self.model.addConstr(
-        #                 gp.quicksum(
-        #                     self.variables[classroom][section][day][time]
-        #                     for classroom in classroom_match_type
-        #                 )
-        #                 == 1,
-        #                 name=f"RN3:Section_{section}_{class_type}_{day}_{time}"
-        #             )
+            self.model.addConstr(
+                gp.quicksum(
+                    self.variables[classroom][section][day][time]
+                    for classroom in self.classrooms
+                    if self.classrooms[classroom]["classroom_type"] == "Sala"
+                    for day, time in zip(days, times)
+                )
+                == qtty_theory_classroom,
+                name=f"RN3:Section_Theory_{section}",
+            )
 
-        # for section in self.sections.keys():
-        #     days, times = utils.get_section_schedule(self.sections, section)
-        #     classroom_types = self.sections[section]["classroom_type"].split(",")
-
-        #     if len(classroom_types) == 1:
-        #         classroom_types = [classroom_types[0]] * len(days)
-
-        # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
-        # se foi solicitado uma sala teórica e outra prática, deverá ser alocado uma sala teórica e outra prática
-        # for class_type in classroom_types:
-        #     for day, time in zip(days, times):
-        #         self.model.addConstr(
-        #             gp.quicksum(
-        #                 self.variables[classroom][section][day][time]
-        #                 for classroom in self.classrooms
-        #                 if self.classrooms[classroom]["classroom_type"]
-        #                 == class_type
-        #             )
-        #             == classroom_types.count(class_type),
-        #             name=f"RN3:Section_{section}_{class_type}_{day}_{time}"
-        #         )
-
-        # for classroom in self.classrooms:
-        # if self.classrooms[classroom]["classroom_type"] in classroom_types:
-        # for class_type in classroom_types:
-        #     self.model.addConstr(
-        #         gp.quicksum(
-        #             self.variables[classroom][section][day][time]
-        #             for classroom in self.classrooms
-        #             for day, time in zip(days, times)
-        #             if self.classrooms[classroom]["classroom_type"] == class_type
-        #         )
-        #         == classroom_types.count(class_type)
-        #     )
-        # else:
-        #     for day, time in zip(days, times):
-        #         self.model.addConstr(
-        #             self.variables[classroom][section][day][time] == 0
-        #         )
+            self.model.addConstr(
+                gp.quicksum(
+                    self.variables[classroom][section][day][time]
+                    for classroom in self.classrooms
+                    if self.classrooms[classroom]["classroom_type"] == "Laboratório"
+                    for day, time in zip(days, times)
+                )
+                == qtty_practical_classroom,
+                name=f"RN3:Section_Practical_{section}",
+            )
 
         # RN4: Caso a disciplina seja do primeiro período e for turma de calouro,
         # uma sala específica deverá ser ocupada para as aulas teóricas (F3014)
