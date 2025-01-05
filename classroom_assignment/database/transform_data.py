@@ -34,6 +34,11 @@ def transform_sections_to_dict(data: pd.DataFrame) -> Dict:
         if line["day"] == None or line["time"] == None:
             key_to_delete.append(dt)
 
+        if line["blackboard_restriction"] == "FALSE":
+            line["blackboard_restriction"] = False
+        elif line["blackboard_restriction"] == "TRUE":
+            line["blackboard_restriction"] = True
+
     for k in key_to_delete:
         del data_transformed[k]
 

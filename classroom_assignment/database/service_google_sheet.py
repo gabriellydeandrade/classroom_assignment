@@ -72,7 +72,7 @@ def get_secion_allocation():
             "Tipo sala": "classroom_type",
             "Período": "term",
             "Tipo turma": "class_type",
-            "Restrição quadro negro": "board_type"
+            "Restrição quadro negro": "blackboard_restriction"
         },
         inplace=True,
     )
@@ -94,7 +94,8 @@ def get_classrooms_available():
             "Instituto responsável",
             "Tipo sala",
             "Capacidade SIGA",
-            "Capacidade real"
+            "Capacidade real",
+            "Tipo de quadro"
         ]
     )
     classrooms.rename(
@@ -104,6 +105,7 @@ def get_classrooms_available():
             "Tipo sala": "classroom_type",
             "Capacidade SIGA": "capacity_siga",
             "Capacidade real": "capacity",
+            "Tipo de quadro": "board_type"
         },
         inplace=True,
     )

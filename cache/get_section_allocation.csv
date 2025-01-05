@@ -1,4 +1,4 @@
-,responsable_institute,graduation_course,professor,course_id,course_name,day,time,capacity,classroom_type,term,class_type,board_type
+,responsable_institute,graduation_course,professor,course_id,course_name,day,time,capacity,classroom_type,term,class_type,blackboard_restriction
 0,IC,BCC1-CMT1,Adriana Vivacqua,ICP142,Organização de Dados,TER,10:00-12:00,60,T,2,Regular,FALSE
 1,IC,BCC2,Adriana Vivacqua,ICP145,Habilidades sociais para o trabalho,QUI,13:00-15:00,30,T,2,Extra,FALSE
 2,IC,BCC1,Amaury Cruz,ICP351,Modelagem Matemática e Computacional,"SEG,QUA",08:00-10:00,60,T,5,Regular,FALSE
@@ -38,8 +38,8 @@
 36,IC,BCC2-CMT1,Severino Collier,ICP136,Introdução ao Pensamento Dedutivo,"SEG,QUA",10:00-12:00,30,T,1,Veterano,FALSE
 37,IC,BCC1,Silvana Rossetto,ICP133,Fundamentos de Sistemas de Computação,"TER,QUI",10:00-12:00,60,T,1,Calouro,FALSE
 38,IC,BCC1,Silvana Rossetto,ICP361,Programação Concorrente,"TER,QUI",08:00-10:00,60,"T,P",6,Regular,FALSE
-39,IC,BCC1,Valéria Bastos,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,60,"T,P",1,Calouro,FALSE
-40,IC,BCC1,Valéria Bastos,ICP353,Computadores e Programação,"TER,QUI",08:00-10:00,60,T,5,Regular,FALSE
+39,IC,BCC1,Valéria Bastos,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,60,"T,P",1,Calouro,TRUE
+40,IC,BCC1,Valéria Bastos,ICP353,Computadores e Programação,"TER,QUI",08:00-10:00,60,T,5,Regular,TRUE
 41,IC,BCC1,Vinícius Gusmão,ICP350,Modelagem e Avaliação de Desempenho,"SEG,QUA",08:00-10:00,60,T,5,Regular,FALSE
 42,IC,BCC2,Vinícius Gusmão,ICP350,Modelagem e Avaliação de Desempenho,"SEG,QUA",10:00-12:00,60,T,5,Extra,FALSE
 43,IC,BCC1-CMT1-ASD1,Vivian Santos,ICP489,Banco de Dados I,"QUA,SEX",08:00-10:00,60,"T,P",5,Regular,FALSE

@@ -1,116 +1,116 @@
-classroom_name,responsable_institute,classroom_type,capacity_siga,capacity
-F1012 (LEP2),CCMN,Laboratório,60,
-F2001/003,CCMN,Anfiteatro,120,40
-F2002/004,CCMN,Anfiteatro,80,
-F2009,CCMN,Sala,90,40
-F2011/013,CCMN,Anfiteatro,90,52
-F2015/017,CCMN,Anfiteatro,90,57
-F2021/023,CCMN,Anfiteatro,90,48
-F2025/027,CCMN,Anfiteatro,90,47
-F2026/028,CCMN,Anfiteatro,123,108
-F2029/031,CCMN,Anfiteatro,90,58
-F2030/032,CCMN,Anfiteatro,123,103
-F2033/035,CCMN,Anfiteatro,90,55
-F2037/039,CCMN,Anfiteatro,90,
-F3001,CCMN,Sala,Sem Registro,125
-F3002,CCMN,Sala,Sem Registro,90
-F3003,CCMN,Sala,Sem Registro,70
-F3004,CCMN,Sala,Sem Registro,60
-F3005,CCMN,Sala,Sem Registro,60
-F3006,CCMN,Sala,Sem Registro,60
-F3007,CCMN,Sala,Sem Registro,140
-F3008,CCMN,Sala,Sem Registro,60
-F3009,CCMN,Sala,Sem Registro,90
-F3010,CCMN,Sala,Sem Registro,60
-F3011,CCMN,Sala,Sem Registro,70
-F3012,CCMN,Sala,Sem Registro,90
-F3013,CCMN,Sala,Sem Registro,60
-F3015,CCMN,Sala,Sem Registro,100
-F3016,CCMN,Sala,Sem Registro,60
-H316,COPPE,Sala,,
-H324A,COPPE,,,
-C206,Eng,Sala,,
-D112,Eng,Sala,,
-D119,Eng,,,
-D214,Eng,Anfiteatro,119,
-D218,Eng,Anfiteatro,119,
-F100A,Eng,Sala,,
-F112,Eng,Sala,,
-F116,Eng,Sala,,
-F210,Eng,Sala,,
-F219,Eng,,,
-F222,Eng,Anfiteatro,,
-F223,Eng,Sala,,
-F225,Eng,Sala,,
-F227,Eng,Sala,,
-G212,Eng,Anfiteatro,,
-G213,Eng,Sala,,
-G217,Eng,Sala,,
-G220,Eng,Anfiteatro,,
-H115,Eng,Sala,,
-H209,Eng,Anfiteatro,,
-H222,Eng,Sala,,
-H226,Eng,Sala,,
-H228,Eng,Sala,,
-I105A,Eng,Sala,,
-I228 (LEPAC),Eng,Laboratório,,
-E114,EQ,,,
-E120,EQ,Sala,,
-E126,EQ,Sala,,
-E129,EQ,Sala,,
-E131,EQ,Sala,,90
-E216,EQ,Anfiteatro,,90
-E217,EQ,,120,90
-E220,EQ,Anfiteatro,,
-E221,EQ,Sala,,
-I119,EQ,Sala,,
-I223,EQ,,,
-E1012 (LAB 3),IC,Laboratório,20,
-E2001 (SDCC),IC,Sala,35,
-E2002 (SDLC),IC,Sala,,
-E2011 (LAB 1),IC,Laboratório,30,
-F1013 (LEP1),IC,Laboratório,60,
-F1014 (LSD),IC,Laboratório,70,
-F2005,IC,Sala,80,50
-F2006/008,IC,Sala,95,79
-F2007,IC,Sala,90,52
-F2010/012,IC,Sala,90,69
-F3014,IC,Sala,Sem Registro,90
-A327,IF,Anfiteatro,140,
-A331,IF,Sala,,
-A333,IF,,,
-A335,IF,Sala,60,60
-A341,IF,,,
-F2022/024,IGEO,Sala,90,78
-B110,IM,Sala,60,60
-D116,IM,Anfiteatro,,
-D120,IM,Sala,120,
-D210,IM,Sala,50,
-D212,IM,Sala,50,
-D213,IM,Sala,50,
-D217,IM,Sala,85,
-D219,IM,Sala,85,
-F2014/016,IM,Sala,90,70
-F2018/020,IM,Sala,90,58
-F2034/036,IM,Sala,90,66
-ABC116 (LABMA),IM-DMA,Sala,,
-ABC126 (LIG-2),IM-Lig,Laboratório,,
-ABC128 (LIG-1),IM-Lig,Laboratório,30,
-B106A,IM-Pos,Sala,25,
-B106B,IM-Pos,Sala,,
-B108A,IM-Pos,Sala,,
-B108B,IM-Pos,Sala,20,
-C100A,IM-Pos,Sala,,
-C100B,IM-Pos,Sala,,
-C116,IM-Pos,Anfiteatro,,
-C119,IM-Pos,Anfiteatro,,
-A611,IQ,Anfiteatro,90,
-A624,IQ,Anfiteatro,,
-A633,IQ,Anfiteatro,98,
-NEAD,NEAD,Laboratório,Sem Registro,
-A201,POLI,Sala,70,70
-A202,POLI,Sala,70,70
-A203,POLI,Sala,70,70
-A204,POLI,Laboratório,70,70
-A205,POLI,Sala,70,70
-A206,POLI,Sala,70,70
+classroom_name,responsable_institute,classroom_type,capacity_siga,capacity,board_type
+F1012 (LEP2),CCMN,Laboratório,60,,
+F2001/003,CCMN,Anfiteatro,120,40,Quadro Negro / Lousa de Giz
+F2002/004,CCMN,Anfiteatro,80,,Quadro Negro / Lousa de Giz
+F2009,CCMN,Sala,90,40,Quadro Negro / Lousa de Giz
+F2011/013,CCMN,Anfiteatro,90,52,Quadro Negro / Lousa de Giz
+F2015/017,CCMN,Anfiteatro,90,57,Quadro Negro / Lousa de Giz
+F2021/023,CCMN,Anfiteatro,90,48,Quadro Negro / Lousa de Giz
+F2025/027,CCMN,Anfiteatro,90,47,Quadro Negro / Lousa de Giz
+F2026/028,CCMN,Anfiteatro,123,108,Quadro Negro / Lousa de Giz
+F2029/031,CCMN,Anfiteatro,90,58,Quadro Negro / Lousa de Giz
+F2030/032,CCMN,Anfiteatro,123,103,Quadro Negro / Lousa de Giz
+F2033/035,CCMN,Anfiteatro,90,55,Quadro Negro / Lousa de Giz
+F2037/039,CCMN,Anfiteatro,90,,Quadro Negro / Lousa de Giz
+F3001,CCMN,Sala,Sem Registro,125,Branco
+F3002,CCMN,Sala,Sem Registro,90,Branco
+F3003,CCMN,Sala,Sem Registro,70,Branco
+F3004,CCMN,Sala,Sem Registro,60,Branco
+F3005,CCMN,Sala,Sem Registro,60,Branco
+F3006,CCMN,Sala,Sem Registro,60,Branco
+F3007,CCMN,Sala,Sem Registro,140,Branco
+F3008,CCMN,Sala,Sem Registro,60,Branco
+F3009,CCMN,Sala,Sem Registro,90,Branco
+F3010,CCMN,Sala,Sem Registro,60,Branco
+F3011,CCMN,Sala,Sem Registro,70,Branco
+F3012,CCMN,Sala,Sem Registro,90,Branco
+F3013,CCMN,Sala,Sem Registro,60,Branco
+F3015,CCMN,Sala,Sem Registro,100,Branco
+F3016,CCMN,Sala,Sem Registro,60,Branco
+H316,COPPE,Sala,,,
+H324A,COPPE,,,,
+C206,Eng,Sala,,,
+D112,Eng,Sala,,,
+D119,Eng,,,,
+D214,Eng,Anfiteatro,119,,
+D218,Eng,Anfiteatro,119,,
+F100A,Eng,Sala,,,
+F112,Eng,Sala,,,
+F116,Eng,Sala,,,
+F210,Eng,Sala,,,
+F219,Eng,,,,
+F222,Eng,Anfiteatro,,,
+F223,Eng,Sala,,,
+F225,Eng,Sala,,,
+F227,Eng,Sala,,,
+G212,Eng,Anfiteatro,,,
+G213,Eng,Sala,,,
+G217,Eng,Sala,,,
+G220,Eng,Anfiteatro,,,
+H115,Eng,Sala,,,
+H209,Eng,Anfiteatro,,,
+H222,Eng,Sala,,,
+H226,Eng,Sala,,,
+H228,Eng,Sala,,,
+I105A,Eng,Sala,,,
+I228 (LEPAC),Eng,Laboratório,,,
+E114,EQ,,,,
+E120,EQ,Sala,,,
+E126,EQ,Sala,,,
+E129,EQ,Sala,,,
+E131,EQ,Sala,,90,
+E216,EQ,Anfiteatro,,90,
+E217,EQ,,120,90,
+E220,EQ,Anfiteatro,,,
+E221,EQ,Sala,,,
+I119,EQ,Sala,,,
+I223,EQ,,,,
+E1012 (LAB 3),IC,Laboratório,20,,
+E2001 (SDCC),IC,Sala,35,,
+E2002 (SDLC),IC,Sala,,,
+E2011 (LAB 1),IC,Laboratório,30,,
+F1013 (LEP1),IC,Laboratório,60,,
+F1014 (LSD),IC,Laboratório,70,,
+F2005,IC,Sala,80,50,Quadro Negro / Lousa de Giz
+F2006/008,IC,Sala,95,79,Quadro Negro / Lousa de Giz
+F2007,IC,Sala,90,52,Quadro Negro / Lousa de Giz
+F2010/012,IC,Sala,90,69,Quadro Negro / Lousa de Giz
+F3014,IC,Sala,Sem Registro,90,Branco
+A327,IF,Anfiteatro,140,,
+A331,IF,Sala,,,
+A333,IF,,,,
+A335,IF,Sala,60,60,
+A341,IF,,,,
+F2022/024,IGEO,Sala,90,78,Quadro Negro / Lousa de Giz
+B110,IM,Sala,60,60,Branco
+D116,IM,Anfiteatro,,,
+D120,IM,Sala,120,,
+D210,IM,Sala,50,,
+D212,IM,Sala,50,,
+D213,IM,Sala,50,,
+D217,IM,Sala,85,,
+D219,IM,Sala,85,,
+F2014/016,IM,Sala,90,70,Quadro Negro / Lousa de Giz
+F2018/020,IM,Sala,90,58,Quadro Negro / Lousa de Giz
+F2034/036,IM,Sala,90,66,Quadro Negro / Lousa de Giz
+ABC116 (LABMA),IM-DMA,Sala,,,
+ABC126 (LIG-2),IM-Lig,Laboratório,,,
+ABC128 (LIG-1),IM-Lig,Laboratório,30,,Smart
+B106A,IM-Pos,Sala,25,,
+B106B,IM-Pos,Sala,,,
+B108A,IM-Pos,Sala,,,
+B108B,IM-Pos,Sala,20,,
+C100A,IM-Pos,Sala,,,
+C100B,IM-Pos,Sala,,,
+C116,IM-Pos,Anfiteatro,,,Smart
+C119,IM-Pos,Anfiteatro,,,
+A611,IQ,Anfiteatro,90,,
+A624,IQ,Anfiteatro,,,
+A633,IQ,Anfiteatro,98,,
+NEAD,NEAD,Laboratório,Sem Registro,,
+A201,POLI,Sala,70,70,Branco
+A202,POLI,Sala,70,70,Branco
+A203,POLI,Sala,70,70,Branco
+A204,POLI,Laboratório,70,70,Branco
+A205,POLI,Sala,70,70,Branco
+A206,POLI,Sala,70,70,Branco

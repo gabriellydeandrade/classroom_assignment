@@ -180,9 +180,10 @@ class ClassroomAssignment:
                 name=f"RN3:Section_Practical_{section}",
             )
 
-        # RN4: Caso a disciplina seja do primeiro período e for turma de calouro,
-        # uma sala específica deverá ser ocupada para as aulas teóricas (F3014)
         for section in self.sections:
+
+            # RN4: Caso a disciplina seja do primeiro período e for turma de calouro,
+            # uma sala específica deverá ser ocupada para as aulas teóricas (F3014)
             if (
                 self.sections[section]["term"] == 1
                 and self.sections[section]["class_type"] == "Calouro"
@@ -203,6 +204,22 @@ class ClassroomAssignment:
                     )
                     == qtty_theory_classroom,
                     name=f"RN4:F3014_NewStudents_{section}",
+                )
+
+            # RN5: Se a seção tiver alguma restrição de quadro, levar em consideração
+
+            if self.sections[section]["blackboard_restriction"]:
+                days, times = utils.get_section_schedule(self.sections, section)
+
+                self.model.addConstr(
+                    gp.quicksum(
+                        self.variables[classroom][section][day][time]
+                        for classroom in self.classrooms
+                        if utils.is_blackboard(self.classrooms[classroom])
+                        for day, time in zip(days, times)
+                    )
+                    == 0,
+                    name=f"RN5:Board_Restriction_{section}_{classroom}_{day}_{time}",
                 )
 
     def set_objective(self):

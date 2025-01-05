@@ -2,6 +2,13 @@ import csv
 from typing import Tuple
 
 
+def is_blackboard(classroom: dict) -> bool:
+    board_type =  classroom["board_type"]
+    if board_type:
+        if "giz" in board_type.lower():
+            return True
+    return False
+
 def get_courses_by_exact_day_and_time(courses: dict, day: str, time: str) -> set:
 
     result = []
