@@ -34,10 +34,6 @@ class TestSectionAllocationFromGoogleSheets(TestCase):
         mock_data = pd.DataFrame(
             {
                 "Instituto responsável": ["IC", "IC"],
-                "Código único turma": [
-                    "OBG-BCC1-1",
-                    "OBG-BCC1-2",
-                ],
                 "Nome curto professor": ["Prof1", "Prof2"],
                 "Código disciplina": ["Course1", "Course2"],
                 "Nome disciplina": ["CourseName1", "CourseName2"],
@@ -47,8 +43,6 @@ class TestSectionAllocationFromGoogleSheets(TestCase):
                 "Tipo sala": ["Laboratório", "Sala"],
             },
         )
-
-        mock_data.index.name = "course_class_id"
 
         mock_read_google_sheet.return_value = mock_data
 
@@ -64,14 +58,9 @@ class TestSectionAllocationFromGoogleSheets(TestCase):
                 "time": ["08:00-10:00", "10:00-12:00"],
                 "capacity": [30, 30],
                 "classroom_type": ["Laboratório", "Sala"],
-            },
-            index=[
-                "OBG-BCC1-1",
-                "OBG-BCC1-2",
-            ],
+            }
         )
 
-        expected_data.index.name = "course_class_id"
 
         mock_read_google_sheet.assert_called_once()
         pd.testing.assert_frame_equal(result, expected_data)

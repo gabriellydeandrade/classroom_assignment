@@ -12,8 +12,10 @@ google-auth-oauthlib = "*"
 cache-pandas = "*"
 pandas = "*"
 pandera = "*"
+streamlit = "*"
 
 [dev-packages]
+ipykernel = "*"
 
 [requires]
 python_version = "3.9"

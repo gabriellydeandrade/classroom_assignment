@@ -55,27 +55,29 @@ def read_google_sheet_to_dataframe(spreadsheet_id, range_name):
 
 @cache_to_csv("cache/get_section_allocation.csv", refresh_time=settings.APP_CACHE_TTL)
 def get_secion_allocation():
-    page_name = "alocacao!A:J"
+    page_name = "alocacao!A:M"
 
     df = read_google_sheet_to_dataframe(settings.SAMPLE_SPREADSHEET_ID, page_name)
 
     df.rename(
         columns={
             "Instituto responsável": "responsable_institute",
+            "Curso": "graduation_course",
             "Nome curto professor": "professor",
-            "Código único turma": "course_class_id",
             "Código disciplina": "course_id",
             "Nome disciplina": "course_name",
             "Dia da semana": "day",
             "Horário": "time",
-            "Qtd alunos": "capacity",
+            "Vagas": "capacity",
             "Tipo sala": "classroom_type",
+            "Período": "term",
+            "Tipo turma": "class_type",
+            "Restrição quadro negro": "blackboard_restriction"
         },
         inplace=True,
     )
 
-    df.set_index("course_class_id", inplace=True)
-
+    df["term"] = df["term"].astype(int)
 
     return df
 
@@ -92,7 +94,8 @@ def get_classrooms_available():
             "Instituto responsável",
             "Tipo sala",
             "Capacidade SIGA",
-            "Capacidade real"
+            "Capacidade real",
+            "Tipo de quadro"
         ]
     )
     classrooms.rename(
@@ -102,6 +105,7 @@ def get_classrooms_available():
             "Tipo sala": "classroom_type",
             "Capacidade SIGA": "capacity_siga",
             "Capacidade real": "capacity",
+            "Tipo de quadro": "board_type"
         },
         inplace=True,
     )
