@@ -11,7 +11,6 @@ from database.construct_sets import (
 
 DEFAULT_COEFFICIENT = 10
 RESPONSIBLE_INSTITUTE_COEFFICIENT = 100
-WEIGHT_FACTOR_C = 1000
 
 
 class ClassroomAssignment:
@@ -26,10 +25,15 @@ class ClassroomAssignment:
         self.model = gp.Model(name="ClassroomAssignment", env=self.env)
 
     def init_environment(self):
-        env = gp.Env(empty=True)
-        env.setParam("LicenseID", settings.APP_LICENSE_ID)
-        env.setParam("WLSAccessID", settings.APP_WLS_ACCESS_ID)
-        env.setParam("WLSSecret", settings.APP_WS_SECRET)
+        if settings.APP_LICENSE_TYPE == settings.LicenseType.NAMED_USER_ACADEMIC.value:
+            env = gp.Env(empty=False)
+
+        elif settings.APP_LICENSE_TYPE == settings.LicenseType.WSL_ACADEMIC.value:
+            env = gp.Env(empty=True)
+            env.setParam("LicenseID", settings.APP_LICENSE_ID)
+            env.setParam("WLSAccessID", settings.APP_WLS_ACCESS_ID)
+            env.setParam("WLSSecret", settings.APP_WS_SECRET)
+
         env.start()
 
         return env
@@ -147,7 +151,7 @@ class ClassroomAssignment:
                     name=f"RN2:Section_{section}_{classroom}_{day}_{time}",
                 )
 
-        # # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
+        # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
         for section in self.sections:
             days, times = utils.get_section_schedule(self.sections, section)
             classroom_types = self.sections[section]["classroom_type"].split(",")
