@@ -10,14 +10,13 @@ sys.path.insert(
 
 from utils.utils import (
     get_section_schedule,
-    get_section_by_time,
     get_possible_schedules,
     treat_and_save_results,
 )
 
 
 class TestUtils(TestCase):
-    def test_get_schedule_from_course(self):
+    def test_get_schedule_from_specific_course(self):
         mock_get_courses_set = {
             "OBG-BCC1-1": {
                 "course_id": "ICP131,ICP222",
@@ -35,8 +34,11 @@ class TestUtils(TestCase):
             },
         }
 
+        result = get_section_schedule(mock_get_courses_set, "OBG-BCC1-1")
+        expected_result = (["SEG", "QUA"], ["13:00-15:00", "08:00-10:00"])
+
         result = get_section_schedule(mock_get_courses_set, "OBG-BCC1-2")
-        expected_result = ("TER,QUI", "15:00-17:00")
+        expected_result = (["TER", "QUI"], ["15:00-17:00", "15:00-17:00"])
 
         self.assertEqual(result, expected_result)
 
@@ -105,8 +107,9 @@ class TestGetPossibleSchedules(TestCase):
         for i in range(len(expected_days)):
             expected_schedule.append((expected_days[i], expected_times[i]))
             schedule.append((result[0][i], result[1][i]))
-        
+
         self.assertEqual(set(expected_schedule), set(schedule))
+
 
 class TestTreatAndSaveResults(TestCase):
 
@@ -131,6 +134,8 @@ class TestTreatAndSaveResults(TestCase):
                 "time": "08:00-10:00",
                 "capacity": 30,
                 "classroom_type": "Laboratório",
+                "graduation_course": "BCC1",
+                "term": 1,
             },
             1: {
                 "institute": "IC",
@@ -141,6 +146,8 @@ class TestTreatAndSaveResults(TestCase):
                 "time": "10:00-12:00",
                 "capacity": 30,
                 "classroom_type": "Sala",
+                "graduation_course": "BCC1",
+                "term": 1,
             },
         }
 
@@ -150,25 +157,29 @@ class TestTreatAndSaveResults(TestCase):
             [
                 "E2011 (LAB 1)",
                 "Prof1",
+                "BCC1",
                 "Course1",
                 "CourseName1",
+                1,
                 "SEG,QUA",
                 "08:00-10:00",
             ],
             [
                 "F2007",
                 "Prof2",
+                "BCC1",
                 "Course2",
                 "CourseName2",
+                1,
                 "TER,QUI",
                 "10:00-12:00",
             ],
         ]
 
         cap_diff = [
-            "CapDiff_A201_OBG-BCC2-7#70.0",
-            "CapDiff_A201_OBG-BCC2-5#70.0",
-            "CapDiff_A202_OBG-BCC2-7#70.0",
+            ["CapDiff_A201_OBG-BCC2-7#70.0"],
+            ["CapDiff_A201_OBG-BCC2-5#70.0"],
+            ["CapDiff_A202_OBG-BCC2-7#70.0"],
         ]
 
         expected_result = timeschedule, cap_diff

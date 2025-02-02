@@ -3,11 +3,12 @@ from typing import Tuple
 
 
 def is_blackboard(classroom: dict) -> bool:
-    board_type =  classroom["board_type"]
+    board_type = classroom["board_type"]
     if board_type:
         if "giz" in board_type.lower():
             return True
     return False
+
 
 def get_courses_by_exact_day_and_time(courses: dict, day: str, time: str) -> set:
 
@@ -138,7 +139,7 @@ def treat_and_save_results(timeschedule: list, courses: dict):
             pnc.append([schedule])
         else:
 
-            schedule, value = schedule.split("#")
+            schedule, _ = schedule.split("#")
             allocation = schedule.split("_")
             classroom_name = allocation[0]
             course_class_id = int(allocation[1])

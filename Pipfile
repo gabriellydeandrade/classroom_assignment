@@ -16,6 +16,8 @@ gurobipy = "==11.0.0"
 
 [dev-packages]
 ipykernel = "*"
+coverage = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.9"
