@@ -102,7 +102,7 @@ classroom_assignment/
 
 ## Mathematical Formulation
 
-See the [classroom_assignment.ipynb](classroom_assignment.ipynb) file.
+See the [classrrom_assignment.ipynb](classrrom_assignment.ipynb) file.
 
 ## Implementation Steps
 
