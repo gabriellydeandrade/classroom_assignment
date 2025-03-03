@@ -1,48 +1,41 @@
 ,responsable_institute,graduation_course,professor,course_id,course_name,day,time,capacity,classroom_type,term,class_type,blackboard_restriction
-0,IC,BCC1-CMT1,Adriana Vivacqua,ICP142,Organização de Dados,TER,10:00-12:00,60,T,2,Regular,FALSE
-1,IC,BCC2,Adriana Vivacqua,ICP145,Habilidades sociais para o trabalho,QUI,13:00-15:00,30,T,2,Extra,FALSE
-2,IC,BCC1,Amaury Cruz,ICP351,Modelagem Matemática e Computacional,"SEG,QUA",08:00-10:00,60,T,5,Regular,FALSE
-3,IC,BCC2-CMT1,Anamaria Moreira,ICP133,Fundamentos de Sistemas de Computação,"TER,QUI",08:00-10:00,30,T,1,Veterano,FALSE
-4,IC,BCC2,Carla Delgado,ICP135,Projeto de Carreira,"SEG,QUA",13:00-15:00,30,T,1,Veterano,FALSE
-5,IC,BCC1,Carla Delgado,ICP472,Metodologia da Pesquisa,"QUA,SEX",10:00-12:00,60,T,7,Regular,FALSE
-6,IC,BCC1,Carolina Marcelino,ICP362,Redes de Computadores I,"QUA,SEX",10:00-12:00,60,T,6,Regular,FALSE
-7,IC,BCC1,Carolina Marcelino,ICP011,Tóp. Esp. em Ciência de Dados I,PREENCHER MANUALMENTE,PREENCHER MANUALMENTE,30,,7,G,FALSE
-8,IC,BCC1-CMT1-ASD1,Claudson Bornstein,ICP116,Estrutura de Dados,"TER,QUI",13:00-15:00,60,T,3,Regular,FALSE
-9,IC,BCC2-CMT1,Daniel Bastos,ICP134,Números Inteiros e Criptografia,"TER,QUI",08:00-10:00,30,T,1,Veterano,FALSE
-10,IC,BCC1,Daniel Sadoc,ICP473,Segurança da Informação,"QUA,SEX",08:00-10:00,60,T,7,Regular,FALSE
-11,IC,CMT1,Daniel Sadoc,ICP103,Análise de Risco,,,60,P,10,Regular,FALSE
-12,IC,BCC1,Gabriel Pereira,ICP143,Projeto Prático,TER,13:00-15:00,60,T,2,Regular,FALSE
-13,IC,BCC2-CMT1,Gabriel Pereira,ICP143,Projeto Prático,QUI,13:00-15:00,30,T,2,Extra,FALSE
-14,IC,BCC1,Gabriel Pereira,ICP246,Arquitetura de Computadores e Sistemas Operacionais,"TER,QUI",10:00-12:00,60,T,4,Regular,FALSE
-15,IC,BCC2,Giseli Lopes,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,30,"T,P",1,Veterano,FALSE
-16,IC,BCC1,Giseli Lopes,ICP141,Programação de Computadores II,"QUA,SEX",08:00-10:00,60,"T,P",2,Regular,FALSE
-17,IC,BCC1,Hugo Musso,ICP123,Linguagens Formais,"SEG,QUA",13:00-15:00,60,T,5,Regular,FALSE
-18,IC,BCC1,Hugo Nobrega,ICP144,Matemática Discreta,"TER,QUI",08:00-10:00,60,T,2,Calouro,FALSE
-19,IC,BCC2,Hugo Nobrega,ICP144,Matemática Discreta,"TER,QUI",15:00-17:00,30,T,2,Extra,FALSE
-20,IC,BCC1,João Carlos Pereira,ICP363,Introdução ao Aprendizado de Máquina,"TER,QUI",13:00-15:00,60,T,6,Regular,FALSE
-21,IC,BCC1,João Carlos Pereira,ICP370,Lógica e Computabilidade,"QUA,SEX",08:00-10:00,60,T,6,Regular,FALSE
-22,IC,BCC1,João Paixão,ICP136,Introdução ao Pensamento Dedutivo,"SEG,QUA",08:00-10:00,60,T,1,Calouro,FALSE
-23,IC,BCC1,João Paixão,ICP248,Computação Científica e Análise de dados,"QUA,SEX",10:00-12:00,60,"T,P",4,Regular,FALSE
-24,IC,BCC1,Jonice de Oliveira,ICP249,Tecnologia e Sociedade,"TER,QUI",13:00-15:00,60,T,4,Regular,FALSE
-25,IC,BCC2-CMT1,Juliana França,ICP132,Processo de Software,"SEG,QUA",10:00-12:00,30,"T,P",1,Veterano,FALSE
-26,IC,CMT1,Juliana França,ICP102,Trabalhando com Grandes Volumes de Dados,,,60,T,10,Regular,FALSE
-27,IC,BCC1,Juliana Valério,ICP115,Álgebra Linear Algorítmica,"SEG,QUA,SEX","13:00-15:00,13:00-15:00,08:00-10:00",60,"T,T,P",3,Regular,FALSE
-28,IC,BCC1,Luziane Mendonça,ICP365,Otimização,"TER,QUI",10:00-12:00,60,T,6,Regular,FALSE
-29,IC,BCC1,Marcello Goulart,ICP238,Introdução a Computação Numérica,SEG,08:00-10:00,60,P,3,Calouro,FALSE
-30,IC,BCC2,Marcello Goulart,ICP238,Introdução a Computação Numérica,SEG,13:00-15:00,30,P,3,Extra,FALSE
-31,IC,BCC1,Maria Luiza Campos,ICP145,Habilidades sociais para o trabalho,QUI,10:00-12:00,60,T,2,Calouro,FALSE
-32,IC,CMT1,Maria Luiza Campos,ICP357,Data Warehousing no Sup. à Tomada de Decisão,"SEG,QUA",13:00-15:00,60,T,10,Regular,FALSE
-33,IC,BCC1,Mitre Dourado,ICP368,Algoritmos e Grafos,"TER,QUI",10:00-12:00,60,T,5,Regular,FALSE
-34,IC,BCC1,Rafael Mello,ICP237,Introdução a Modelagem de Sistemas,"TER,QUI",15:00-17:00,60,"T,P",3,Regular,FALSE
-35,IC,BCC1,Severino Collier,ICP134,Números Inteiros e Criptografia,"TER,QUI",08:00-10:00,60,T,1,Calouro,FALSE
-36,IC,BCC2-CMT1,Severino Collier,ICP136,Introdução ao Pensamento Dedutivo,"SEG,QUA",10:00-12:00,30,T,1,Veterano,FALSE
-37,IC,BCC1,Silvana Rossetto,ICP133,Fundamentos de Sistemas de Computação,"TER,QUI",10:00-12:00,60,T,1,Calouro,FALSE
-38,IC,BCC1,Silvana Rossetto,ICP361,Programação Concorrente,"TER,QUI",08:00-10:00,60,"T,P",6,Regular,FALSE
-39,IC,BCC1,Valéria Bastos,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,60,"T,P",1,Calouro,TRUE
-40,IC,BCC1,Valéria Bastos,ICP353,Computadores e Programação,"TER,QUI",08:00-10:00,60,T,5,Regular,TRUE
-41,IC,BCC1,Vinícius Gusmão,ICP350,Modelagem e Avaliação de Desempenho,"SEG,QUA",08:00-10:00,60,T,5,Regular,FALSE
-42,IC,BCC2,Vinícius Gusmão,ICP350,Modelagem e Avaliação de Desempenho,"SEG,QUA",10:00-12:00,60,T,5,Extra,FALSE
-43,IC,BCC1-CMT1-ASD1,Vivian Santos,ICP489,Banco de Dados I,"QUA,SEX",08:00-10:00,60,"T,P",5,Regular,FALSE
-44,IC,BCC1,Eldânae Teixeira,ICP132,Processo de Software,"TER,QUI",13:00-15:00,60,"T,P",1,Calouro,FALSE
-45,IC,BCC1,Eldânae Teixeira,ICP135,Projeto de Carreira,"SEG,QUA",13:00-15:00,60,T,1,Calouro,FALSE
-46,IC,BCC1,Ronald Chiesse,ICP239,Programação Orientada a Objeto,"TER,QUI",10:00-12:00,60,"T,P",3,Regular,FALSE
+0,IC,BCC1-CMT1,PROFESSOR 1,ICP142,Organização de Dados,TER,10:00-12:00,60,T,2,Regular,FALSE
+1,IC,BCC1,PROFESSOR 1,ICP145,Habilidades sociais para o trabalho,QUI,10:00-12:00,60,T,2,Regular,FALSE
+2,IC,BCC1,PROFESSOR 1,ICP472,Metodologia da Pesquisa,"QUA,SEX",10:00-12:00,60,T,7,Regular,FALSE
+3,IC,BCC2-CMT1,PROFESSOR 4,ICP133,Fundamentos de Sistemas de Computação,"TER,QUI",08:00-10:00,30,T,1,Veterano,FALSE
+4,IC,BCC1,PROFESSOR 7,ICP362,Redes de Computadores I,"QUA,SEX",10:00-12:00,60,T,6,Regular,FALSE
+5,IC,BCC1,PROFESSOR 7,ICP011,Tóp. Esp. em Ciência de Dados I,"SEG,QUA",08:00-10:00,30,,7,G,FALSE
+6,IC,BCC1-CMT1-ASD1,PROFESSOR 8,ICP116,Estrutura de Dados,"TER,QUI",13:00-15:00,60,T,3,Regular,FALSE
+7,IC,BCC1,PROFESSOR 10,ICP134,Números Inteiros e Criptografia,"TER,QUI",08:00-10:00,60,T,1,Calouro,FALSE
+8,IC,BCC1,PROFESSOR 11,ICP363,Introdução ao Aprendizado de Máquina,"TER,QUI",13:00-15:00,60,T,6,Regular,FALSE
+9,IC,BCC1,PROFESSOR 11,ICP473,Segurança da Informação,"QUA,SEX",08:00-10:00,60,T,7,Regular,FALSE
+10,IC,BCC1,PROFESSOR 34,ICP135,Projeto de Carreira,"SEG,QUA",13:00-15:00,60,T,1,Calouro,FALSE
+11,IC,BCC2-CMT1,PROFESSOR 34,ICP132,Processo de Software,"SEG,QUA",10:00-12:00,30,"T,P",1,Veterano,FALSE
+12,IC,BCC1,PROFESSOR 12,ICP143,Projeto Prático,TER,13:00-15:00,30,T,2,Regular,FALSE
+13,IC,BCC2-CMT1,PROFESSOR 12,ICP143,Projeto Prático,QUI,13:00-15:00,30,T,2,Regular,FALSE
+14,IC,BCC1,PROFESSOR 12,ICP246,Arquitetura de Computadores e Sistemas Operacionais,"TER,QUI",10:00-12:00,60,T,4,Regular,FALSE
+15,IC,BCC1,PROFESSOR 13,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,60,"T,P",1,Calouro,FALSE
+16,IC,BCC1,PROFESSOR 13,ICP141,Programação de Computadores II,"QUA,SEX",08:00-10:00,60,"T,P",2,Regular,FALSE
+17,IC,BCC1,PROFESSOR 14,ICP123,Linguagens Formais,"SEG,QUA",13:00-15:00,60,T,5,Regular,FALSE
+18,IC,BCC1,PROFESSOR 15,ICP144,Matemática Discreta,"TER,QUI",08:00-10:00,60,T,2,Regular,FALSE
+19,IC,BCC1,PROFESSOR 15,ICP370,Lógica e Computabilidade,"QUA,SEX",08:00-10:00,60,T,6,Regular,FALSE
+20,IC,BCC1,PROFESSOR 16,ICP136,Introdução ao Pensamento Dedutivo,"SEG,QUA",08:00-10:00,60,T,1,Calouro,FALSE
+21,IC,BCC2-CMT1,PROFESSOR 16,ICP136,Introdução ao Pensamento Dedutivo,"SEG,QUA",10:00-12:00,30,T,1,Veterano,FALSE
+22,IC,BCC1,PROFESSOR 17,ICP238,Introdução a Computação Numérica,SEG,08:00-10:00,60,P,3,Regular,FALSE
+23,IC,BCC1,PROFESSOR 17,ICP248,Computação Científica e Análise de dados,"QUA,SEX",10:00-12:00,60,"T,P",4,Regular,FALSE
+24,IC,BCC1,PROFESSOR 18,ICP132,Processo de Software,"TER,QUI",13:00-15:00,60,"T,P",1,Calouro,FALSE
+25,IC,BCC1,PROFESSOR 21,ICP115,Álgebra Linear Algorítmica,"SEG,QUA,SEX","13:00-15:00,13:00-15:00,08:00-10:00",60,"T,T,P",3,Regular,FALSE
+26,IC,BCC1,PROFESSOR 22,ICP365,Otimização,"TER,QUI",10:00-12:00,60,T,6,Regular,FALSE
+27,IC,BCC2,PROFESSOR 25,ICP135,Projeto de Carreira,"SEG,QUA",13:00-15:00,30,T,1,Veterano,FALSE
+28,IC,BCC1,PROFESSOR 25,ICP249,Tecnologia e Sociedade,"TER,QUI",13:00-15:00,60,T,4,Regular,FALSE
+29,IC,BCC1,PROFESSOR 28,ICP237,Introdução a Modelagem de Sistemas,"TER,QUI",15:00-17:00,60,"T,P",3,Regular,FALSE
+30,IC,BCC2-CMT1,PROFESSOR 29,ICP134,Números Inteiros e Criptografia,"TER,QUI",08:00-10:00,30,T,1,Veterano,FALSE
+31,IC,BCC1,PROFESSOR 29,ICP351,Modelagem Matemática e Computacional,"SEG,QUA",08:00-10:00,60,T,5,Regular,FALSE
+32,IC,BCC1,PROFESSOR 30,ICP133,Fundamentos de Sistemas de Computação,"TER,QUI",10:00-12:00,60,T,1,Calouro,FALSE
+33,IC,BCC1,PROFESSOR 30,ICP361,Programação Concorrente,"TER,QUI",08:00-10:00,60,"T,P",6,Regular,FALSE
+34,IC,BCC2,PROFESSOR 31,ICP131,Programação de Computadores I,"SEG,QUA",10:00-12:00,30,"T,P",1,Veterano,FALSE
+35,IC,BCC1,PROFESSOR 31,ICP353,Computadores e Programação,"TER,QUI",08:00-10:00,60,T,5,Regular,FALSE
+36,IC,BCC1,PROFESSOR 32,ICP350,Modelagem e Avaliação de Desempenho,"SEG,QUA",08:00-10:00,60,T,5,Regular,FALSE
+37,IC,BCC1,PROFESSOR 32,ICP368,Algoritmos e Grafos,"TER,QUI",10:00-12:00,60,T,5,Regular,FALSE
+38,IC,BCC1-CMT1-ASD1,PROFESSOR 33,ICP489,Banco de Dados I,"QUA,SEX",08:00-10:00,60,"T,P",5,Regular,FALSE
+39,IC,BCC1,PROFESSOR 43,ICP239,Programação Orientada a Objeto,"TER,QUI",10:00-12:00,60,"T,P",3,Regular,FALSE

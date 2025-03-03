@@ -11,7 +11,6 @@ from database.construct_sets import (
 
 DEFAULT_COEFFICIENT = 10
 RESPONSIBLE_INSTITUTE_COEFFICIENT = 100
-WEIGHT_FACTOR_C = 1000
 
 
 class ClassroomAssignment:
@@ -26,10 +25,15 @@ class ClassroomAssignment:
         self.model = gp.Model(name="ClassroomAssignment", env=self.env)
 
     def init_environment(self):
-        env = gp.Env(empty=True)
-        env.setParam("LicenseID", settings.APP_LICENSE_ID)
-        env.setParam("WLSAccessID", settings.APP_WLS_ACCESS_ID)
-        env.setParam("WLSSecret", settings.APP_WS_SECRET)
+        if settings.APP_LICENSE_TYPE == settings.LicenseType.NAMED_USER_ACADEMIC.value:
+            env = gp.Env(empty=False)
+
+        elif settings.APP_LICENSE_TYPE == settings.LicenseType.WSL_ACADEMIC.value:
+            env = gp.Env(empty=True)
+            env.setParam("LicenseID", settings.APP_LICENSE_ID)
+            env.setParam("WLSAccessID", settings.APP_WLS_ACCESS_ID)
+            env.setParam("WLSSecret", settings.APP_WS_SECRET)
+
         env.start()
 
         return env
@@ -147,7 +151,7 @@ class ClassroomAssignment:
                     name=f"RN2:Section_{section}_{classroom}_{day}_{time}",
                 )
 
-        # # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
+        # RN3: O tipo de sala deverá ser o mesmo requerido na alocação da disciplina
         for section in self.sections:
             days, times = utils.get_section_schedule(self.sections, section)
             classroom_types = self.sections[section]["classroom_type"].split(",")
@@ -257,20 +261,33 @@ class ClassroomAssignment:
 
     def generate_results(self):
 
+        if self.model.Status == 2:
+            print(f"Optimal solution found. Model return status={self.model.Status}")
+        else:
+            self.model.computeIIS()
+            self.model.write("model.ilp")
+            raise Exception(f"Model return status={self.model.Status}")
+
         classroom_assignement = []
         for var in self.model.getVars():
-            try:
-                if var.X > 0 and "tolerance_slack" not in var.VarName:
-                    timeschedule = f"{var.VarName}#{var.X}"
-                    classroom_assignement.append(timeschedule)
-            except:
-                self.model.computeIIS()
-                self.model.write("model.ilp")
-                raise Exception(f"Model return status {self.model.Status}")
+            if var.X > 0 and "tolerance_slack" not in var.VarName:
+                timeschedule = f"{var.VarName}#{var.X}"
+                classroom_assignement.append(timeschedule)
 
         model_value = self.model.ObjVal
 
         utils.treat_and_save_results(classroom_assignement, self.sections)
+
+        print("========= METHOD ==========")
+        print(self.model.getParamInfo("Method"))
+        print(self.model.getParamInfo("ConcurrentMethod"))
+        print(self.model.getParamInfo("ConcurrentMIP"))
+
+        print(f"É MIP: {self.model.getAttr(GRB.Attr.IsMIP)}")
+        print(f"É QP: {self.model.getAttr(GRB.Attr.IsQP)}")
+        print(f"É QCP: {self.model.getAttr(GRB.Attr.IsQCP)}")
+        print(f"É MultiObj: {self.model.getAttr(GRB.Attr.IsMultiObj)}")
+        print("=============================")
 
         print("========= RESULT ==========")
         print("Result was saved in results/*")

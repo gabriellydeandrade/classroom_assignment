@@ -9,7 +9,7 @@ sys.path.insert(
     0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 )  # FIXME quero corrigir de outra forma
 
-from database.transform_data import transform_to_dict
+from database.transform_data import transform_classrooms_to_dict
 
 
 def mock_decorator(*args, **kwargs):
@@ -76,7 +76,7 @@ class TestTransformClassroomAvailable(TestCase):
             {
                 "classroom_name": ["Sala 1", "Sala 2"],
                 "responsible_institute": ["IC", "IC"],
-                "classrom_type": ["Laboratório", "Sala"],
+                "classroom_type": ["Laboratório", "Sala"],
                 "capacity": [30, 30],
             },
             index=[
@@ -87,19 +87,19 @@ class TestTransformClassroomAvailable(TestCase):
 
         classrom_available.index.name = "classroom_name"
 
-        result = transform_to_dict(classrom_available)
+        result = transform_classrooms_to_dict(classrom_available)
 
         expected_result = {
             "Sala 1": {
                 "classroom_name": "Sala 1",
                 "responsible_institute": "IC",
-                "classrom_type": "Laboratório",
+                "classroom_type": "Laboratório",
                 "capacity": 30,
             },
             "Sala 2": {
                 "classroom_name": "Sala 2",
                 "responsible_institute": "IC",
-                "classrom_type": "Sala",
+                "classroom_type": "Sala",
                 "capacity": 30,
             },
         }
@@ -111,7 +111,7 @@ class TestTransformClassroomAvailable(TestCase):
             {
                 "classroom_name": ["Sala 1", "Sala 2"],
                 "responsible_institute": ["IC", "IC"],
-                "classrom_type": ["Laboratório", "Sala"],
+                "classroom_type": ["Laboratório", "Sala"],
                 "capacity_siga": [40, 40],
                 "capacity": ["", 30],
             },
@@ -123,20 +123,20 @@ class TestTransformClassroomAvailable(TestCase):
 
         classrom_available.index.name = "classroom_name"
 
-        result = transform_to_dict(classrom_available)
+        result = transform_classrooms_to_dict(classrom_available)
 
         expected_result = {
             "Sala 1": {
                 "classroom_name": "Sala 1",
                 "responsible_institute": "IC",
-                "classrom_type": "Laboratório",
+                "classroom_type": "Laboratório",
                 "capacity_siga": 40,
                 "capacity": 40,
             },
             "Sala 2": {
                 "classroom_name": "Sala 2",
                 "responsible_institute": "IC",
-                "classrom_type": "Sala",
+                "classroom_type": "Sala",
                 "capacity_siga": 40,
                 "capacity": 30,
             },
@@ -149,7 +149,7 @@ class TestTransformClassroomAvailable(TestCase):
             {
                 "classroom_name": ["Sala 1", "Sala 2"],
                 "responsible_institute": ["IC", "IC"],
-                "classrom_type": ["Laboratório", "Sala"],
+                "classroom_type": ["Laboratório", "Sala"],
                 "capacity_siga": ["", ""],
                 "capacity": ["", ""],
             },
@@ -161,20 +161,20 @@ class TestTransformClassroomAvailable(TestCase):
 
         classrom_available.index.name = "classroom_name"
 
-        result = transform_to_dict(classrom_available)
+        result = transform_classrooms_to_dict(classrom_available)
 
         expected_result = {
             "Sala 1": {
                 "classroom_name": "Sala 1",
                 "responsible_institute": "IC",
-                "classrom_type": "Laboratório",
+                "classroom_type": "Laboratório",
                 "capacity_siga": "",
                 "capacity": 0,
             },
             "Sala 2": {
                 "classroom_name": "Sala 2",
                 "responsible_institute": "IC",
-                "classrom_type": "Sala",
+                "classroom_type": "Sala",
                 "capacity_siga": "",
                 "capacity": 0,
             },

@@ -10,25 +10,30 @@ sys.path.insert(
     0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 )  # FIXME quero corrigir de outra forma
 
+
 def mock_decorator(*args, **kwargs):
     """Decorate by doing nothing."""
+
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):
             return f(*args, **kwargs)
+
         return decorated_function
+
     return decorator
 
-patch('cache_pandas.cache_to_csv', mock_decorator).start()
+
+patch("cache_pandas.cache_to_csv", mock_decorator).start()
 
 from database.service_google_sheet import (
     get_secion_allocation,
 )
-from database.transform_data import transform_to_dict
+from database.transform_data import transform_sections_to_dict
 
 
 class TestSectionAllocationFromGoogleSheets(TestCase):
-    
+
     @patch("database.service_google_sheet.read_google_sheet_to_dataframe")
     def test_get_secion_allocation(self, mock_read_google_sheet):
         mock_data = pd.DataFrame(
@@ -39,8 +44,9 @@ class TestSectionAllocationFromGoogleSheets(TestCase):
                 "Nome disciplina": ["CourseName1", "CourseName2"],
                 "Dia da semana": ["SEG,QUA", "TER"],
                 "Horário": ["08:00-10:00", "10:00-12:00"],
-                "Qtd alunos": [30, 30],
+                "Vagas": [30, 30],
                 "Tipo sala": ["Laboratório", "Sala"],
+                "Período": [1, 1],
             },
         )
 
@@ -58,9 +64,9 @@ class TestSectionAllocationFromGoogleSheets(TestCase):
                 "time": ["08:00-10:00", "10:00-12:00"],
                 "capacity": [30, 30],
                 "classroom_type": ["Laboratório", "Sala"],
+                "term": [1, 1],
             }
         )
-
 
         mock_read_google_sheet.assert_called_once()
         pd.testing.assert_frame_equal(result, expected_data)
@@ -79,6 +85,7 @@ class TestTransformSectionAllocation(TestCase):
                 "time": ["08:00-10:00", "10:00-12:00"],
                 "capacity": [30, 30],
                 "classroom_type": ["Laboratório", "Sala"],
+                "blackboard_restriction": ["FALSE", False],
             },
             index=[
                 "OBG-BCC1-1",
@@ -88,7 +95,7 @@ class TestTransformSectionAllocation(TestCase):
 
         section_allocation.index.name = "course_class_id"
 
-        result = transform_to_dict(section_allocation)
+        result = transform_sections_to_dict(section_allocation)
 
         expected_result = {
             "OBG-BCC1-1": {
@@ -100,6 +107,7 @@ class TestTransformSectionAllocation(TestCase):
                 "time": "08:00-10:00",
                 "capacity": 30,
                 "classroom_type": "Laboratório",
+                "blackboard_restriction": False,
             },
             "OBG-BCC1-2": {
                 "institute": "IC",
@@ -110,6 +118,7 @@ class TestTransformSectionAllocation(TestCase):
                 "time": "10:00-12:00",
                 "capacity": 30,
                 "classroom_type": "Sala",
+                "blackboard_restriction": False,
             },
         }
 

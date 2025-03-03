@@ -23,7 +23,9 @@ class TestInitializeVariablesAndCoefficients(unittest.TestCase):
             "Section2": {"capacity": 15, "day": "TER,QUI", "time": "08:00-10:00"},
         }
         mock_get_schedule.side_effect = lambda sections, section: (
-            ("SEG,QUA", "10:00-12:00") if section == "Section1" else ("TER,QUI", "08:00-10:00")
+            ("SEG,QUA", "10:00-12:00")
+            if section == "Section1"
+            else ("TER,QUI", "08:00-10:00")
         )
 
         self.timetabling = ClassroomAssignment(classrooms, sections)
@@ -47,8 +49,18 @@ class TestAddCapacitySlackVariables(unittest.TestCase):
             "Room2": {"capacity": 20, "classroom_type": "Laboratório"},
         }
         self.sections = {
-            "Section1": {"capacity": 25, "day": "SEG,QUA", "time": "10:00-12:00", "classroom_type": "Sala"},
-            "Section2": {"capacity": 15, "day": "TER,QUI", "time": "08:00-10:00", "classroom_type": "Laboratório"},
+            "Section1": {
+                "capacity": 25,
+                "day": "SEG,QUA",
+                "time": "10:00-12:00",
+                "classroom_type": "Sala",
+            },
+            "Section2": {
+                "capacity": 15,
+                "day": "TER,QUI",
+                "time": "08:00-10:00",
+                "classroom_type": "Laboratório",
+            },
         }
         self.timetabling = ClassroomAssignment(self.classrooms, self.sections)
         self.timetabling.add_capacity_slack_variables()
@@ -56,7 +68,7 @@ class TestAddCapacitySlackVariables(unittest.TestCase):
 
     def test_add_capacity_slack_variables_for_all_classrooms(self):
         for classroom in self.classrooms.keys():
-            self.assertIn(classroom, self.timetabling.slack_variables_capacity_exceeded)
+            self.assertIn(classroom, self.timetabling.slack_variables_capacity_diff)
 
 
 if __name__ == "__main__":
